@@ -1,3 +1,3 @@
 import { Sprite } from "./Sprite.js";
 
-export class Grass extends Sprite {}
+export class Enemy extends Sprite {}

@@ -4,7 +4,8 @@ import { Sprite } from "./Sprite.js";
 export class Player extends Sprite {
     constructor(x, y, radius) {
         super(x, y, radius);
-        this.speed = 10;
+        this.speed = 3;
+        this.isCameraLock = true;
         controls();
     }
     moving() {

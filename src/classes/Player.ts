@@ -6,7 +6,8 @@ export class Player extends Sprite {
   speed: number;
   constructor(x: number, y: number, radius: number) {
     super(x, y, radius);
-    this.speed = 10;
+    this.speed = 3;
+    this.isCameraLock = true;
     controls();
   }
 
