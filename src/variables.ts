@@ -1,4 +1,4 @@
-import { Keys, WidthHeight } from "./interfaces/interfaces.js";
+import { Keys, WidthHeight, xywh } from "./interfaces/interfaces.js";
 
 export const keys: Keys = {
   w: false,
@@ -8,12 +8,14 @@ export const keys: Keys = {
   space: false,
 };
 
-export const dimensions: { canvas: WidthHeight; map: WidthHeight } = {
+export const dimensions: { canvas: WidthHeight; map: xywh } = {
   canvas: {
     w: 800,
     h: 600,
   },
   map: {
+    x: 0,
+    y: 0,
     w: 3200,
     h: 2400,
   },

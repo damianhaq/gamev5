@@ -10,3 +10,10 @@ export interface WidthHeight {
   w: number;
   h: number;
 }
+
+export interface xywh {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}

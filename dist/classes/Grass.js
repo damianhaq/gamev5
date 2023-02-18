@@ -1,3 +1,4 @@
+import { dimensions } from "../variables.js";
 export class Grass {
     constructor(x, y, color) {
         this.x = x;
@@ -19,14 +20,15 @@ export class Grass {
         }
         // Narysuj trawkę
         c.beginPath();
-        c.moveTo(8 + this.x, 16 + this.y);
-        c.lineTo(6 + this.x, 8 + this.y);
-        c.lineTo(0 + this.x, 0 + this.y);
-        c.moveTo(8 + this.x, 16 + this.y);
-        c.lineTo(10 + this.x, 8 + this.y);
-        c.lineTo(10 + this.x, 0 + this.y);
+        c.moveTo(8 + this.x + dimensions.map.x, 16 + this.y + dimensions.map.y);
+        c.lineTo(6 + this.x + dimensions.map.x, 8 + this.y + dimensions.map.y);
+        c.lineTo(0 + this.x + dimensions.map.x, 0 + this.y + dimensions.map.y);
+        c.moveTo(8 + this.x + dimensions.map.x, 16 + this.y + dimensions.map.y);
+        c.lineTo(10 + this.x + dimensions.map.x, 8 + this.y + dimensions.map.y);
+        c.lineTo(10 + this.x + dimensions.map.x, 0 + this.y + dimensions.map.y);
         c.stroke();
         // c.quadraticCurveTo(this.x + 40, this.y + 0, 40, 10);
         c.fill();
+        // this.shift();
     }
 }
