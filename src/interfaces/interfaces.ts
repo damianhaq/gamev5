@@ -5,3 +5,8 @@ export interface Keys {
   d: boolean;
   space: boolean;
 }
+
+export interface WidthHeight {
+  w: number;
+  h: number;
+}

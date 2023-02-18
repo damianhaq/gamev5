@@ -1,17 +1,16 @@
 import { addGrass } from "./functions/addGrass.js";
 import { Grass } from "./classes/Grass.js";
 import { Player } from "./classes/Player.js";
-import { controlls } from "./functions/controls.js";
+import { controls } from "./functions/controls.js";
+import { dimensions } from "./variables.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
-canvas.height = 600;
-canvas.width = 800;
+canvas.height = dimensions.canvas.h;
+canvas.width = dimensions.canvas.w;
 const c: CanvasRenderingContext2D = canvas.getContext("2d");
 
-controlls();
-
 // Add grass
-const grassArray: Grass[] = addGrass(0, 0, canvas.width, canvas.height, 10);
+const grassArray: Grass[] = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
 
 // Player
 const player: Player = new Player(canvas.width / 2, canvas.height / 2, 20);

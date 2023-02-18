@@ -1,6 +1,6 @@
 import { keys } from "../variables.js";
 
-export function controlls() {
+export function controls() {
   document.body.addEventListener("keydown", (ev) => {
     if (ev.code === "KeyW") keys.w = true;
     if (ev.code === "KeyS") keys.s = true;
