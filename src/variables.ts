@@ -6,6 +6,11 @@ export const keys: Keys = {
   a: false,
   d: false,
   space: false,
+  mouse: {
+    click: false,
+    x: 0,
+    y: 0,
+  },
 };
 
 export const dimensions: { canvas: WidthHeight; map: xywh } = {

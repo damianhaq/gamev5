@@ -4,6 +4,11 @@ export const keys = {
     a: false,
     d: false,
     space: false,
+    mouse: {
+        click: false,
+        x: 0,
+        y: 0,
+    },
 };
 export const dimensions = {
     canvas: {

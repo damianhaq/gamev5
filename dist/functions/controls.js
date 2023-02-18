@@ -26,4 +26,12 @@ export function controls() {
             keys.space = false;
         // console.log(keys);
     });
+    document.addEventListener("mousedown", (ev) => {
+        keys.mouse.click = true;
+        keys.mouse.x = ev.x;
+        keys.mouse.y = ev.y;
+    });
+    document.addEventListener("mouseup", (ev) => {
+        keys.mouse.click = false;
+    });
 }

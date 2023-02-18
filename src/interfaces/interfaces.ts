@@ -4,6 +4,11 @@ export interface Keys {
   a: boolean;
   d: boolean;
   space: boolean;
+  mouse: {
+    click: boolean;
+    x: number;
+    y: number;
+  };
 }
 
 export interface WidthHeight {

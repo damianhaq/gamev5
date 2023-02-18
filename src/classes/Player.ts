@@ -1,14 +1,20 @@
+import { bullets } from "../app.js";
 import { controls } from "../functions/controls.js";
+import { calculateDirection } from "../functions/helpers.js";
 import { dimensions, keys } from "../variables.js";
+import { Bullet } from "./Bullet.js";
+import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Player extends Sprite {
   speed: number;
-  constructor(x: number, y: number, radius: number) {
+  constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
     this.speed = 3;
     this.isCameraLock = true;
+    this.enemies = enemies;
     controls();
+    this.shoot();
   }
 
   moving() {
@@ -17,6 +23,39 @@ export class Player extends Sprite {
 
     if (keys.w && !this.isCollideBorderMap("up")) dimensions.map.y += this.speed;
     else if (keys.s && !this.isCollideBorderMap("bot")) dimensions.map.y -= this.speed;
+  }
+
+  shoot() {
+    const iid = setInterval(() => {
+      // console.log("shoot");
+      const nearestEnemy: Enemy = this.findNearestEnemy();
+      const direction = calculateDirection(
+        this.x - dimensions.map.x,
+        this.y - dimensions.map.y,
+        nearestEnemy.x,
+        nearestEnemy.y
+      );
+      bullets.push(
+        new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction)
+      );
+      // console.log(bullets);
+    }, 1000);
+  }
+
+  findNearestEnemy(): Enemy | null {
+    let nearestEnemy: Enemy | null = null;
+    let nearestDistance = Number.MAX_VALUE;
+
+    for (const enemy of this.enemies) {
+      const distance = Math.sqrt((enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2);
+
+      if (distance < nearestDistance) {
+        nearestEnemy = enemy;
+        nearestDistance = distance;
+      }
+    }
+
+    return nearestEnemy;
   }
 
   isCollideBorderMap(side: "left" | "right" | "up" | "bot"): boolean {
