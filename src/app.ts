@@ -9,6 +9,7 @@ import { camera } from "./functions/camera.js";
 import { Grass } from "./classes/Grass.js";
 import { addGrass } from "./functions/addGrass.js";
 import { drawGrass } from "./functions/draw/drawGrass.js";
+import { ExpBall } from "./classes/expBall.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
@@ -28,6 +29,9 @@ export const bullets: Bullet[] = [];
 addEnemies(1000, 100);
 export const enemies: Enemy[] = [];
 enemies.push(new Enemy(100, 100, 12, 0.5, 100));
+
+// ExpBalls
+export const expBalls: ExpBall[] = [];
 
 // Player
 const player: Player = new Player(300, 300, 20, enemies);
@@ -55,8 +59,12 @@ function animate() {
     enemy.collideEnemies(enemies, index);
   });
 
+  expBalls.forEach((exp) => {
+    exp.update(c, drawCircle);
+  });
+
   if (!game.isGameOver) requestAnimationFrame(animate);
-  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}`;
+  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
 }
 
 animate();

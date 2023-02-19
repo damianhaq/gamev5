@@ -1,9 +1,10 @@
-import { enemies } from "../app.js";
+import { enemies, expBalls } from "../app.js";
 import {
   calculateDirection,
   calculateDistance,
   collideCircleResolve,
 } from "../functions/helpers.js";
+import { ExpBall } from "./expBall.js";
 import { Player } from "./Player.js";
 import { Sprite } from "./Sprite.js";
 
@@ -65,6 +66,10 @@ export class Enemy extends Sprite {
   }
 
   die(index: number) {
-    if (this.hp <= 0) enemies.splice(index, 1);
+    if (this.hp <= 0) {
+      expBalls.push(new ExpBall(this.x, this.y, 3));
+
+      enemies.splice(index, 1);
+    }
   }
 }

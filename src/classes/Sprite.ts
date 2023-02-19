@@ -8,7 +8,9 @@ export class Sprite {
     public hp: number = 0,
     public immuneTime: number = 0,
     public immuneCount: number = 0,
-    public isImmune: boolean = false
+    public isImmune: boolean = false,
+    public type: "stroke" | "fill" = "stroke",
+    public color: string = "#202124"
   ) {
     this.x = x;
     this.y = y;
@@ -18,7 +20,7 @@ export class Sprite {
   }
 
   update(c: CanvasRenderingContext2D, drawMe: Function) {
-    drawMe(this.x, this.y, this.radius, "stroke", "#202124", c);
+    drawMe(this.x, this.y, this.radius, this.type, this.color, c);
 
     this.showHp(c);
     this.moving();
