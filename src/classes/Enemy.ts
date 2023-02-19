@@ -1,5 +1,9 @@
 import { enemies } from "../app.js";
-import { calculateDirection, calculateDistance } from "../functions/helpers.js";
+import {
+  calculateDirection,
+  calculateDistance,
+  collideCircleResolve,
+} from "../functions/helpers.js";
 import { Player } from "./Player.js";
 import { Sprite } from "./Sprite.js";
 
@@ -31,21 +35,11 @@ export class Enemy extends Sprite {
       player.radius
     );
     if (distance <= 0) {
-      this.resolveCircle(player);
+      const { x, y } = collideCircleResolve(this, player);
+      this.x = x;
+      this.y = y;
     } else {
     }
-  }
-
-  resolveCircle(player) {
-    let distance_x = this.x - player.x;
-    let distance_y = this.y - player.y;
-    let radii_sum = this.radius + player.radius;
-    let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
-    let unit_x = distance_x / length;
-    let unit_y = distance_y / length;
-
-    this.x = player.x + (radii_sum + 1) * unit_x;
-    this.y = player.y + (radii_sum + 1) * unit_y;
   }
 
   die(index: number) {

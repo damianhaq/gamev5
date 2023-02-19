@@ -1,3 +1,5 @@
+import { Sprite } from "../classes/Sprite";
+
 export function calculateDirection(
   fromX: number,
   fromY: number,
@@ -29,4 +31,20 @@ export function calculateDistance(
   let distance: number = Math.sqrt((fromX - toX) ** 2 + (fromY - toY) ** 2);
   distance = distance - fromRadius - toRadius;
   return distance;
+}
+
+export function collideCircleResolve(c1: Sprite, c2: Sprite): { x: number; y: number } {
+  let distance_x = c1.x - c2.x;
+  let distance_y = c1.y - c2.y;
+  let radii_sum = c1.radius + c2.radius;
+  let length = Math.sqrt(distance_x * distance_x + distance_y * distance_y) || 1;
+  let unit_x = distance_x / length;
+  let unit_y = distance_y / length;
+
+  return {
+    x: c2.x + (radii_sum + 1) * unit_x,
+    y: c2.y + (radii_sum + 1) * unit_y,
+  };
+  // c1.x = c2.x + (radii_sum + 1) * unit_x;
+  // c1.y = c2.y + (radii_sum + 1) * unit_y;
 }
