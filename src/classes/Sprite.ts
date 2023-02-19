@@ -5,7 +5,10 @@ export class Sprite {
     public x: number,
     public y: number,
     public radius: number,
-    public hp: number = 0
+    public hp: number = 0,
+    public immuneTime: number = 0,
+    public immuneCount: number = 0,
+    public isImmune: boolean = false
   ) {
     this.x = x;
     this.y = y;

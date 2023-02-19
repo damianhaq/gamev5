@@ -10,6 +10,7 @@ export class Enemy extends Sprite {
         this.speed = speed;
         this.speed = speed;
         this.hp = hp;
+        this.dmg = 5;
     }
     moveTowardsPlayer(player) {
         const direction = calculateDirection(this.x, this.y, player.x, player.y);
@@ -17,6 +18,8 @@ export class Enemy extends Sprite {
         this.y += direction.y * this.speed;
         const distance = calculateDistance(this.x, this.y, this.radius, player.x, player.y, player.radius);
         if (distance <= 0) {
+            if (!player.isImmune)
+                player.getDamage(this.dmg, this);
             const { x, y } = collideCircleResolve(this, player);
             this.x = x;
             this.y = y;

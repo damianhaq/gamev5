@@ -12,6 +12,8 @@ export class Player extends Sprite {
         this.enemies = enemies;
         this.attackSpeed = 500;
         this.hp = 100;
+        this.immuneTime = 100;
+        this.immuneCount = 0;
         controls();
         this.shoot();
     }
@@ -72,6 +74,13 @@ export class Player extends Sprite {
                     return true;
                 break;
         }
+    }
+    getDamage(value, from) {
+        this.hp -= value;
+        this.isImmune = true;
+        setTimeout(() => {
+            this.isImmune = false;
+        }, this.immuneTime);
     }
     die() {
         if (this.hp <= 0) {

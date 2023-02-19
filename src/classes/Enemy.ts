@@ -8,6 +8,7 @@ import { Player } from "./Player.js";
 import { Sprite } from "./Sprite.js";
 
 export class Enemy extends Sprite {
+  dmg: number;
   constructor(
     public x: number,
     public y: number,
@@ -18,6 +19,7 @@ export class Enemy extends Sprite {
     super(x, y, radius);
     this.speed = speed;
     this.hp = hp;
+    this.dmg = 5;
   }
 
   moveTowardsPlayer(player: Player) {
@@ -36,6 +38,7 @@ export class Enemy extends Sprite {
     );
 
     if (distance <= 0) {
+      if (!player.isImmune) player.getDamage(this.dmg, this);
       const { x, y } = collideCircleResolve(this, player);
       this.x = x;
       this.y = y;
