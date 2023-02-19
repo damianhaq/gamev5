@@ -1,7 +1,6 @@
 import { bullets, enemies } from "../app.js";
 import { calculateDistance } from "../functions/helpers.js";
 import { dimensions } from "../variables.js";
-import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Bullet extends Sprite {
@@ -48,7 +47,6 @@ export class Bullet extends Sprite {
       if (distance <= 0) {
         enemy.hp -= this.dmg;
         bullets.splice(index, 1);
-        // if (enemy.hp <= 0) enemies.splice(index, 1);
       }
     });
   }

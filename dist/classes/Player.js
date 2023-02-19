@@ -8,8 +8,7 @@ export class Player extends Sprite {
     constructor(x, y, radius, enemies) {
         super(x, y, radius);
         this.enemies = enemies;
-        this.speed = 3;
-        this.isCameraLock = true;
+        this.speed = 1;
         this.enemies = enemies;
         this.attackSpeed = 500;
         this.hp = 100;
@@ -17,28 +16,28 @@ export class Player extends Sprite {
         this.shoot();
     }
     moving() {
-        if (keys.a && !this.isCollideBorderMap("left"))
-            dimensions.map.x += this.speed;
-        else if (keys.d && !this.isCollideBorderMap("right"))
-            dimensions.map.x -= this.speed;
-        if (keys.w && !this.isCollideBorderMap("up"))
-            dimensions.map.y += this.speed;
-        else if (keys.s && !this.isCollideBorderMap("bot"))
-            dimensions.map.y -= this.speed;
+        if (keys.a && !this.isCollideBorderMap("left")) {
+            this.x -= this.speed;
+        }
+        else if (keys.d && !this.isCollideBorderMap("right")) {
+            this.x += this.speed;
+        }
+        if (keys.w && !this.isCollideBorderMap("up")) {
+            this.y -= this.speed;
+        }
+        else if (keys.s && !this.isCollideBorderMap("bot")) {
+            this.y += this.speed;
+        }
         this.die();
     }
     shoot() {
         const iid = setInterval(() => {
             if (this.enemies.length > 0) {
-                // console.log("shoot");
                 const nearestEnemy = this.findNearestEnemy();
                 // draw line to nearest enemy
-                // c.moveTo(this.x, this.y);
-                // c.lineTo(nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
-                // c.stroke();
-                const direction = calculateDirection(this.x, this.y, nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
-                bullets.push(new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction, 10));
-                // console.log(bullets);
+                // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
+                const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
+                bullets.push(new Bullet(this.x, this.y, 5, 1, direction, 10));
             }
         }, this.attackSpeed);
     }
@@ -46,8 +45,7 @@ export class Player extends Sprite {
         let nearestEnemy = null;
         let nearestDistance = Number.MAX_VALUE;
         for (const enemy of this.enemies) {
-            const distance = Math.sqrt(Math.pow((enemy.x + dimensions.map.x - this.x), 2) +
-                Math.pow((enemy.y + dimensions.map.y - this.y), 2));
+            const distance = Math.sqrt(Math.pow((enemy.x - this.x), 2) + Math.pow((enemy.y - this.y), 2));
             if (distance < nearestDistance) {
                 nearestEnemy = enemy;
                 nearestDistance = distance;
@@ -58,19 +56,19 @@ export class Player extends Sprite {
     isCollideBorderMap(side) {
         switch (side) {
             case "left":
-                if (this.x - this.radius <= dimensions.map.x)
+                if (this.x - this.radius <= 0)
                     return true;
                 break;
             case "right":
-                if (this.x + this.radius >= dimensions.map.w + dimensions.map.x)
+                if (this.x + this.radius >= dimensions.map.w)
                     return true;
                 break;
             case "up":
-                if (this.y - this.radius <= dimensions.map.y)
+                if (this.y - this.radius <= 0)
                     return true;
                 break;
             case "bot":
-                if (this.y + this.radius >= dimensions.map.h + dimensions.map.y)
+                if (this.y + this.radius >= dimensions.map.h)
                     return true;
                 break;
         }

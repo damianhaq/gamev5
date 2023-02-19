@@ -33,7 +33,6 @@ export class Bullet extends Sprite {
             if (distance <= 0) {
                 enemy.hp -= this.dmg;
                 bullets.splice(index, 1);
-                // if (enemy.hp <= 0) enemies.splice(index, 1);
             }
         });
     }
