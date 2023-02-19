@@ -60,12 +60,8 @@ export function addEnemies(interval: number, maxEnemies: number) {
         break;
     }
 
-    // if (x < 0 || x > dimensions.map.w) {
-    //   console.log("poza mapą x");
-    // }
-
-    console.log("site:", site, "x: ", x, "y: ", y);
-    enemies.push(new Enemy(x, y, 12, 0.5));
+    // console.log("site:", site, "x: ", x, "y: ", y);
+    enemies.push(new Enemy(x, y, 12, 0.5, 100));
   }, interval);
 }
 

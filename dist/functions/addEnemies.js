@@ -37,11 +37,8 @@ export function addEnemies(interval, maxEnemies) {
                 y = randomNumber(dimensions.map.y * -1 + dimensions.canvas.h, dimensions.map.y * -1 + dimensions.canvas.h + 50);
                 break;
         }
-        // if (x < 0 || x > dimensions.map.w) {
-        //   console.log("poza mapą x");
-        // }
-        console.log("site:", site, "x: ", x, "y: ", y);
-        enemies.push(new Enemy(x, y, 12, 0.5));
+        // console.log("site:", site, "x: ", x, "y: ", y);
+        enemies.push(new Enemy(x, y, 12, 0.5, 100));
     }, interval);
 }
 function getSite() {

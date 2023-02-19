@@ -1,7 +1,7 @@
 import { addGrass } from "./functions/addGrass.js";
 import { Grass } from "./classes/Grass.js";
 import { Player } from "./classes/Player.js";
-import { dimensions } from "./variables.js";
+import { dimensions, game } from "./variables.js";
 import { drawMap } from "./functions/drawMap.js";
 import { Enemy } from "./classes/Enemy.js";
 import { drawPlayer } from "./functions/draw/drawPlayer.js";
@@ -28,8 +28,7 @@ export const bullets: Bullet[] = [];
 //Enemy
 addEnemies(1000, 100);
 export const enemies: Enemy[] = [];
-enemies.push(new Enemy(100, 100, 12, 0.5));
-// const enemy: Enemy = new Enemy(100, 100, 12, 0.5);
+enemies.push(new Enemy(100, 100, 12, 0.5, 100));
 
 // Player
 const player: Player = new Player(canvas.width / 2, canvas.height / 2, 20, enemies);
@@ -41,17 +40,22 @@ function animate() {
   drawMap(c);
 
   grassArray.forEach((el) => el.update(c, drawGrass));
-  bullets.forEach((el, index) => {
-    el.update(c, drawBullet);
-    el.deleteIfOverMap(index);
-  });
-  player.update(c, drawPlayer);
-  enemies.forEach((enemy) => {
-    enemy.update(c, drawEnemy);
-    enemy.moveTowardsPlayer(player);
+
+  bullets.forEach((bullet, index) => {
+    bullet.update(c, drawBullet);
+    bullet.deleteIfOverMap(index);
+    bullet.collisionEnemy(index);
   });
 
-  requestAnimationFrame(animate);
+  player.update(c, drawPlayer);
+
+  enemies.forEach((enemy, index) => {
+    enemy.update(c, drawEnemy);
+    enemy.moveTowardsPlayer(player);
+    enemy.die(index);
+  });
+
+  if (!game.isGameOver) requestAnimationFrame(animate);
   p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}`;
   // console.log(time);
 }

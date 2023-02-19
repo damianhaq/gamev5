@@ -25,3 +25,7 @@ export const dimensions: { canvas: WidthHeight; map: xywh } = {
     h: 2400,
   },
 };
+
+export const game = {
+  isGameOver: false,
+};

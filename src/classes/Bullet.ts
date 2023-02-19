@@ -1,5 +1,7 @@
-import { bullets } from "../app.js";
+import { bullets, enemies } from "../app.js";
+import { calculateDistance } from "../functions/helpers.js";
 import { dimensions } from "../variables.js";
+import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Bullet extends Sprite {
@@ -8,11 +10,13 @@ export class Bullet extends Sprite {
     public y: number,
     public radius: number,
     public speed: number,
-    public direction: { x: number; y: number }
+    public direction: { x: number; y: number },
+    public dmg: number
   ) {
     super(x, y, radius);
     this.speed = speed;
     this.direction = direction;
+    this.dmg = dmg;
   }
 
   moving(): void {
@@ -29,5 +33,23 @@ export class Bullet extends Sprite {
     ) {
       bullets.splice(index, 1);
     }
+  }
+
+  collisionEnemy(index: number) {
+    enemies.forEach((enemy) => {
+      const distance: number = calculateDistance(
+        enemy.x,
+        enemy.y,
+        enemy.radius,
+        this.x,
+        this.y,
+        this.radius
+      );
+      if (distance <= 0) {
+        enemy.hp -= this.dmg;
+        bullets.splice(index, 1);
+        // if (enemy.hp <= 0) enemies.splice(index, 1);
+      }
+    });
   }
 }

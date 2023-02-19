@@ -1,7 +1,7 @@
 import { bullets } from "../app.js";
 import { controls } from "../functions/controls.js";
 import { calculateDirection } from "../functions/helpers.js";
-import { dimensions, keys } from "../variables.js";
+import { dimensions, game, keys } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Sprite } from "./Sprite.js";
 export class Player extends Sprite {
@@ -11,6 +11,8 @@ export class Player extends Sprite {
         this.speed = 3;
         this.isCameraLock = true;
         this.enemies = enemies;
+        this.attackSpeed = 500;
+        this.hp = 100;
         controls();
         this.shoot();
     }
@@ -23,19 +25,22 @@ export class Player extends Sprite {
             dimensions.map.y += this.speed;
         else if (keys.s && !this.isCollideBorderMap("bot"))
             dimensions.map.y -= this.speed;
+        this.die();
     }
     shoot() {
         const iid = setInterval(() => {
-            // console.log("shoot");
-            const nearestEnemy = this.findNearestEnemy();
-            // draw line to nearest enemy
-            // c.moveTo(this.x, this.y);
-            // c.lineTo(nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
-            // c.stroke();
-            const direction = calculateDirection(this.x, this.y, nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
-            bullets.push(new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction));
-            // console.log(bullets);
-        }, 1000);
+            if (this.enemies.length > 0) {
+                // console.log("shoot");
+                const nearestEnemy = this.findNearestEnemy();
+                // draw line to nearest enemy
+                // c.moveTo(this.x, this.y);
+                // c.lineTo(nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
+                // c.stroke();
+                const direction = calculateDirection(this.x, this.y, nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
+                bullets.push(new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction, 10));
+                // console.log(bullets);
+            }
+        }, this.attackSpeed);
     }
     findNearestEnemy() {
         let nearestEnemy = null;
@@ -68,6 +73,11 @@ export class Player extends Sprite {
                 if (this.y + this.radius >= dimensions.map.h + dimensions.map.y)
                     return true;
                 break;
+        }
+    }
+    die() {
+        if (this.hp <= 0) {
+            game.isGameOver = true;
         }
     }
 }

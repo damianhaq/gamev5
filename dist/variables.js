@@ -22,3 +22,6 @@ export const dimensions = {
         h: 2400,
     },
 };
+export const game = {
+    isGameOver: false,
+};
