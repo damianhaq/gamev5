@@ -8,7 +8,7 @@ export class Player extends Sprite {
     constructor(x, y, radius, enemies) {
         super(x, y, radius);
         this.enemies = enemies;
-        this.speed = 1;
+        this.speed = 5;
         this.enemies = enemies;
         this.attackSpeed = 500;
         this.hp = 100;

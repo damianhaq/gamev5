@@ -5,6 +5,8 @@ import { Enemy } from "./classes/Enemy.js";
 import { addEnemies } from "./functions/addEnemies.js";
 import { drawCircle } from "./functions/draw/drawCircle.js";
 import { camera } from "./functions/camera.js";
+import { addGrass } from "./functions/addGrass.js";
+import { drawGrass } from "./functions/draw/drawGrass.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
@@ -12,7 +14,7 @@ canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
 // Add grass
-// const grassArray: Grass[] = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
+const grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
 //Bullet
 export const bullets = [];
 //Enemy
@@ -26,7 +28,7 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     camera(player);
     drawMap(c);
-    // grassArray.forEach((el) => el.update(c, drawGrass));
+    grassArray.forEach((el) => el.update(c, drawGrass));
     bullets.forEach((bullet, index) => {
         bullet.update(c, drawCircle);
         bullet.deleteIfOverMap(index);

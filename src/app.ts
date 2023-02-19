@@ -6,6 +6,9 @@ import { Bullet } from "./classes/Bullet.js";
 import { addEnemies } from "./functions/addEnemies.js";
 import { drawCircle } from "./functions/draw/drawCircle.js";
 import { camera } from "./functions/camera.js";
+import { Grass } from "./classes/Grass.js";
+import { addGrass } from "./functions/addGrass.js";
+import { drawGrass } from "./functions/draw/drawGrass.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
@@ -16,7 +19,7 @@ canvas.width = dimensions.canvas.w;
 export const c: CanvasRenderingContext2D = canvas.getContext("2d");
 
 // Add grass
-// const grassArray: Grass[] = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
+const grassArray: Grass[] = addGrass(dimensions.map.w, dimensions.map.h, 100);
 
 //Bullet
 export const bullets: Bullet[] = [];
@@ -35,7 +38,7 @@ function animate() {
   camera(player);
   drawMap(c);
 
-  // grassArray.forEach((el) => el.update(c, drawGrass));
+  grassArray.forEach((el) => el.update(c, drawGrass));
 
   bullets.forEach((bullet, index) => {
     bullet.update(c, drawCircle);
