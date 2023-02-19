@@ -1,4 +1,4 @@
-import { bullets } from "../app.js";
+import { bullets, c } from "../app.js";
 import { controls } from "../functions/controls.js";
 import { calculateDirection } from "../functions/helpers.js";
 import { dimensions, keys } from "../variables.js";
@@ -29,11 +29,17 @@ export class Player extends Sprite {
     const iid = setInterval(() => {
       // console.log("shoot");
       const nearestEnemy: Enemy = this.findNearestEnemy();
+
+      // draw line to nearest enemy
+      // c.moveTo(this.x, this.y);
+      // c.lineTo(nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
+      // c.stroke();
+
       const direction = calculateDirection(
-        this.x - dimensions.map.x,
-        this.y - dimensions.map.y,
-        nearestEnemy.x,
-        nearestEnemy.y
+        this.x,
+        this.y,
+        nearestEnemy.x + dimensions.map.x,
+        nearestEnemy.y + dimensions.map.y
       );
       bullets.push(
         new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction)
@@ -48,7 +54,8 @@ export class Player extends Sprite {
 
     for (const enemy of this.enemies) {
       const distance: number = Math.sqrt(
-        (enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2
+        (enemy.x + dimensions.map.x - this.x) ** 2 +
+          (enemy.y + dimensions.map.y - this.y) ** 2
       );
 
       if (distance < nearestDistance) {
