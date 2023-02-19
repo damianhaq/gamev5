@@ -52,6 +52,7 @@ function animate() {
     enemy.update(c, drawCircle);
     enemy.moveTowardsPlayer(player);
     enemy.die(index);
+    enemy.collideEnemies(enemies, index);
   });
 
   if (!game.isGameOver) requestAnimationFrame(animate);

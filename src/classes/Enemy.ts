@@ -34,12 +34,31 @@ export class Enemy extends Sprite {
       player.y,
       player.radius
     );
+
     if (distance <= 0) {
       const { x, y } = collideCircleResolve(this, player);
       this.x = x;
       this.y = y;
-    } else {
     }
+  }
+
+  collideEnemies(enemies: Enemy[], index: number) {
+    enemies.forEach((enemy) => {
+      const distance = calculateDistance(
+        this.x,
+        this.y,
+        this.radius,
+        enemy.x,
+        enemy.y,
+        enemy.radius
+      );
+
+      if (distance <= 0) {
+        const { x, y } = collideCircleResolve(this, enemy);
+        this.x = x;
+        this.y = y;
+      }
+    });
   }
 
   die(index: number) {

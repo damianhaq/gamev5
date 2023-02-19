@@ -21,8 +21,16 @@ export class Enemy extends Sprite {
             this.x = x;
             this.y = y;
         }
-        else {
-        }
+    }
+    collideEnemies(enemies, index) {
+        enemies.forEach((enemy) => {
+            const distance = calculateDistance(this.x, this.y, this.radius, enemy.x, enemy.y, enemy.radius);
+            if (distance <= 0) {
+                const { x, y } = collideCircleResolve(this, enemy);
+                this.x = x;
+                this.y = y;
+            }
+        });
     }
     die(index) {
         if (this.hp <= 0)
