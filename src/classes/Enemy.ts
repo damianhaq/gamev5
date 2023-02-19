@@ -68,7 +68,6 @@ export class Enemy extends Sprite {
   die(index: number) {
     if (this.hp <= 0) {
       expBalls.push(new ExpBall(this.x, this.y, 3));
-
       enemies.splice(index, 1);
     }
   }

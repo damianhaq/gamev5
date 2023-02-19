@@ -7,7 +7,6 @@ export class Sprite {
     public radius: number,
     public hp: number = 0,
     public immuneTime: number = 0,
-    public immuneCount: number = 0,
     public isImmune: boolean = false,
     public type: "stroke" | "fill" = "stroke",
     public color: string = "#202124"
@@ -22,13 +21,13 @@ export class Sprite {
   update(c: CanvasRenderingContext2D, drawMe: Function) {
     drawMe(this.x, this.y, this.radius, this.type, this.color, c);
 
-    this.showHp(c);
+    if (this.hp > 0) this.showHp(c);
     this.moving();
   }
 
   moving() {}
 
   showHp(c: CanvasRenderingContext2D) {
-    drawText(this.x, this.y, this.hp.toString(), c);
+    drawText(this.x, this.y, this.hp.toString(), "#000", c);
   }
 }

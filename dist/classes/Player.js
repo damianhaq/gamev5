@@ -8,12 +8,12 @@ export class Player extends Sprite {
     constructor(x, y, radius, enemies) {
         super(x, y, radius);
         this.enemies = enemies;
-        this.speed = 5;
+        this.speed = 2;
         this.enemies = enemies;
         this.attackSpeed = 500;
         this.hp = 100;
         this.immuneTime = 100;
-        this.immuneCount = 0;
+        this.grabItemRange = 100;
         controls();
         this.shoot();
     }
@@ -39,7 +39,7 @@ export class Player extends Sprite {
                 // draw line to nearest enemy
                 // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                 const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
-                bullets.push(new Bullet(this.x, this.y, 5, 1, direction, 10));
+                bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
             }
         }, this.attackSpeed);
     }

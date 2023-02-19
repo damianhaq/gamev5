@@ -24,7 +24,7 @@ enemies.push(new Enemy(100, 100, 12, 0.5, 100));
 // ExpBalls
 export const expBalls = [];
 // Player
-const player = new Player(300, 300, 20, enemies);
+export const player = new Player(300, 300, 20, enemies);
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -43,8 +43,9 @@ function animate() {
         enemy.die(index);
         enemy.collideEnemies(enemies, index);
     });
-    expBalls.forEach((exp) => {
+    expBalls.forEach((exp, index) => {
         exp.update(c, drawCircle);
+        exp.moveToPlayer(index, expBalls);
     });
     if (!game.isGameOver)
         requestAnimationFrame(animate);

@@ -9,14 +9,15 @@ import { Sprite } from "./Sprite.js";
 export class Player extends Sprite {
   speed: number;
   attackSpeed: number;
+  grabItemRange: number;
   constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
-    this.speed = 5;
+    this.speed = 2;
     this.enemies = enemies;
     this.attackSpeed = 500;
     this.hp = 100;
     this.immuneTime = 100;
-    this.immuneCount = 0;
+    this.grabItemRange = 100;
 
     controls();
     this.shoot();
@@ -52,7 +53,7 @@ export class Player extends Sprite {
           nearestEnemy.x,
           nearestEnemy.y
         );
-        bullets.push(new Bullet(this.x, this.y, 5, 1, direction, 10));
+        bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
       }
     }, this.attackSpeed);
   }
