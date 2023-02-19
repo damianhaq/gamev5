@@ -7,6 +7,7 @@ import { drawPlayer } from "./functions/draw/drawPlayer.js";
 import { drawEnemy } from "./functions/draw/drawEnemy.js";
 import { drawGrass } from "./functions/draw/drawGrass.js";
 import { drawBullet } from "./functions/draw/drawBullet.js";
+import { addEnemies } from "./functions/addEnemies.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
@@ -18,7 +19,8 @@ const grassArray = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
 //Bullet
 export const bullets = [];
 //Enemy
-const enemies = [];
+addEnemies(1000, 100);
+export const enemies = [];
 enemies.push(new Enemy(100, 100, 12, 0.5));
 // const enemy: Enemy = new Enemy(100, 100, 12, 0.5);
 // Player
@@ -38,7 +40,7 @@ function animate() {
         enemy.moveTowardsPlayer(player);
     });
     requestAnimationFrame(animate);
-    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}`;
+    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}`;
     // console.log(time);
 }
 animate();

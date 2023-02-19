@@ -9,6 +9,7 @@ import { drawEnemy } from "./functions/draw/drawEnemy.js";
 import { drawGrass } from "./functions/draw/drawGrass.js";
 import { Bullet } from "./classes/Bullet.js";
 import { drawBullet } from "./functions/draw/drawBullet.js";
+import { addEnemies } from "./functions/addEnemies.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
@@ -25,7 +26,8 @@ const grassArray: Grass[] = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 1
 export const bullets: Bullet[] = [];
 
 //Enemy
-const enemies: Enemy[] = [];
+addEnemies(1000, 100);
+export const enemies: Enemy[] = [];
 enemies.push(new Enemy(100, 100, 12, 0.5));
 // const enemy: Enemy = new Enemy(100, 100, 12, 0.5);
 
@@ -50,7 +52,7 @@ function animate() {
   });
 
   requestAnimationFrame(animate);
-  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}`;
+  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}`;
   // console.log(time);
 }
 

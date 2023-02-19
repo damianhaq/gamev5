@@ -47,7 +47,9 @@ export class Player extends Sprite {
     let nearestDistance = Number.MAX_VALUE;
 
     for (const enemy of this.enemies) {
-      const distance = Math.sqrt((enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2);
+      const distance: number = Math.sqrt(
+        (enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2
+      );
 
       if (distance < nearestDistance) {
         nearestEnemy = enemy;
