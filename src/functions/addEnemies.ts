@@ -12,20 +12,25 @@ export function addEnemies(interval: number, maxEnemies: number) {
 
     // pick which site of screen spawn enemies
     const site = getSite();
+    // site = "down";
 
     // random coordinate according to site
     switch (site) {
       case "left":
         x = randomNumber(dimensions.map.x * -1, dimensions.map.x * -1 - 50);
         y = randomNumber(
-          dimensions.map.y * -1,
-          dimensions.map.y * -1 + dimensions.canvas.h
+          dimensions.map.y * -1 < 0 ? 0 : dimensions.map.y * -1,
+          dimensions.map.y * -1 + dimensions.canvas.h > dimensions.map.h
+            ? dimensions.map.h
+            : dimensions.map.y * -1 + dimensions.canvas.h
         );
         break;
       case "up":
         x = randomNumber(
-          dimensions.map.x * -1,
-          dimensions.map.x * -1 + dimensions.canvas.w
+          dimensions.map.x * -1 < 0 ? 0 : dimensions.map.x * -1,
+          dimensions.map.x * -1 + dimensions.canvas.w > dimensions.map.w
+            ? dimensions.map.w
+            : dimensions.map.x * -1 + dimensions.canvas.w
         );
         y = randomNumber(dimensions.map.y * -1, dimensions.map.y * -1 - 50);
         break;
@@ -35,14 +40,18 @@ export function addEnemies(interval: number, maxEnemies: number) {
           dimensions.map.x * -1 + dimensions.canvas.w + 50
         );
         y = randomNumber(
-          dimensions.map.y * -1,
-          dimensions.map.y * -1 + dimensions.canvas.h
+          dimensions.map.y * -1 < 0 ? 0 : dimensions.map.y * -1,
+          dimensions.map.y * -1 + dimensions.canvas.h > dimensions.map.h
+            ? dimensions.map.h
+            : dimensions.map.y * -1 + dimensions.canvas.h
         );
         break;
       case "down":
         x = randomNumber(
-          dimensions.map.x * -1,
-          dimensions.map.x * -1 + dimensions.canvas.w
+          dimensions.map.x * -1 < 0 ? 0 : dimensions.map.x * -1,
+          dimensions.map.x * -1 + dimensions.canvas.w > dimensions.map.w
+            ? dimensions.map.w
+            : dimensions.map.x * -1 + dimensions.canvas.w
         );
         y = randomNumber(
           dimensions.map.y * -1 + dimensions.canvas.h,
@@ -55,7 +64,7 @@ export function addEnemies(interval: number, maxEnemies: number) {
     //   console.log("poza mapą x");
     // }
 
-    // console.log("site:", site, "x: ", x, "y: ", y);
+    console.log("site:", site, "x: ", x, "y: ", y);
     enemies.push(new Enemy(x, y, 12, 0.5));
   }, interval);
 }

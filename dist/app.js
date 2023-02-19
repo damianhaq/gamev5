@@ -13,7 +13,7 @@ canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
-const c = canvas.getContext("2d");
+export const c = canvas.getContext("2d");
 // Add grass
 const grassArray = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
 //Bullet

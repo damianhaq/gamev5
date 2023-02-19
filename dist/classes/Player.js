@@ -28,7 +28,11 @@ export class Player extends Sprite {
         const iid = setInterval(() => {
             // console.log("shoot");
             const nearestEnemy = this.findNearestEnemy();
-            const direction = calculateDirection(this.x - dimensions.map.x, this.y - dimensions.map.y, nearestEnemy.x, nearestEnemy.y);
+            // draw line to nearest enemy
+            // c.moveTo(this.x, this.y);
+            // c.lineTo(nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
+            // c.stroke();
+            const direction = calculateDirection(this.x, this.y, nearestEnemy.x + dimensions.map.x, nearestEnemy.y + dimensions.map.y);
             bullets.push(new Bullet(this.x - dimensions.map.x, this.y - dimensions.map.y, 5, 1, direction));
             // console.log(bullets);
         }, 1000);
@@ -37,7 +41,8 @@ export class Player extends Sprite {
         let nearestEnemy = null;
         let nearestDistance = Number.MAX_VALUE;
         for (const enemy of this.enemies) {
-            const distance = Math.sqrt(Math.pow((enemy.x - this.x), 2) + Math.pow((enemy.y - this.y), 2));
+            const distance = Math.sqrt(Math.pow((enemy.x + dimensions.map.x - this.x), 2) +
+                Math.pow((enemy.y + dimensions.map.y - this.y), 2));
             if (distance < nearestDistance) {
                 nearestEnemy = enemy;
                 nearestDistance = distance;

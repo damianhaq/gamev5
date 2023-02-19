@@ -17,7 +17,7 @@ const p: HTMLParagraphElement = document.querySelector("#log");
 
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
-const c: CanvasRenderingContext2D = canvas.getContext("2d");
+export const c: CanvasRenderingContext2D = canvas.getContext("2d");
 
 // Add grass
 const grassArray: Grass[] = addGrass(0, 0, dimensions.map.w, dimensions.map.h, 100);
