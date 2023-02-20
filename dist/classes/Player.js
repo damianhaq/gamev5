@@ -12,6 +12,7 @@ export class Player extends Sprite {
         this.enemies = enemies;
         this.attackSpeed = 500;
         this.hp = 100;
+        this.maxHP = 100;
         this.immuneTime = 100;
         this.grabItemRange = 100;
         controls();

@@ -6,6 +6,7 @@ export class Sprite {
     public y: number,
     public radius: number,
     public hp: number = 0,
+    public maxHP: number = 0,
     public immuneTime: number = 0,
     public isImmune: boolean = false,
     public type: "stroke" | "fill" = "stroke",

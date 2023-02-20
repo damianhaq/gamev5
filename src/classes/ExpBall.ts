@@ -1,5 +1,6 @@
 import { player } from "../app.js";
 import { calculateDirection, calculateDistance } from "../functions/helpers.js";
+import { stats } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 
 export class ExpBall extends Sprite {
@@ -31,7 +32,7 @@ export class ExpBall extends Sprite {
       this.y += direction.y * this.speed;
 
       if (distance <= 0) {
-        // todo: add exp
+        stats.player.currentXP += 10;
         expballs.splice(index, 1);
       }
     }

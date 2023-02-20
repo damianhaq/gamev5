@@ -10,6 +10,8 @@ import { Grass } from "./classes/Grass.js";
 import { addGrass } from "./functions/addGrass.js";
 import { drawGrass } from "./functions/draw/drawGrass.js";
 import { ExpBall } from "./classes/expBall.js";
+import { GUI } from "./classes/GUI.js";
+import { guiAll } from "./functions/guiAll.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
@@ -28,13 +30,16 @@ export const bullets: Bullet[] = [];
 //Enemy
 addEnemies(1000, 100);
 export const enemies: Enemy[] = [];
-enemies.push(new Enemy(100, 100, 12, 0.5, 100));
+// enemies.push(new Enemy(100, 100, 12, 0.5, 100));
 
 // ExpBalls
 export const expBalls: ExpBall[] = [];
 
 // Player
 export const player: Player = new Player(300, 300, 20, enemies);
+
+// GUI
+export const gui: GUI = new GUI(c);
 
 //Animate
 function animate() {
@@ -66,6 +71,7 @@ function animate() {
 
   if (!game.isGameOver) requestAnimationFrame(animate);
   p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
+  guiAll();
 }
 
 animate();

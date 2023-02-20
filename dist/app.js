@@ -1,12 +1,13 @@
 import { Player } from "./classes/Player.js";
 import { dimensions, game } from "./variables.js";
 import { drawMap } from "./functions/drawMap.js";
-import { Enemy } from "./classes/Enemy.js";
 import { addEnemies } from "./functions/addEnemies.js";
 import { drawCircle } from "./functions/draw/drawCircle.js";
 import { camera } from "./functions/camera.js";
 import { addGrass } from "./functions/addGrass.js";
 import { drawGrass } from "./functions/draw/drawGrass.js";
+import { GUI } from "./classes/GUI.js";
+import { guiAll } from "./functions/guiAll.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
@@ -20,11 +21,13 @@ export const bullets = [];
 //Enemy
 addEnemies(1000, 100);
 export const enemies = [];
-enemies.push(new Enemy(100, 100, 12, 0.5, 100));
+// enemies.push(new Enemy(100, 100, 12, 0.5, 100));
 // ExpBalls
 export const expBalls = [];
 // Player
 export const player = new Player(300, 300, 20, enemies);
+// GUI
+export const gui = new GUI(c);
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -50,5 +53,6 @@ function animate() {
     if (!game.isGameOver)
         requestAnimationFrame(animate);
     p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
+    guiAll();
 }
 animate();

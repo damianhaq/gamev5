@@ -48,3 +48,13 @@ export function collideCircleResolve(c1: Sprite, c2: Sprite): { x: number; y: nu
   // c1.x = c2.x + (radii_sum + 1) * unit_x;
   // c1.y = c2.y + (radii_sum + 1) * unit_y;
 }
+
+export function calculatePercentage(
+  currentValue: number,
+  maxValue: number,
+  maxWidth: number
+): number {
+  const percentage: number = (currentValue / maxValue) * 100;
+  const currentWidth: number = (percentage / 100) * maxWidth;
+  return currentWidth;
+}

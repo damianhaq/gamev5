@@ -28,3 +28,8 @@ export function collideCircleResolve(c1, c2) {
     // c1.x = c2.x + (radii_sum + 1) * unit_x;
     // c1.y = c2.y + (radii_sum + 1) * unit_y;
 }
+export function calculatePercentage(currentValue, maxValue, maxWidth) {
+    const percentage = (currentValue / maxValue) * 100;
+    const currentWidth = (percentage / 100) * maxWidth;
+    return currentWidth;
+}
