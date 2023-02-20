@@ -12,8 +12,8 @@ export const keys = {
 };
 export const dimensions = {
     canvas: {
-        w: 800,
-        h: 600,
+        w: 1200,
+        h: 800,
     },
     map: {
         x: 0,
@@ -21,7 +21,17 @@ export const dimensions = {
         w: 3200,
         h: 2400,
     },
+    gui: {},
 };
 export const game = {
     isGameOver: false,
+};
+export const stats = {
+    player: {
+        maxHP: 100,
+        currentHP: 100,
+        lvl: 1,
+        maxXP: 100,
+        currentXP: 0,
+    },
 };
