@@ -1,3 +1,4 @@
+import { calculatePercentage } from "../functions/helpers.js";
 export class GUI {
     constructor(c) {
         this.c = c;
@@ -15,6 +16,9 @@ export class GUI {
         this.c.restore();
     }
     progressBar(maxValue, CurrentValue, x, y, w, h, colorLine, lineWidth, isFill, colorFill, progressBarColor, progressEdgeColor) {
+        if (CurrentValue > maxValue)
+            CurrentValue = maxValue;
+        const currentW = calculatePercentage(CurrentValue, maxValue, w);
         this.c.save();
         //background
         if (isFill) {
@@ -23,13 +27,13 @@ export class GUI {
         }
         // Progressbar
         this.c.fillStyle = progressBarColor;
-        this.c.fillRect(x, y, CurrentValue, h);
+        this.c.fillRect(x, y, currentW, h);
         // ProgressbarLine
         this.c.beginPath();
         this.c.lineWidth = lineWidth;
         this.c.strokeStyle = progressEdgeColor;
-        this.c.moveTo(x + CurrentValue, y);
-        this.c.lineTo(x + CurrentValue, y + h);
+        this.c.moveTo(x + currentW, y);
+        this.c.lineTo(x + currentW, y + h);
         this.c.stroke();
         // Text
         this.c.fillStyle = "#000";

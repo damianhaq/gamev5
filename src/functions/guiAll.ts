@@ -13,8 +13,9 @@ export function guiAll() {
     "#fff"
   );
 
+  // expbar
   gui.progressBar(
-    1000,
+    stats.player.maxXP,
     stats.player.currentXP,
     10,
     dimensions.canvas.h - 70,
