@@ -52,7 +52,7 @@ function animate() {
     });
     if (!game.isGameOver)
         requestAnimationFrame(animate);
-    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
     guiAll();
+    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
 }
 animate();

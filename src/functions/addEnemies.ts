@@ -61,7 +61,7 @@ export function addEnemies(interval: number, maxEnemies: number) {
     }
 
     // console.log("site:", site, "x: ", x, "y: ", y);
-    enemies.push(new Enemy(x, y, 12, 0.5, 100));
+    enemies.push(new Enemy(x, y, 12, 0.5, 100, 48));
   }, interval);
 }
 

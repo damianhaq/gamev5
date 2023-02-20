@@ -1,4 +1,5 @@
 import { Sprite } from "../classes/Sprite";
+import { stats } from "../variables.js";
 
 export function calculateDirection(
   fromX: number,
@@ -57,4 +58,16 @@ export function calculatePercentage(
   const percentage: number = (currentValue / maxValue) * 100;
   const currentWidth: number = (percentage / 100) * maxWidth;
   return currentWidth;
+}
+
+export function addExp(value: number) {
+  const { currentXP, maxXP, lvl, maxXpGrowPrecentage } = stats.player;
+
+  if (currentXP + value <= maxXP) {
+    stats.player.currentXP += value;
+  } else {
+    stats.player.lvl += 1;
+    stats.player.currentXP = value - (maxXP - currentXP);
+    stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
+  }
 }

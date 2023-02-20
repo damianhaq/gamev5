@@ -15,12 +15,14 @@ export class Enemy extends Sprite {
     public y: number,
     public radius: number,
     public speed: number,
-    hp: number
+    hp: number,
+    public expDropValue: number
   ) {
     super(x, y, radius);
     this.speed = speed;
     this.hp = hp;
     this.dmg = 5;
+    this.expDropValue = expDropValue;
   }
 
   moveTowardsPlayer(player: Player) {
@@ -67,7 +69,7 @@ export class Enemy extends Sprite {
 
   die(index: number) {
     if (this.hp <= 0) {
-      expBalls.push(new ExpBall(this.x, this.y, 3));
+      expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
       enemies.splice(index, 1);
     }
   }
