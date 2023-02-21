@@ -1,12 +1,12 @@
-import { dimensions, game, instances, stats } from "./variables.js";
+import { dimensions, game, instances, keys, stats } from "./variables.js";
 
 import { GUI } from "./classes/GUI.js";
-import { guiAll } from "./functions/guiAll.js";
 
 import { mainMenu } from "./functions/loops/mainMenu.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
 import { controls } from "./functions/controls.js";
+import { pause } from "./functions/pause.js";
 
 const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
@@ -43,10 +43,20 @@ function animate() {
       game.initialPlayingFlag = false;
       loadPlaying();
     }
-    playing();
-  }
 
-  guiAll();
+    if (keys.escape && game.pauseFlag) {
+      game.pauseFlag = false;
+      game.isPause = !game.isPause;
+    } else if (!keys.escape && !game.pauseFlag) {
+      game.pauseFlag = true;
+    }
+
+    playing();
+
+    if (game.isPause) {
+      pause();
+    }
+  }
 
   requestAnimationFrame(animate);
 }

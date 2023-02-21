@@ -11,6 +11,8 @@ export function controls() {
             keys.d = true;
         if (ev.code === "Space")
             keys.space = true;
+        if (ev.code === "Escape")
+            keys.escape = true;
         // console.log(keys);
     });
     document.body.addEventListener("keyup", (ev) => {
@@ -24,7 +26,9 @@ export function controls() {
             keys.d = false;
         if (ev.code === "Space")
             keys.space = false;
-        // console.log(keys);
+        if (ev.code === "Escape")
+            keys.escape = false;
+        // console.log(ev.code);
     });
     document.addEventListener("mousedown", (ev) => {
         keys.mouse.click = true;

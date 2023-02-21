@@ -1,7 +1,7 @@
 // import { player } from "../app.js";
 import { addExp, calculateDirection, calculateDistance } from "../functions/helpers.js";
 // import { player } from "../functions/initial/playing.js";
-import { instances } from "../variables.js";
+import { game, instances } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 export class ExpBall extends Sprite {
     constructor(x, y, radius, expValue) {
@@ -19,8 +19,10 @@ export class ExpBall extends Sprite {
         const distance = calculateDistance(this.x, this.y, this.radius, instances.player.x, instances.player.y, instances.player.radius);
         if (distance < instances.player.grabItemRange) {
             const direction = calculateDirection(this.x, this.y, instances.player.x, instances.player.y);
-            this.x += direction.x * this.speed;
-            this.y += direction.y * this.speed;
+            if (!game.isPause) {
+                this.x += direction.x * this.speed;
+                this.y += direction.y * this.speed;
+            }
             if (distance <= 0) {
                 // stats.player.currentXP += this.expValue;
                 addExp(this.expValue);

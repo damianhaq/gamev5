@@ -4,6 +4,7 @@ import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
 import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
+import { guiPlaying } from "../guiPlaying.js";
 export function playing() {
     if (game.isGameOver)
         return;
@@ -26,4 +27,5 @@ export function playing() {
         exp.update(c, drawCircle);
         exp.moveToPlayer(index, instances.expBalls);
     });
+    guiPlaying();
 }

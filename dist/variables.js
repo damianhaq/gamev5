@@ -4,6 +4,7 @@ export const keys = {
     a: false,
     d: false,
     space: false,
+    escape: false,
     mouse: {
         click: false,
         executeOnceFlag: true,
@@ -27,6 +28,8 @@ export const dimensions = {
 export const game = {
     gameState: "mainMenu",
     initialPlayingFlag: true,
+    pauseFlag: true,
+    isPause: false,
     isGameOver: false,
     localStorageKey: "gamev5",
     font: {

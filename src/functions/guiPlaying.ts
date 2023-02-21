@@ -2,7 +2,7 @@ import { gui } from "../app.js";
 import { dimensions, game, stats } from "../variables.js";
 import { drawText } from "./draw/drawText.js";
 
-export function guiAll() {
+export function guiPlaying() {
   // expbar
   gui.progressBar(
     stats.player.maxXP,

@@ -7,6 +7,7 @@ export function controls() {
     if (ev.code === "KeyA") keys.a = true;
     if (ev.code === "KeyD") keys.d = true;
     if (ev.code === "Space") keys.space = true;
+    if (ev.code === "Escape") keys.escape = true;
 
     // console.log(keys);
   });
@@ -17,8 +18,9 @@ export function controls() {
     if (ev.code === "KeyA") keys.a = false;
     if (ev.code === "KeyD") keys.d = false;
     if (ev.code === "Space") keys.space = false;
+    if (ev.code === "Escape") keys.escape = false;
 
-    // console.log(keys);
+    // console.log(ev.code);
   });
 
   document.addEventListener("mousedown", (ev: MouseEvent) => {

@@ -1,6 +1,6 @@
 // import { enemies, expBalls } from "../app.js";
 import { calculateDirection, calculateDistance, collideCircleResolve, } from "../functions/helpers.js";
-import { instances } from "../variables.js";
+import { game, instances } from "../variables.js";
 // import { enemies, expBalls } from "../functions/initial/playing.js";
 import { ExpBall } from "./expBall.js";
 import { Sprite } from "./Sprite.js";
@@ -19,8 +19,10 @@ export class Enemy extends Sprite {
     }
     moveTowardsPlayer(player) {
         const direction = calculateDirection(this.x, this.y, player.x, player.y);
-        this.x += direction.x * this.speed;
-        this.y += direction.y * this.speed;
+        if (!game.isPause) {
+            this.x += direction.x * this.speed;
+            this.y += direction.y * this.speed;
+        }
         const distance = calculateDistance(this.x, this.y, this.radius, player.x, player.y, player.radius);
         if (distance <= 0) {
             if (!player.isImmune)

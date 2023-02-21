@@ -6,7 +6,7 @@ export function mainMenu(gui: GUI) {
   gui.text(
     dimensions.canvas.w / 2,
     dimensions.canvas.h / 2,
-    "Gra",
+    "Game",
     20,
     game.font.main,
     game.colors.blue
