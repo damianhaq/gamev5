@@ -42,7 +42,6 @@ function animate() {
     if (game.initialPlayingFlag) {
       game.initialPlayingFlag = false;
       loadPlaying();
-      console.log(instances);
     }
     playing();
   }

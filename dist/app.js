@@ -1,4 +1,4 @@
-import { dimensions, game, instances } from "./variables.js";
+import { dimensions, game } from "./variables.js";
 import { GUI } from "./classes/GUI.js";
 import { guiAll } from "./functions/guiAll.js";
 import { mainMenu } from "./functions/loops/mainMenu.js";
@@ -31,7 +31,6 @@ function animate() {
         if (game.initialPlayingFlag) {
             game.initialPlayingFlag = false;
             loadPlaying();
-            console.log(instances);
         }
         playing();
     }
