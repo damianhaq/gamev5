@@ -15,7 +15,7 @@ export class GUI {
         this.c.strokeRect(x, y, w, h);
         this.c.restore();
     }
-    progressBar(maxValue, CurrentValue, x, y, w, h, colorLine, lineWidth, isFill, colorFill, progressBarColor, progressEdgeColor) {
+    progressBar(maxValue, CurrentValue, font, x, y, w, h, colorLine, lineWidth, isFill, colorFill, progressBarColor, progressEdgeColor) {
         if (CurrentValue > maxValue)
             CurrentValue = maxValue;
         const currentW = calculatePercentage(CurrentValue, maxValue, w);
@@ -36,13 +36,20 @@ export class GUI {
         this.c.lineTo(x + currentW, y + h);
         this.c.stroke();
         // Text
+        this.c.font = `${1 + h / 2}px ${font}`;
         this.c.fillStyle = "#000";
         this.c.textAlign = "center";
-        this.c.fillText(`${CurrentValue}/${maxValue}`, x + w / 2, y + h / 2);
+        this.c.fillText(`${CurrentValue}/${maxValue}`, x + w / 2, y + h / 2 + 1 + h / 2);
         // Border
         this.c.lineWidth = lineWidth;
         this.c.strokeStyle = colorLine;
         this.c.strokeRect(x, y, w, h);
         this.c.restore();
+    }
+    text(x, y, text, fontSize, font, color) {
+        this.c.font = `${fontSize}px ${font}`;
+        this.c.textAlign = "center";
+        this.c.fillStyle = color;
+        this.c.fillText(text, x, y);
     }
 }

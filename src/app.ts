@@ -1,5 +1,5 @@
 import { Player } from "./classes/Player.js";
-import { dimensions, game } from "./variables.js";
+import { dimensions, game, stats } from "./variables.js";
 import { drawMap } from "./functions/drawMap.js";
 import { Enemy } from "./classes/Enemy.js";
 import { Bullet } from "./classes/Bullet.js";
@@ -20,6 +20,19 @@ const p: HTMLParagraphElement = document.querySelector("#log");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c: CanvasRenderingContext2D = canvas.getContext("2d");
+
+console.log("devicePixelRatio: " + window.devicePixelRatio);
+console.log("canvas size: " + canvas.width + " x " + canvas.height);
+console.log(
+  "canvas style size: " + canvas.style.width + "px x " + canvas.style.height + "px"
+);
+canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
+canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
+
+canvas.style.width = dimensions.canvas.w + "px";
+canvas.style.height = dimensions.canvas.h + "px";
+
+c.scale(window.devicePixelRatio, window.devicePixelRatio);
 
 // Add grass
 const grassArray: Grass[] = addGrass(dimensions.map.w, dimensions.map.h, 100);
@@ -74,7 +87,7 @@ function animate() {
 
   guiAll();
 
-  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
+  p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}  bullets${bullets.length}  lvl ${stats.player.lvl}`;
 }
 
 animate();

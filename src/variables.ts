@@ -29,6 +29,14 @@ export const dimensions = {
 
 export const game = {
   isGameOver: false,
+  font: {
+    main: "Minecraftia",
+    secondary: "Retro gaming",
+  },
+  colors: {
+    blue: "#1a73e8",
+    blue2: "#0098ff",
+  },
 };
 
 export const stats = {

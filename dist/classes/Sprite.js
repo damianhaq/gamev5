@@ -1,4 +1,5 @@
 import { drawText } from "../functions/draw/drawText.js";
+import { game } from "../variables.js";
 export class Sprite {
     constructor(x, y, radius, hp = 0, maxHP = 0, immuneTime = 0, isImmune = false, type = "stroke", color = "#202124") {
         this.x = x;
@@ -23,6 +24,6 @@ export class Sprite {
     }
     moving() { }
     showHp(c) {
-        drawText(this.x, this.y, this.hp.toString(), "#000", c);
+        drawText(this.x, this.y + 8, this.hp.toString(), 8, game.font.main, "#000");
     }
 }

@@ -29,6 +29,7 @@ export class GUI {
   progressBar(
     maxValue: number,
     CurrentValue: number,
+    font: string,
     x: number,
     y: number,
     w: number,
@@ -65,9 +66,10 @@ export class GUI {
     this.c.stroke();
 
     // Text
+    this.c.font = `${1 + h / 2}px ${font}`;
     this.c.fillStyle = "#000";
     this.c.textAlign = "center";
-    this.c.fillText(`${CurrentValue}/${maxValue}`, x + w / 2, y + h / 2);
+    this.c.fillText(`${CurrentValue}/${maxValue}`, x + w / 2, y + h / 2 + 1 + h / 2);
 
     // Border
     this.c.lineWidth = lineWidth;
@@ -75,5 +77,19 @@ export class GUI {
     this.c.strokeRect(x, y, w, h);
 
     this.c.restore();
+  }
+
+  text(
+    x: number,
+    y: number,
+    text: string,
+    fontSize: number,
+    font: string,
+    color: string
+  ) {
+    this.c.font = `${fontSize}px ${font}`;
+    this.c.textAlign = "center";
+    this.c.fillStyle = color;
+    this.c.fillText(text, x, y);
   }
 }
