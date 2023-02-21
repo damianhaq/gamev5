@@ -1,6 +1,6 @@
 import { calculateDistance } from "../functions/helpers.js";
 // import { bullets, enemies } from "../functions/initial/playing.js";
-import { dimensions, instances } from "../variables.js";
+import { dimensions, game, instances } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 
 export class Bullet extends Sprite {
@@ -19,8 +19,10 @@ export class Bullet extends Sprite {
   }
 
   moving(): void {
-    this.x += this.direction.x * this.speed;
-    this.y += this.direction.y * this.speed;
+    if (!game.isPause) {
+      this.x += this.direction.x * this.speed;
+      this.y += this.direction.y * this.speed;
+    }
   }
 
   deleteIfOverMap(index: number) {

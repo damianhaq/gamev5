@@ -4,6 +4,7 @@ export interface Keys {
   a: boolean;
   d: boolean;
   space: boolean;
+  escape: boolean;
   mouse: {
     click: boolean;
     executeOnceFlag: boolean;

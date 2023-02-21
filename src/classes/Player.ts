@@ -1,7 +1,7 @@
 import { controls } from "../functions/controls.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection } from "../functions/helpers.js";
-import { dimensions, game, instances, keys } from "../variables.js";
+import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
@@ -15,8 +15,8 @@ export class Player extends Sprite {
     this.speed = 2;
     this.enemies = enemies;
     this.attackSpeed = 500;
-    this.hp = 100;
-    this.maxHP = 100;
+    this.hp = stats.player.currentHP;
+    this.maxHP = stats.player.maxHP;
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
@@ -24,26 +24,28 @@ export class Player extends Sprite {
   }
 
   moving() {
-    if (keys.a && !this.isCollideBorderMap("left")) {
-      this.x -= this.speed;
-    } else if (keys.d && !this.isCollideBorderMap("right")) {
-      this.x += this.speed;
-    }
+    if (!game.isPause) {
+      if (keys.a && !this.isCollideBorderMap("left")) {
+        this.x -= this.speed;
+      } else if (keys.d && !this.isCollideBorderMap("right")) {
+        this.x += this.speed;
+      }
 
-    if (keys.w && !this.isCollideBorderMap("up")) {
-      this.y -= this.speed;
-    } else if (keys.s && !this.isCollideBorderMap("bot")) {
-      this.y += this.speed;
-    }
+      if (keys.w && !this.isCollideBorderMap("up")) {
+        this.y -= this.speed;
+      } else if (keys.s && !this.isCollideBorderMap("bot")) {
+        this.y += this.speed;
+      }
 
-    this.die();
+      this.die();
+    }
   }
 
   shoot() {
     let iid: number;
     if (!iid) {
       iid = setInterval(() => {
-        if (this.enemies.length > 0) {
+        if (this.enemies.length > 0 && !game.isPause) {
           const nearestEnemy: Enemy = this.findNearestEnemy();
 
           // draw line to nearest enemy

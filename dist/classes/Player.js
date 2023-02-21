@@ -1,6 +1,6 @@
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection } from "../functions/helpers.js";
-import { dimensions, game, instances, keys } from "../variables.js";
+import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Sprite } from "./Sprite.js";
 export class Player extends Sprite {
@@ -10,32 +10,34 @@ export class Player extends Sprite {
         this.speed = 2;
         this.enemies = enemies;
         this.attackSpeed = 500;
-        this.hp = 100;
-        this.maxHP = 100;
+        this.hp = stats.player.currentHP;
+        this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
         this.grabItemRange = 100;
         this.shoot();
     }
     moving() {
-        if (keys.a && !this.isCollideBorderMap("left")) {
-            this.x -= this.speed;
+        if (!game.isPause) {
+            if (keys.a && !this.isCollideBorderMap("left")) {
+                this.x -= this.speed;
+            }
+            else if (keys.d && !this.isCollideBorderMap("right")) {
+                this.x += this.speed;
+            }
+            if (keys.w && !this.isCollideBorderMap("up")) {
+                this.y -= this.speed;
+            }
+            else if (keys.s && !this.isCollideBorderMap("bot")) {
+                this.y += this.speed;
+            }
+            this.die();
         }
-        else if (keys.d && !this.isCollideBorderMap("right")) {
-            this.x += this.speed;
-        }
-        if (keys.w && !this.isCollideBorderMap("up")) {
-            this.y -= this.speed;
-        }
-        else if (keys.s && !this.isCollideBorderMap("bot")) {
-            this.y += this.speed;
-        }
-        this.die();
     }
     shoot() {
         let iid;
         if (!iid) {
             iid = setInterval(() => {
-                if (this.enemies.length > 0) {
+                if (this.enemies.length > 0 && !game.isPause) {
                     const nearestEnemy = this.findNearestEnemy();
                     // draw line to nearest enemy
                     // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
