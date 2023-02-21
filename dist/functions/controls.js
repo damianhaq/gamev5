@@ -28,10 +28,14 @@ export function controls() {
     });
     document.addEventListener("mousedown", (ev) => {
         keys.mouse.click = true;
-        keys.mouse.x = ev.x;
-        keys.mouse.y = ev.y;
+        keys.mouse.x = ev.offsetX;
+        keys.mouse.y = ev.offsetY;
     });
     document.addEventListener("mouseup", (ev) => {
         keys.mouse.click = false;
+    });
+    document.addEventListener("mousemove", (ev) => {
+        keys.mouse.x = ev.offsetX;
+        keys.mouse.y = ev.offsetY;
     });
 }

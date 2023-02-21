@@ -6,6 +6,7 @@ export const keys = {
     space: false,
     mouse: {
         click: false,
+        executeOnceFlag: true,
         x: 0,
         y: 0,
     },

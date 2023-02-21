@@ -20,7 +20,7 @@ export function guiAll() {
     game.colors.blue
   );
 
-  gui.frame(dimensions.canvas.w - 80, 35, 70, 37, game.colors.blue, 2, false, "");
+  gui.frame(dimensions.canvas.w - 80, 35, 70, 37, game.colors.blue, 2, true, "#fff");
   gui.text(
     dimensions.canvas.w - 30,
     70,
@@ -30,4 +30,8 @@ export function guiAll() {
     game.colors.blue
   );
   gui.text(dimensions.canvas.w - 54, 68, `Lvl`, 14, game.font.main, game.colors.blue);
+}
+
+function newGame() {
+  console.log("test fuinkcji nowa greasdasdfgdg");
 }

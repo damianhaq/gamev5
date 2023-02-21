@@ -1,4 +1,5 @@
 import { calculatePercentage } from "../functions/helpers.js";
+import { keys } from "../variables.js";
 
 export class GUI {
   constructor(public c: CanvasRenderingContext2D) {
@@ -91,5 +92,43 @@ export class GUI {
     this.c.textAlign = "center";
     this.c.fillStyle = color;
     this.c.fillText(text, x, y);
+  }
+
+  button(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    text: string,
+    font: string,
+    colorLine: string,
+    colorFill: string,
+    colorHover: string,
+    colorText: string,
+    lineWidth: number,
+    func: Function
+  ) {
+    let { click, x: mx, y: my, executeOnceFlag } = keys.mouse;
+
+    //mouse Over
+    if (mx >= x && mx <= x + w && my >= y && my <= y + h) {
+      // hover
+      this.frame(x - 2, y - 2, w + 4, h + 4, colorLine, lineWidth, true, colorFill);
+
+      if (executeOnceFlag && click) {
+        // execute when click
+        keys.mouse.executeOnceFlag = false;
+      }
+    } else {
+      //mouse away
+      this.frame(x, y, w, h, colorLine, lineWidth, true, colorFill);
+    }
+
+    if (!click && !executeOnceFlag) {
+      // execute when release click
+      func();
+      keys.mouse.executeOnceFlag = true;
+    }
+    this.text(x + w / 2, y + h - h / 6, text, h / 3, font, colorText);
   }
 }

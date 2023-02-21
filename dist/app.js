@@ -23,7 +23,7 @@ canvas.style.width = dimensions.canvas.w + "px";
 canvas.style.height = dimensions.canvas.h + "px";
 c.scale(window.devicePixelRatio, window.devicePixelRatio);
 // Add grass
-const grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
+export const grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
 //Bullet
 export const bullets = [];
 //Enemy
@@ -39,6 +39,16 @@ export const gui = new GUI(c);
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
+    gameLoop();
+    guiAll();
+    requestAnimationFrame(animate);
+    // Dev
+    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}  bullets${bullets.length}  lvl ${stats.player.lvl}`;
+}
+animate();
+function gameLoop() {
+    if (game.isGameOver)
+        return;
     camera(player);
     drawMap(c);
     grassArray.forEach((el) => el.update(c, drawGrass));
@@ -58,9 +68,4 @@ function animate() {
         exp.update(c, drawCircle);
         exp.moveToPlayer(index, expBalls);
     });
-    if (!game.isGameOver)
-        requestAnimationFrame(animate);
-    guiAll();
-    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}  bullets${bullets.length}  lvl ${stats.player.lvl}`;
 }
-animate();
