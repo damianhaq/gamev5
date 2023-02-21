@@ -1,58 +1,40 @@
-import { Player } from "./classes/Player.js";
 import { dimensions, game } from "./variables.js";
-import { drawMap } from "./functions/drawMap.js";
-import { addEnemies } from "./functions/addEnemies.js";
-import { drawCircle } from "./functions/draw/drawCircle.js";
-import { camera } from "./functions/camera.js";
-import { addGrass } from "./functions/addGrass.js";
-import { drawGrass } from "./functions/draw/drawGrass.js";
 import { GUI } from "./classes/GUI.js";
 import { guiAll } from "./functions/guiAll.js";
+import { mainMenu } from "./functions/loops/mainMenu.js";
+import { playing } from "./functions/loops/playing.js";
+import { loadPlaying } from "./functions/initial/loadPlaying.js";
+import { controls } from "./functions/controls.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
-// Add grass
-const grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
-//Bullet
-export const bullets = [];
-//Enemy
-addEnemies(1000, 100);
-export const enemies = [];
-// enemies.push(new Enemy(100, 100, 12, 0.5, 100));
-// ExpBalls
-export const expBalls = [];
-// Player
-export const player = new Player(300, 300, 20, enemies);
+canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
+canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
+canvas.style.width = dimensions.canvas.w + "px";
+canvas.style.height = dimensions.canvas.h + "px";
+c.scale(window.devicePixelRatio, window.devicePixelRatio);
 // GUI
 export const gui = new GUI(c);
+controls();
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
-    camera(player);
-    drawMap(c);
-    grassArray.forEach((el) => el.update(c, drawGrass));
-    bullets.forEach((bullet, index) => {
-        bullet.update(c, drawCircle);
-        bullet.deleteIfOverMap(index);
-        bullet.collisionEnemy(index);
-    });
-    player.update(c, drawCircle);
-    enemies.forEach((enemy, index) => {
-        enemy.update(c, drawCircle);
-        enemy.moveTowardsPlayer(player);
-        enemy.die(index);
-        enemy.collideEnemies(enemies, index);
-    });
-    expBalls.forEach((exp, index) => {
-        exp.update(c, drawCircle);
-        exp.moveToPlayer(index, expBalls);
-    });
-    if (!game.isGameOver)
-        requestAnimationFrame(animate);
-    p.innerHTML = `map: x${dimensions.map.x} y${dimensions.map.y}  player: x${player.x} y${player.y}  enemies ${enemies.length}  expBalls${expBalls.length}`;
+    if (game.gameState === "mainMenu") {
+        mainMenu(gui);
+        // Dev
+        p.innerHTML = `gameState: ${game.gameState}  `;
+    }
+    if (game.gameState === "playing") {
+        if (game.initialPlayingFlag) {
+            game.initialPlayingFlag = false;
+            loadPlaying();
+        }
+        playing();
+    }
     guiAll();
+    requestAnimationFrame(animate);
 }
 animate();

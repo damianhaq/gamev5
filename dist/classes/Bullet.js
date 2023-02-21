@@ -1,6 +1,6 @@
-import { bullets, enemies } from "../app.js";
 import { calculateDistance } from "../functions/helpers.js";
-import { dimensions } from "../variables.js";
+// import { bullets, enemies } from "../functions/initial/playing.js";
+import { dimensions, instances } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 export class Bullet extends Sprite {
     constructor(x, y, radius, speed, direction, dmg) {
@@ -24,15 +24,15 @@ export class Bullet extends Sprite {
             this.x + this.radius > dimensions.map.w ||
             this.y - this.radius < 0 ||
             this.y + this.radius > dimensions.map.h) {
-            bullets.splice(index, 1);
+            instances.bullets.splice(index, 1);
         }
     }
     collisionEnemy(index) {
-        enemies.forEach((enemy) => {
+        instances.enemies.forEach((enemy) => {
             const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.x, this.y, this.radius);
             if (distance <= 0) {
                 enemy.hp -= this.dmg;
-                bullets.splice(index, 1);
+                instances.bullets.splice(index, 1);
             }
         });
     }

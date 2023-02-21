@@ -6,6 +6,7 @@ export const keys = {
     space: false,
     mouse: {
         click: false,
+        executeOnceFlag: true,
         x: 0,
         y: 0,
     },
@@ -24,7 +25,18 @@ export const dimensions = {
     gui: {},
 };
 export const game = {
+    gameState: "mainMenu",
+    initialPlayingFlag: true,
     isGameOver: false,
+    localStorageKey: "gamev5",
+    font: {
+        main: "Minecraftia",
+        secondary: "Retro gaming",
+    },
+    colors: {
+        blue: "#1a73e8",
+        blue2: "#0098ff",
+    },
 };
 export const stats = {
     player: {
@@ -33,5 +45,13 @@ export const stats = {
         lvl: 1,
         maxXP: 100,
         currentXP: 0,
+        maxXpGrowPrecentage: 20, // how much precent grow next lvl maxXp
     },
+};
+export const instances = {
+    grassArray: null,
+    bullets: null,
+    enemies: null,
+    expBalls: null,
+    player: null,
 };

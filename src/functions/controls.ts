@@ -23,11 +23,16 @@ export function controls() {
 
   document.addEventListener("mousedown", (ev: MouseEvent) => {
     keys.mouse.click = true;
-    keys.mouse.x = ev.x;
-    keys.mouse.y = ev.y;
+    keys.mouse.x = ev.offsetX;
+    keys.mouse.y = ev.offsetY;
   });
 
   document.addEventListener("mouseup", (ev: MouseEvent) => {
     keys.mouse.click = false;
+  });
+
+  document.addEventListener("mousemove", (ev: MouseEvent) => {
+    keys.mouse.x = ev.offsetX;
+    keys.mouse.y = ev.offsetY;
   });
 }

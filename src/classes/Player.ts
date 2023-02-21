@@ -1,7 +1,7 @@
-import { bullets, c } from "../app.js";
 import { controls } from "../functions/controls.js";
+import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection } from "../functions/helpers.js";
-import { dimensions, game, keys } from "../variables.js";
+import { dimensions, game, instances, keys } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
@@ -20,7 +20,6 @@ export class Player extends Sprite {
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
-    controls();
     this.shoot();
   }
 
@@ -41,22 +40,29 @@ export class Player extends Sprite {
   }
 
   shoot() {
-    const iid = setInterval(() => {
-      if (this.enemies.length > 0) {
-        const nearestEnemy: Enemy = this.findNearestEnemy();
+    let iid: number;
+    if (!iid) {
+      iid = setInterval(() => {
+        if (this.enemies.length > 0) {
+          const nearestEnemy: Enemy = this.findNearestEnemy();
 
-        // draw line to nearest enemy
-        // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
+          // draw line to nearest enemy
+          // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
 
-        const direction = calculateDirection(
-          this.x,
-          this.y,
-          nearestEnemy.x,
-          nearestEnemy.y
-        );
-        bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
-      }
-    }, this.attackSpeed);
+          const direction = calculateDirection(
+            this.x,
+            this.y,
+            nearestEnemy.x,
+            nearestEnemy.y
+          );
+          instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
+        }
+        if (game.isGameOver) {
+          clearInterval(iid);
+          iid = null;
+        }
+      }, this.attackSpeed);
+    }
   }
 
   findNearestEnemy(): Enemy | null {
@@ -103,7 +109,7 @@ export class Player extends Sprite {
 
   die() {
     if (this.hp <= 0) {
-      game.isGameOver = true;
+      gameOver();
     }
   }
 }

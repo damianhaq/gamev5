@@ -1,4 +1,5 @@
 import { drawText } from "../functions/draw/drawText.js";
+import { game } from "../variables.js";
 
 export class Sprite {
   constructor(
@@ -29,6 +30,6 @@ export class Sprite {
   moving() {}
 
   showHp(c: CanvasRenderingContext2D) {
-    drawText(this.x, this.y, this.hp.toString(), "#000", c);
+    drawText(this.x, this.y + 8, this.hp.toString(), 8, game.font.main, "#000");
   }
 }
