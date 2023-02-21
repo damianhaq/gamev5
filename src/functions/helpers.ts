@@ -1,5 +1,5 @@
 import { Sprite } from "../classes/Sprite";
-import { stats } from "../variables.js";
+import { game, stats } from "../variables.js";
 
 export function calculateDirection(
   fromX: number,
@@ -70,4 +70,16 @@ export function addExp(value: number) {
     stats.player.currentXP = value - (maxXP - currentXP);
     stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
   }
+}
+
+export function saveDataToLocalStorage(data: object): void {
+  localStorage.setItem(game.localStorageKey, JSON.stringify(data));
+}
+
+export function loadDataFromLocalStorage(): object | null {
+  const data = localStorage.getItem(game.localStorageKey);
+  if (data) {
+    return JSON.parse(data);
+  }
+  return null;
 }

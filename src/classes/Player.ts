@@ -1,8 +1,7 @@
-import { bullets, c } from "../app.js";
 import { controls } from "../functions/controls.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection } from "../functions/helpers.js";
-import { dimensions, game, keys } from "../variables.js";
+import { dimensions, game, instances, keys } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
@@ -21,7 +20,6 @@ export class Player extends Sprite {
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
-    controls();
     this.shoot();
   }
 
@@ -57,7 +55,7 @@ export class Player extends Sprite {
             nearestEnemy.x,
             nearestEnemy.y
           );
-          bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
+          instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
         }
         if (game.isGameOver) {
           clearInterval(iid);
@@ -111,7 +109,6 @@ export class Player extends Sprite {
 
   die() {
     if (this.hp <= 0) {
-      game.isGameOver = true;
       gameOver();
     }
   }

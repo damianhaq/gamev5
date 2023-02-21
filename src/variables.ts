@@ -29,7 +29,10 @@ export const dimensions = {
 };
 
 export const game = {
+  gameState: "mainMenu",
+  initialPlayingFlag: true,
   isGameOver: false,
+  localStorageKey: "gamev5",
   font: {
     main: "Minecraftia",
     secondary: "Retro gaming",
@@ -49,4 +52,12 @@ export const stats = {
     currentXP: 0,
     maxXpGrowPrecentage: 20, // how much precent grow next lvl maxXp
   },
+};
+
+export const instances = {
+  grassArray: null,
+  bullets: null,
+  enemies: null,
+  expBalls: null,
+  player: null,
 };

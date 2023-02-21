@@ -1,8 +1,15 @@
-import { bullets, enemies, expBalls, grassArray } from "../app.js";
+// import { enemies, bullets, expBalls, grassArray } from "./initial/playing.js";
+
+import { game, instances } from "../variables.js";
 
 export function gameOver() {
-  enemies.length = 0;
-  bullets.length = 0;
-  expBalls.length = 0;
-  grassArray.length = 0;
+  instances.enemies.length = 0;
+  instances.bullets.length = 0;
+  instances.expBalls.length = 0;
+  instances.grassArray.length = 0;
+  instances.player = null;
+
+  game.isGameOver = true;
+  game.gameState = "mainMenu";
+  game.initialPlayingFlag = true;
 }

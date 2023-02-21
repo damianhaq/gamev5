@@ -1,7 +1,8 @@
-import { enemies } from "../app.js";
+// import { enemies } from "../app.js";
 import { Enemy } from "../classes/Enemy.js";
-import { dimensions, game } from "../variables.js";
+import { dimensions, game, instances } from "../variables.js";
 import { randomNumber } from "./helpers.js";
+// import { enemies } from "./initial/playing.js";
 export function addEnemies(interval, maxEnemies) {
     let site;
     let iid;
@@ -40,7 +41,7 @@ export function addEnemies(interval, maxEnemies) {
                     break;
             }
             // console.log("site:", site, "x: ", x, "y: ", y);
-            enemies.push(new Enemy(x, y, 12, 0.5, 100, 48));
+            instances.enemies.push(new Enemy(x, y, 12, 0.5, 100, 48));
             if (game.isGameOver) {
                 clearInterval(iid);
                 iid = null;

@@ -1,4 +1,4 @@
-import { stats } from "../variables.js";
+import { game, stats } from "../variables.js";
 export function calculateDirection(fromX, fromY, toX, toY) {
     const dx = toX - fromX;
     const dy = toY - fromY;
@@ -44,4 +44,14 @@ export function addExp(value) {
         stats.player.currentXP = value - (maxXP - currentXP);
         stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
     }
+}
+export function saveDataToLocalStorage(data) {
+    localStorage.setItem(game.localStorageKey, JSON.stringify(data));
+}
+export function loadDataFromLocalStorage() {
+    const data = localStorage.getItem(game.localStorageKey);
+    if (data) {
+        return JSON.parse(data);
+    }
+    return null;
 }

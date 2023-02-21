@@ -31,7 +31,3 @@ export function guiAll() {
   );
   gui.text(dimensions.canvas.w - 54, 68, `Lvl`, 14, game.font.main, game.colors.blue);
 }
-
-function newGame() {
-  console.log("test fuinkcji nowa greasdasdfgdg");
-}

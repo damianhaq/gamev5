@@ -1,5 +1,7 @@
-import { enemies, expBalls } from "../app.js";
+// import { enemies, expBalls } from "../app.js";
 import { calculateDirection, calculateDistance, collideCircleResolve, } from "../functions/helpers.js";
+import { instances } from "../variables.js";
+// import { enemies, expBalls } from "../functions/initial/playing.js";
 import { ExpBall } from "./expBall.js";
 import { Sprite } from "./Sprite.js";
 export class Enemy extends Sprite {
@@ -40,8 +42,8 @@ export class Enemy extends Sprite {
     }
     die(index) {
         if (this.hp <= 0) {
-            expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
-            enemies.splice(index, 1);
+            instances.expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
+            instances.enemies.splice(index, 1);
         }
     }
 }

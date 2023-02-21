@@ -7,6 +7,3 @@ export function guiAll() {
     gui.text(dimensions.canvas.w - 30, 70, `${stats.player.lvl}`, 17, game.font.main, game.colors.blue);
     gui.text(dimensions.canvas.w - 54, 68, `Lvl`, 14, game.font.main, game.colors.blue);
 }
-function newGame() {
-    console.log("test fuinkcji nowa greasdasdfgdg");
-}
