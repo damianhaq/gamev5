@@ -20,13 +20,42 @@ export class Player extends Sprite {
     }
     moving() {
         if (!game.isPause) {
-            if (keys.a && !this.isCollideBorderMap("left")) {
+            const diagonalSpeed = this.speed / Math.sqrt(2); // prędkość na ukos
+            if (keys.a &&
+                keys.w &&
+                !this.isCollideBorderMap("left") &&
+                !this.isCollideBorderMap("up")) {
+                this.x -= diagonalSpeed;
+                this.y -= diagonalSpeed;
+            }
+            else if (keys.a &&
+                keys.s &&
+                !this.isCollideBorderMap("left") &&
+                !this.isCollideBorderMap("bot")) {
+                this.x -= diagonalSpeed;
+                this.y += diagonalSpeed;
+            }
+            else if (keys.d &&
+                keys.w &&
+                !this.isCollideBorderMap("right") &&
+                !this.isCollideBorderMap("up")) {
+                this.x += diagonalSpeed;
+                this.y -= diagonalSpeed;
+            }
+            else if (keys.d &&
+                keys.s &&
+                !this.isCollideBorderMap("right") &&
+                !this.isCollideBorderMap("bot")) {
+                this.x += diagonalSpeed;
+                this.y += diagonalSpeed;
+            }
+            else if (keys.a && !this.isCollideBorderMap("left")) {
                 this.x -= this.speed;
             }
             else if (keys.d && !this.isCollideBorderMap("right")) {
                 this.x += this.speed;
             }
-            if (keys.w && !this.isCollideBorderMap("up")) {
+            else if (keys.w && !this.isCollideBorderMap("up")) {
                 this.y -= this.speed;
             }
             else if (keys.s && !this.isCollideBorderMap("bot")) {
