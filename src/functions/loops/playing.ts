@@ -1,4 +1,7 @@
 import { c } from "../../app.js";
+import { AppearingText } from "../../classes/AppearingText.js";
+import { Enemy } from "../../classes/Enemy.js";
+import { ExpBall } from "../../classes/expBall.js";
 import { game, instances } from "../../variables.js";
 import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
@@ -24,17 +27,21 @@ export function playing() {
 
   instances.player.update(c, drawCircle);
 
-  instances.enemies.forEach((enemy, index) => {
+  instances.enemies.forEach((enemy: Enemy, index: number) => {
     enemy.update(c, drawCircle);
     enemy.moveTowardsPlayer(instances.player);
     enemy.die(index);
     enemy.collideEnemies(instances.enemies, index);
-    enemy.customText(enemy.immuneProjectilesId.length);
+    enemy.customText(enemy.immuneProjectilesId.length.toString());
   });
 
-  instances.expBalls.forEach((exp, index) => {
+  instances.expBalls.forEach((exp: ExpBall, index: number) => {
     exp.update(c, drawCircle);
     exp.moveToPlayer(index, instances.expBalls);
+  });
+
+  instances.appearingText.forEach((el: AppearingText, index: number) => {
+    el.update(index);
   });
 
   guiPlaying();

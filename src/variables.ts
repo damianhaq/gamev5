@@ -65,6 +65,7 @@ export const instances = {
   enemies: null,
   expBalls: null,
   player: null,
+  appearingText: null,
   skills: {
     magicField: null,
   },

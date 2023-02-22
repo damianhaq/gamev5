@@ -1,6 +1,7 @@
 // import { enemies, expBalls } from "../app.js";
-import { calculateDirection, calculateDistance, collideCircleResolve, } from "../functions/helpers.js";
+import { calculateDirection, calculateDistance, collideCircleResolve, randomNumber, } from "../functions/helpers.js";
 import { game, instances } from "../variables.js";
+import { AppearingText } from "./AppearingText.js";
 // import { enemies, expBalls } from "../functions/initial/playing.js";
 import { ExpBall } from "./expBall.js";
 import { Sprite } from "./Sprite.js";
@@ -53,6 +54,7 @@ export class Enemy extends Sprite {
         this.hp -= value;
         if (id)
             this.immuneProjectilesId.push(id);
+        instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, value.toString(), 16));
         // console.log(id);
         // console.log(this.immuneProjectiles);
     }
