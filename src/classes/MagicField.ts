@@ -20,7 +20,7 @@ export class MagicField {
   }
 
   update() {
-    drawCircle(this.who.x, this.who.y, this.radius, "fill", "#e8eaed", c);
+    drawCircle(this.who.x, this.who.y, this.radius, "fill", "#e8eaee", c);
   }
 
   attack() {
