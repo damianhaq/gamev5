@@ -80,10 +80,10 @@ export class Enemy extends Sprite {
     }
   }
 
-  getDamage(value: number, id: string) {
+  getDamage(value: number, id: string = null) {
     this.hp -= value;
 
-    this.immuneProjectilesId.push(id);
+    if (id) this.immuneProjectilesId.push(id);
     // console.log(id);
     // console.log(this.immuneProjectiles);
   }

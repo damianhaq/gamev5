@@ -10,12 +10,13 @@ export function playing() {
         return;
     camera(instances.player);
     drawMap(c);
+    instances.skills.magicField.update();
     instances.grassArray.forEach((el) => el.update(c, drawGrass));
     instances.bullets.forEach((bullet, index) => {
         bullet.update(c, drawCircle);
         bullet.deleteIfOverMap(index);
         bullet.collisionEnemy(index);
-        bullet.customText(bullet.penetrationNumber);
+        // bullet.customText(bullet.penetrationNumber);
     });
     instances.player.update(c, drawCircle);
     instances.enemies.forEach((enemy, index) => {

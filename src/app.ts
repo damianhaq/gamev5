@@ -35,7 +35,7 @@ function animate() {
   if (game.gameState === "mainMenu") {
     mainMenu(gui);
     // Dev
-    p.innerHTML = `gameState: ${game.gameState}  `;
+    // p.innerHTML = `gameState: ${game.gameState}  `;
   }
 
   if (game.gameState === "playing") {

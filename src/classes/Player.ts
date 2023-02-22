@@ -1,6 +1,7 @@
 import { controls } from "../functions/controls.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import { magicField } from "../functions/skills/magicField.js";
 import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
@@ -23,6 +24,7 @@ export class Player extends Sprite {
 
     this.shoot();
     projectile();
+    magicField(this);
   }
 
   moving() {
@@ -95,7 +97,7 @@ export class Player extends Sprite {
 
           countId++;
           instances.bullets.push(
-            new Bullet(this.x, this.y, 5, 2, direction, 10, `${countId}bullet`, 2)
+            new Bullet(this.x, this.y, 5, 2, direction, 10, `${countId}bullet`, 1)
           );
         }
         if (game.isGameOver) {

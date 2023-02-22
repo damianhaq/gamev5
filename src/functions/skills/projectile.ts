@@ -7,8 +7,11 @@ export function projectile() {
   let iid: number;
   let countId: number = 0;
   const data = {
-    attackSpeed: 1100,
+    attackSpeed: 2100,
+    movementSpeed: 2,
     damage: 30,
+    radius: 15,
+    penetrationNumber: 5,
   };
 
   if (!iid) {
@@ -31,15 +34,16 @@ export function projectile() {
           new Bullet(
             instances.player.x,
             instances.player.y,
-            15,
-            2,
+            data.radius,
+            data.movementSpeed,
             direction,
             data.damage,
             `${countId}projectile`,
-            5
+            data.penetrationNumber
           )
         );
       }
+
       if (game.isGameOver) {
         clearInterval(iid);
         iid = null;

@@ -49,9 +49,10 @@ export class Enemy extends Sprite {
             instances.enemies.splice(index, 1);
         }
     }
-    getDamage(value, id) {
+    getDamage(value, id = null) {
         this.hp -= value;
-        this.immuneProjectilesId.push(id);
+        if (id)
+            this.immuneProjectilesId.push(id);
         // console.log(id);
         // console.log(this.immuneProjectiles);
     }
