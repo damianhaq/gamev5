@@ -41,9 +41,13 @@ export function addExp(value) {
     }
     else {
         stats.player.lvl += 1;
+        lvlup();
         stats.player.currentXP = value - (maxXP - currentXP);
         stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
     }
+}
+export function lvlup() {
+    game.isPause = true;
 }
 export function saveDataToLocalStorage(data) {
     localStorage.setItem(game.localStorageKey, JSON.stringify(data));

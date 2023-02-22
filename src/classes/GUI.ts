@@ -86,10 +86,11 @@ export class GUI {
     text: string,
     fontSize: number,
     font: string,
-    color: string
+    color: string,
+    textAlign: "left" | "right" | "center" | "start" | "end" = "center"
   ) {
     this.c.font = `${fontSize}px ${font}`;
-    this.c.textAlign = "center";
+    this.c.textAlign = textAlign;
     this.c.fillStyle = color;
     this.c.fillText(text, x, y);
   }

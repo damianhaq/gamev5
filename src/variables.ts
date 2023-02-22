@@ -54,6 +54,8 @@ export const stats = {
     maxXP: 100,
     currentXP: 0,
     maxXpGrowPrecentage: 20, // how much precent grow next lvl maxXp
+    upgradePoints: 0,
+    baseDamage: 10,
   },
 };
 

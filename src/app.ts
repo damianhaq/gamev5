@@ -34,12 +34,11 @@ function animate() {
 
   if (game.gameState === "mainMenu") {
     mainMenu(gui);
-    // Dev
-    // p.innerHTML = `gameState: ${game.gameState}  `;
   }
 
   if (game.gameState === "playing") {
     if (game.initialPlayingFlag) {
+      //execute once
       game.initialPlayingFlag = false;
       loadPlaying();
     }
@@ -54,7 +53,7 @@ function animate() {
     playing();
 
     if (game.isPause) {
-      pause();
+      pause(gui);
     }
   }
 

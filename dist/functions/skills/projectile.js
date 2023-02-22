@@ -1,6 +1,6 @@
-import { Bullet } from "../classes/Bullet.js";
-import { game, instances } from "../variables.js";
-import { calculateDirection, findNearestEnemy } from "./helpers.js";
+import { Bullet } from "../../classes/Bullet.js";
+import { game, instances } from "../../variables.js";
+import { calculateDirection, findNearestEnemy } from "../helpers.js";
 export function projectile() {
     let iid;
     let countId = 0;
