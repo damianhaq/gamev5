@@ -57,6 +57,9 @@ export const stats = {
     upgradePoints: 0,
     baseDamage: 10,
   },
+  game: {
+    AllDamageDone: 0,
+  },
 };
 
 export const instances = {

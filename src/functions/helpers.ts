@@ -77,6 +77,7 @@ export function addExp(value: number) {
 
 export function lvlup() {
   game.isPause = true;
+  stats.player.upgradePoints += 1;
 }
 
 export function saveDataToLocalStorage(data: object): void {

@@ -4,7 +4,7 @@ import { mainMenu } from "./functions/loops/mainMenu.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
 import { controls } from "./functions/controls.js";
-import { pause } from "./functions/pause.js";
+import { pauseGui } from "./functions/pauseGui.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
@@ -40,7 +40,7 @@ function animate() {
         }
         playing();
         if (game.isPause) {
-            pause(gui);
+            pauseGui(gui);
         }
     }
     requestAnimationFrame(animate);

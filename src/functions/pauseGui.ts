@@ -1,7 +1,7 @@
 import { GUI } from "../classes/GUI.js";
 import { dimensions, game, stats } from "../variables.js";
 
-export function pause(gui: GUI) {
+export function pauseGui(gui: GUI) {
   gui.frame(
     50,
     100,
@@ -11,6 +11,30 @@ export function pause(gui: GUI) {
     2,
     true,
     "#fff"
+  );
+
+  gui.text(
+    dimensions.canvas.w / 2,
+    200,
+    "Upgrade points: " + stats.player.upgradePoints,
+    20,
+    game.font.main,
+    game.font.main
+  );
+
+  gui.button(
+    dimensions.canvas.w - 100,
+    120,
+    30,
+    30,
+    "X",
+    game.font.main,
+    game.colors.blue,
+    "#fff",
+    "#fff",
+    game.colors.blue,
+    2,
+    () => (game.isPause = false)
   );
 
   gui.text(
@@ -28,6 +52,7 @@ export function pause(gui: GUI) {
     w: 300,
     h: dimensions.canvas.h - 260,
     fs: 14,
+    textHeight: 25,
   };
 
   gui.frame(d.x, d.y, d.w, d.h, game.colors.blue, 2, true, "#fff");
@@ -42,8 +67,17 @@ export function pause(gui: GUI) {
   );
   gui.text(
     d.x + 10,
-    d.y + 55,
+    d.y + 30 + d.textHeight,
     "Base damage: " + stats.player.baseDamage,
+    d.fs,
+    game.font.main,
+    game.colors.blue,
+    "left"
+  );
+  gui.text(
+    d.x + 10,
+    d.y + 30 + d.textHeight * 2,
+    "Dmg Done: " + stats.game.AllDamageDone,
     d.fs,
     game.font.main,
     game.colors.blue,
