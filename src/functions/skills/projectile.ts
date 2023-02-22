@@ -1,7 +1,7 @@
-import { Bullet } from "../classes/Bullet.js";
-import { Enemy } from "../classes/Enemy.js";
-import { game, instances } from "../variables.js";
-import { calculateDirection, findNearestEnemy } from "./helpers.js";
+import { Bullet } from "../../classes/Bullet.js";
+import { Enemy } from "../../classes/Enemy.js";
+import { game, instances } from "../../variables.js";
+import { calculateDirection, findNearestEnemy } from "../helpers.js";
 
 export function projectile() {
   let iid: number;
@@ -16,7 +16,7 @@ export function projectile() {
 
   if (!iid) {
     iid = setInterval(() => {
-      if (instances.enemies.length > 0 && !game.isPause) {
+      if (instances.enemies.length > 0 && !game.isPause && instances.player) {
         const nearestEnemy: Enemy = findNearestEnemy(instances.player);
 
         // draw line to nearest enemy

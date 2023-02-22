@@ -69,9 +69,15 @@ export function addExp(value: number) {
     stats.player.currentXP += value;
   } else {
     stats.player.lvl += 1;
+    lvlup();
     stats.player.currentXP = value - (maxXP - currentXP);
     stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
   }
+}
+
+export function lvlup() {
+  game.isPause = true;
+  stats.player.upgradePoints += 1;
 }
 
 export function saveDataToLocalStorage(data: object): void {
@@ -91,9 +97,10 @@ export function findNearestEnemy(player: Player): Enemy | null {
   let nearestDistance = Number.MAX_VALUE;
 
   for (const enemy of instances.enemies) {
-    const distance: number = Math.sqrt(
-      (enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2
-    );
+    let distance: number;
+    if (player) {
+      distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);
+    }
 
     if (distance < nearestDistance) {
       nearestEnemy = enemy;

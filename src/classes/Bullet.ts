@@ -1,6 +1,6 @@
 import { calculateDistance } from "../functions/helpers.js";
 // import { bullets, enemies } from "../functions/initial/playing.js";
-import { dimensions, game, instances } from "../variables.js";
+import { dimensions, game, instances, stats } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 
 export class Bullet extends Sprite {
@@ -54,6 +54,7 @@ export class Bullet extends Sprite {
         if (!enemy.immuneProjectilesId.includes(this.id)) {
           enemy.getDamage(this.dmg, this.id);
           this.penetrationNumber--;
+          stats.game.AllDamageDone += this.dmg;
           if (this.penetrationNumber <= 0) {
             instances.bullets.splice(index, 1);
           }

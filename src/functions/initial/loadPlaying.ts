@@ -11,12 +11,14 @@ export function loadPlaying() {
   instances.bullets = [];
 
   //Enemy
-  addEnemies(1000, 100);
   instances.enemies = [];
+  addEnemies(1000, 100);
 
   // ExpBalls
   instances.expBalls = [];
 
   // Player
   instances.player = new Player(300, 300, 20, instances.enemies);
+
+  instances.appearingText = [];
 }

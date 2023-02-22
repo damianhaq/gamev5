@@ -4,7 +4,7 @@ import { mainMenu } from "./functions/loops/mainMenu.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
 import { controls } from "./functions/controls.js";
-import { pause } from "./functions/pause.js";
+import { pauseGui } from "./functions/pauseGui.js";
 const canvas = document.querySelector("#canvas");
 canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
@@ -24,11 +24,10 @@ function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
     if (game.gameState === "mainMenu") {
         mainMenu(gui);
-        // Dev
-        // p.innerHTML = `gameState: ${game.gameState}  `;
     }
     if (game.gameState === "playing") {
         if (game.initialPlayingFlag) {
+            //execute once
             game.initialPlayingFlag = false;
             loadPlaying();
         }
@@ -41,7 +40,7 @@ function animate() {
         }
         playing();
         if (game.isPause) {
-            pause();
+            pauseGui(gui);
         }
     }
     requestAnimationFrame(animate);

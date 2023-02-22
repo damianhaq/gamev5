@@ -47,9 +47,9 @@ export class GUI {
         this.c.strokeRect(x, y, w, h);
         this.c.restore();
     }
-    text(x, y, text, fontSize, font, color) {
+    text(x, y, text, fontSize, font, color, textAlign = "center") {
         this.c.font = `${fontSize}px ${font}`;
-        this.c.textAlign = "center";
+        this.c.textAlign = textAlign;
         this.c.fillStyle = color;
         this.c.fillText(text, x, y);
     }

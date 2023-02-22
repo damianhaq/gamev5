@@ -54,6 +54,11 @@ export const stats = {
     maxXP: 100,
     currentXP: 0,
     maxXpGrowPrecentage: 20, // how much precent grow next lvl maxXp
+    upgradePoints: 0,
+    baseDamage: 10,
+  },
+  game: {
+    AllDamageDone: 0,
   },
 };
 
@@ -63,6 +68,7 @@ export const instances = {
   enemies: null,
   expBalls: null,
   player: null,
+  appearingText: null,
   skills: {
     magicField: null,
   },
