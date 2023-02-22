@@ -1,6 +1,8 @@
 import { controls } from "../functions/controls.js";
 import { gameOver } from "../functions/gameOver.js";
-import { calculateDirection } from "../functions/helpers.js";
+import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import { magicField } from "../functions/skills/magicField.js";
+import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
@@ -21,17 +23,51 @@ export class Player extends Sprite {
     this.grabItemRange = 100;
 
     this.shoot();
+    projectile();
+    magicField(this);
   }
 
   moving() {
     if (!game.isPause) {
-      if (keys.a && !this.isCollideBorderMap("left")) {
+      const diagonalSpeed = this.speed / Math.sqrt(2); // prędkość na ukos
+
+      if (
+        keys.a &&
+        keys.w &&
+        !this.isCollideBorderMap("left") &&
+        !this.isCollideBorderMap("up")
+      ) {
+        this.x -= diagonalSpeed;
+        this.y -= diagonalSpeed;
+      } else if (
+        keys.a &&
+        keys.s &&
+        !this.isCollideBorderMap("left") &&
+        !this.isCollideBorderMap("bot")
+      ) {
+        this.x -= diagonalSpeed;
+        this.y += diagonalSpeed;
+      } else if (
+        keys.d &&
+        keys.w &&
+        !this.isCollideBorderMap("right") &&
+        !this.isCollideBorderMap("up")
+      ) {
+        this.x += diagonalSpeed;
+        this.y -= diagonalSpeed;
+      } else if (
+        keys.d &&
+        keys.s &&
+        !this.isCollideBorderMap("right") &&
+        !this.isCollideBorderMap("bot")
+      ) {
+        this.x += diagonalSpeed;
+        this.y += diagonalSpeed;
+      } else if (keys.a && !this.isCollideBorderMap("left")) {
         this.x -= this.speed;
       } else if (keys.d && !this.isCollideBorderMap("right")) {
         this.x += this.speed;
-      }
-
-      if (keys.w && !this.isCollideBorderMap("up")) {
+      } else if (keys.w && !this.isCollideBorderMap("up")) {
         this.y -= this.speed;
       } else if (keys.s && !this.isCollideBorderMap("bot")) {
         this.y += this.speed;
@@ -43,10 +79,11 @@ export class Player extends Sprite {
 
   shoot() {
     let iid: number;
+    let countId: number = 0;
     if (!iid) {
       iid = setInterval(() => {
         if (this.enemies.length > 0 && !game.isPause) {
-          const nearestEnemy: Enemy = this.findNearestEnemy();
+          const nearestEnemy: Enemy = findNearestEnemy(this);
 
           // draw line to nearest enemy
           // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
@@ -57,7 +94,11 @@ export class Player extends Sprite {
             nearestEnemy.x,
             nearestEnemy.y
           );
-          instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
+
+          countId++;
+          instances.bullets.push(
+            new Bullet(this.x, this.y, 5, 2, direction, 10, `${countId}bullet`, 1)
+          );
         }
         if (game.isGameOver) {
           clearInterval(iid);
@@ -65,23 +106,6 @@ export class Player extends Sprite {
         }
       }, this.attackSpeed);
     }
-  }
-
-  findNearestEnemy(): Enemy | null {
-    let nearestEnemy: Enemy | null = null;
-    let nearestDistance = Number.MAX_VALUE;
-
-    for (const enemy of this.enemies) {
-      const distance: number = Math.sqrt(
-        (enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2
-      );
-
-      if (distance < nearestDistance) {
-        nearestEnemy = enemy;
-        nearestDistance = distance;
-      }
-    }
-    return nearestEnemy;
   }
 
   isCollideBorderMap(side: "left" | "right" | "up" | "bot"): boolean {

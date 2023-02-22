@@ -12,6 +12,7 @@ import { Sprite } from "./Sprite.js";
 
 export class Enemy extends Sprite {
   dmg: number;
+  immuneProjectilesId: string[];
   constructor(
     public x: number,
     public y: number,
@@ -25,6 +26,7 @@ export class Enemy extends Sprite {
     this.hp = hp;
     this.dmg = 5;
     this.expDropValue = expDropValue;
+    this.immuneProjectilesId = [];
   }
 
   moveTowardsPlayer(player: Player) {
@@ -76,5 +78,13 @@ export class Enemy extends Sprite {
       instances.expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
       instances.enemies.splice(index, 1);
     }
+  }
+
+  getDamage(value: number, id: string = null) {
+    this.hp -= value;
+
+    if (id) this.immuneProjectilesId.push(id);
+    // console.log(id);
+    // console.log(this.immuneProjectiles);
   }
 }
