@@ -1,7 +1,7 @@
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
 import { magicField } from "../functions/skills/magicField.js";
-import { projectile } from "../functions/skills/projectile.js";
+import { projectile } from "../functions/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Sprite } from "./Sprite.js";
