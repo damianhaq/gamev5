@@ -9,7 +9,7 @@ export function projectile() {
   const data = {
     attackSpeed: 2100,
     movementSpeed: 2,
-    damage: 30,
+    damage: 25,
     radius: 15,
     penetrationNumber: 5,
   };
