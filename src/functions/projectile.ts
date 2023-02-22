@@ -16,7 +16,7 @@ export function projectile() {
 
   if (!iid) {
     iid = setInterval(() => {
-      if (instances.enemies.length > 0 && !game.isPause) {
+      if (instances.enemies.length > 0 && !game.isPause && instances.player) {
         const nearestEnemy: Enemy = findNearestEnemy(instances.player);
 
         // draw line to nearest enemy

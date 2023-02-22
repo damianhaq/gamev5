@@ -59,7 +59,10 @@ export function findNearestEnemy(player) {
     let nearestEnemy = null;
     let nearestDistance = Number.MAX_VALUE;
     for (const enemy of instances.enemies) {
-        const distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);
+        let distance;
+        if (player) {
+            distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);
+        }
         if (distance < nearestDistance) {
             nearestEnemy = enemy;
             nearestDistance = distance;

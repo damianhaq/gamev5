@@ -13,7 +13,7 @@ export function projectile() {
     };
     if (!iid) {
         iid = setInterval(() => {
-            if (instances.enemies.length > 0 && !game.isPause) {
+            if (instances.enemies.length > 0 && !game.isPause && instances.player) {
                 const nearestEnemy = findNearestEnemy(instances.player);
                 // draw line to nearest enemy
                 // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
