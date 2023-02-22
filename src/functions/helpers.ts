@@ -1,5 +1,7 @@
+import { Enemy } from "../classes/Enemy";
+import { Player } from "../classes/Player";
 import { Sprite } from "../classes/Sprite";
-import { game, stats } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 
 export function calculateDirection(
   fromX: number,
@@ -82,4 +84,21 @@ export function loadDataFromLocalStorage(): object | null {
     return JSON.parse(data);
   }
   return null;
+}
+
+export function findNearestEnemy(player: Player): Enemy | null {
+  let nearestEnemy: Enemy | null = null;
+  let nearestDistance = Number.MAX_VALUE;
+
+  for (const enemy of instances.enemies) {
+    const distance: number = Math.sqrt(
+      (enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2
+    );
+
+    if (distance < nearestDistance) {
+      nearestEnemy = enemy;
+      nearestDistance = distance;
+    }
+  }
+  return nearestEnemy;
 }

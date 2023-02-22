@@ -16,6 +16,7 @@ export class Enemy extends Sprite {
         this.hp = hp;
         this.dmg = 5;
         this.expDropValue = expDropValue;
+        this.immuneProjectilesId = [];
     }
     moveTowardsPlayer(player) {
         const direction = calculateDirection(this.x, this.y, player.x, player.y);
@@ -47,5 +48,11 @@ export class Enemy extends Sprite {
             instances.expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
             instances.enemies.splice(index, 1);
         }
+    }
+    getDamage(value, id) {
+        this.hp -= value;
+        this.immuneProjectilesId.push(id);
+        // console.log(id);
+        // console.log(this.immuneProjectiles);
     }
 }

@@ -1,4 +1,4 @@
-import { game, stats } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 export function calculateDirection(fromX, fromY, toX, toY) {
     const dx = toX - fromX;
     const dy = toY - fromY;
@@ -11,7 +11,7 @@ export function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 export function calculateDistance(fromX, fromY, fromRadius, toX, toY, toRadius) {
-    let distance = Math.sqrt(Math.pow((fromX - toX), 2) + Math.pow((fromY - toY), 2));
+    let distance = Math.sqrt((fromX - toX) ** 2 + (fromY - toY) ** 2);
     distance = distance - fromRadius - toRadius;
     return distance;
 }
@@ -54,4 +54,16 @@ export function loadDataFromLocalStorage() {
         return JSON.parse(data);
     }
     return null;
+}
+export function findNearestEnemy(player) {
+    let nearestEnemy = null;
+    let nearestDistance = Number.MAX_VALUE;
+    for (const enemy of instances.enemies) {
+        const distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);
+        if (distance < nearestDistance) {
+            nearestEnemy = enemy;
+            nearestDistance = distance;
+        }
+    }
+    return nearestEnemy;
 }

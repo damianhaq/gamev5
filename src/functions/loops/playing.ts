@@ -18,6 +18,7 @@ export function playing() {
     bullet.update(c, drawCircle);
     bullet.deleteIfOverMap(index);
     bullet.collisionEnemy(index);
+    bullet.customText(bullet.penetrationNumber);
   });
 
   instances.player.update(c, drawCircle);
@@ -27,6 +28,7 @@ export function playing() {
     enemy.moveTowardsPlayer(instances.player);
     enemy.die(index);
     enemy.collideEnemies(instances.enemies, index);
+    enemy.customText(enemy.immuneProjectilesId.length);
   });
 
   instances.expBalls.forEach((exp, index) => {

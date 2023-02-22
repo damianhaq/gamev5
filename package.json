@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/damianhaq/gamev5/issues"
   },
-  "homepage": "https://github.com/damianhaq/gamev5#readme"
+  "homepage": "https://github.com/damianhaq/gamev5#readme",
+  "dependencies": {
+    "nanoid": "^3.3.4",
+    "uuid": "^9.0.0"
+  }
 }

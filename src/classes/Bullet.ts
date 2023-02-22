@@ -10,12 +10,16 @@ export class Bullet extends Sprite {
     public radius: number,
     public speed: number,
     public direction: { x: number; y: number },
-    public dmg: number
+    public dmg: number,
+    public id: string,
+    public penetrationNumber: number = 1
   ) {
     super(x, y, radius);
     this.speed = speed;
     this.direction = direction;
     this.dmg = dmg;
+    this.penetrationNumber = penetrationNumber;
+    this.id = id;
   }
 
   moving(): void {
@@ -47,8 +51,15 @@ export class Bullet extends Sprite {
         this.radius
       );
       if (distance <= 0) {
-        enemy.hp -= this.dmg;
-        instances.bullets.splice(index, 1);
+        if (!enemy.immuneProjectilesId.includes(this.id)) {
+          enemy.getDamage(this.dmg, this.id);
+          this.penetrationNumber--;
+          if (this.penetrationNumber <= 0) {
+            instances.bullets.splice(index, 1);
+          }
+        }
+
+        // enemy.hp -= this.dmg;
       }
     });
   }

@@ -1,5 +1,6 @@
 import { gameOver } from "../functions/gameOver.js";
-import { calculateDirection } from "../functions/helpers.js";
+import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { Bullet } from "./Bullet.js";
 import { Sprite } from "./Sprite.js";
@@ -15,6 +16,7 @@ export class Player extends Sprite {
         this.immuneTime = 100;
         this.grabItemRange = 100;
         this.shoot();
+        projectile();
     }
     moving() {
         if (!game.isPause) {
@@ -35,14 +37,16 @@ export class Player extends Sprite {
     }
     shoot() {
         let iid;
+        let countId = 0;
         if (!iid) {
             iid = setInterval(() => {
                 if (this.enemies.length > 0 && !game.isPause) {
-                    const nearestEnemy = this.findNearestEnemy();
+                    const nearestEnemy = findNearestEnemy(this);
                     // draw line to nearest enemy
                     // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                     const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
-                    instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10));
+                    countId++;
+                    instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, 10, `${countId}bullet`, 2));
                 }
                 if (game.isGameOver) {
                     clearInterval(iid);
@@ -50,18 +54,6 @@ export class Player extends Sprite {
                 }
             }, this.attackSpeed);
         }
-    }
-    findNearestEnemy() {
-        let nearestEnemy = null;
-        let nearestDistance = Number.MAX_VALUE;
-        for (const enemy of this.enemies) {
-            const distance = Math.sqrt(Math.pow((enemy.x - this.x), 2) + Math.pow((enemy.y - this.y), 2));
-            if (distance < nearestDistance) {
-                nearestEnemy = enemy;
-                nearestDistance = distance;
-            }
-        }
-        return nearestEnemy;
     }
     isCollideBorderMap(side) {
         switch (side) {

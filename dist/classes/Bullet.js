@@ -3,7 +3,7 @@ import { calculateDistance } from "../functions/helpers.js";
 import { dimensions, game, instances } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 export class Bullet extends Sprite {
-    constructor(x, y, radius, speed, direction, dmg) {
+    constructor(x, y, radius, speed, direction, dmg, id, penetrationNumber = 1) {
         super(x, y, radius);
         this.x = x;
         this.y = y;
@@ -11,9 +11,13 @@ export class Bullet extends Sprite {
         this.speed = speed;
         this.direction = direction;
         this.dmg = dmg;
+        this.id = id;
+        this.penetrationNumber = penetrationNumber;
         this.speed = speed;
         this.direction = direction;
         this.dmg = dmg;
+        this.penetrationNumber = penetrationNumber;
+        this.id = id;
     }
     moving() {
         if (!game.isPause) {
@@ -33,8 +37,14 @@ export class Bullet extends Sprite {
         instances.enemies.forEach((enemy) => {
             const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.x, this.y, this.radius);
             if (distance <= 0) {
-                enemy.hp -= this.dmg;
-                instances.bullets.splice(index, 1);
+                if (!enemy.immuneProjectilesId.includes(this.id)) {
+                    enemy.getDamage(this.dmg, this.id);
+                    this.penetrationNumber--;
+                    if (this.penetrationNumber <= 0) {
+                        instances.bullets.splice(index, 1);
+                    }
+                }
+                // enemy.hp -= this.dmg;
             }
         });
     }

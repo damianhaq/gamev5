@@ -32,4 +32,8 @@ export class Sprite {
   showHp(c: CanvasRenderingContext2D) {
     drawText(this.x, this.y + 8, this.hp.toString(), 8, game.font.main, "#000");
   }
+
+  customText(text: string) {
+    drawText(this.x, this.y - 10, text, 8, game.font.main, "#000");
+  }
 }
