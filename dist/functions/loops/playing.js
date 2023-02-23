@@ -9,9 +9,9 @@ export function playing() {
     if (game.isGameOver)
         return;
     camera(instances.player);
-    drawMap(c);
     instances.skills.magicField.update();
     instances.grassArray.forEach((el) => el.update(c, drawGrass));
+    drawMap(c);
     instances.bullets.forEach((bullet, index) => {
         bullet.update(c, drawCircle);
         bullet.deleteIfOverMap(index);

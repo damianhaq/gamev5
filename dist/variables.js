@@ -46,6 +46,7 @@ export const stats = {
         maxHP: 100,
         currentHP: 100,
         hpRegen: 0,
+        armor: 1,
         lvl: 1,
         maxXP: 100,
         currentXP: 0,

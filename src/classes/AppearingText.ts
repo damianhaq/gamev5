@@ -8,7 +8,8 @@ export class AppearingText {
     public y: number,
     public time: number,
     public text: string,
-    public fontSize: number
+    public fontSize: number = 16,
+    public color: string = game.colors.blue
   ) {
     this.x = x;
     this.y = y;
@@ -16,13 +17,14 @@ export class AppearingText {
     this.text = text;
     this.fontSize = fontSize;
     this.killMe = false;
+    this.color = color;
 
     this.timeout();
   }
 
   update(index: number) {
     this.y -= 0.5;
-    drawText(this.x, this.y, this.text, this.fontSize, game.font.main, game.colors.blue, {
+    drawText(this.x, this.y, this.text, this.fontSize, game.font.main, this.color, {
       stroke: true,
       color: "#fff",
       lineWidth: 2,

@@ -6,6 +6,8 @@ export function gameOver() {
     instances.expBalls.length = 0;
     instances.grassArray.length = 0;
     instances.player = null;
+    instances.appearingText.length = 0;
+    instances.skills.magicField = null;
     game.isGameOver = true;
     game.gameState = "mainMenu";
     game.initialPlayingFlag = true;

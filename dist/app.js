@@ -1,4 +1,4 @@
-import { dimensions, game, keys } from "./variables.js";
+import { dimensions, game, instances, keys } from "./variables.js";
 import { GUI } from "./classes/GUI.js";
 import { mainMenu } from "./functions/loops/mainMenu.js";
 import { playing } from "./functions/loops/playing.js";
@@ -32,6 +32,8 @@ function animate() {
             loadPlaying();
         }
         if (keys.escape && game.pauseFlag) {
+            // execute once
+            console.log(instances);
             game.pauseFlag = false;
             game.isPause = !game.isPause;
         }

@@ -5,6 +5,7 @@ import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
 import { magicField } from "../functions/skills/magicField.js";
 import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
+import { AppearingText } from "./AppearingText.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
@@ -169,7 +170,13 @@ export class Player extends Sprite {
   }
 
   getDamage(value: number, from: Sprite) {
-    stats.player.currentHP -= value;
+    const { armor } = stats.player;
+
+    stats.player.currentHP -= value - armor;
+    instances.appearingText.push(
+      new AppearingText(this.x, this.y, 500, (value - armor).toString(), 16, "#e42525")
+    );
+
     this.isImmune = true;
     setTimeout(() => {
       this.isImmune = false;

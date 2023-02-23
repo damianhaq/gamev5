@@ -24,7 +24,7 @@ export class MagicField {
   }
 
   attack() {
-    setInterval(() => {
+    const iid = setInterval(() => {
       if (!game.isPause) {
         instances.enemies.forEach((enemy: Enemy) => {
           const distance: number = calculateDistance(
@@ -39,6 +39,10 @@ export class MagicField {
             enemy.getDamage(this.dmg);
 
             // enemy.hp -= this.dmg;
+          }
+
+          if (game.isGameOver) {
+            clearInterval(iid);
           }
         });
       }

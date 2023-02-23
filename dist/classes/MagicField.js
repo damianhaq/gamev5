@@ -18,13 +18,16 @@ export class MagicField {
         drawCircle(this.who.x, this.who.y, this.radius, "fill", "#e8eaee", c);
     }
     attack() {
-        setInterval(() => {
+        const iid = setInterval(() => {
             if (!game.isPause) {
                 instances.enemies.forEach((enemy) => {
                     const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.who.x, this.who.y, this.radius);
                     if (distance <= 0) {
                         enemy.getDamage(this.dmg);
                         // enemy.hp -= this.dmg;
+                    }
+                    if (game.isGameOver) {
+                        clearInterval(iid);
                     }
                 });
             }
