@@ -44,13 +44,16 @@ function animate() {
     }
 
     if (keys.escape && game.pauseFlag) {
+      // execute once
+      console.log(instances);
+
       game.pauseFlag = false;
       game.isPause = !game.isPause;
     } else if (!keys.escape && !game.pauseFlag) {
       game.pauseFlag = true;
     }
 
-    playing();
+    if (!game.isPause) playing();
 
     if (game.isPause) {
       pauseGui(gui);

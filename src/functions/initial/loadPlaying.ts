@@ -2,6 +2,9 @@ import { Player } from "../../classes/Player.js";
 import { dimensions, game, instances } from "../../variables.js";
 import { addEnemies } from "../addEnemies.js";
 import { addGrass } from "../addGrass.js";
+import { circlingBall } from "../skills/circlingBall.js";
+import { magicField } from "../skills/magicField.js";
+import { projectile } from "../skills/projectile.js";
 
 export function loadPlaying() {
   // Add grass
@@ -9,6 +12,8 @@ export function loadPlaying() {
 
   //Bullet
   instances.bullets = [];
+
+  instances.skills.circling = [];
 
   //Enemy
   instances.enemies = [];
@@ -21,4 +26,10 @@ export function loadPlaying() {
   instances.player = new Player(300, 300, 20, instances.enemies);
 
   instances.appearingText = [];
+
+  // base attack
+  instances.player.shoot();
+  // skills
+  projectile();
+  // magicField(instances.player);
 }

@@ -1,6 +1,7 @@
 import { calculateDistance } from "../functions/helpers.js";
 // import { bullets, enemies } from "../functions/initial/playing.js";
 import { dimensions, game, instances, stats } from "../variables.js";
+import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Bullet extends Sprite {
@@ -41,7 +42,7 @@ export class Bullet extends Sprite {
   }
 
   collisionEnemy(index: number) {
-    instances.enemies.forEach((enemy) => {
+    instances.enemies.forEach((enemy: Enemy) => {
       const distance: number = calculateDistance(
         enemy.x,
         enemy.y,
@@ -50,6 +51,7 @@ export class Bullet extends Sprite {
         this.y,
         this.radius
       );
+
       if (distance <= 0) {
         if (!enemy.immuneProjectilesId.includes(this.id)) {
           enemy.getDamage(this.dmg, this.id);

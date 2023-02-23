@@ -1,9 +1,16 @@
 import { controls } from "../functions/controls.js";
+import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
-import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import {
+  calculateDirection,
+  findNearestEnemy,
+  randomNumber,
+} from "../functions/helpers.js";
+import { circlingBall } from "../functions/skills/circlingBall.js";
 import { magicField } from "../functions/skills/magicField.js";
 import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
+import { AppearingText } from "./AppearingText.js";
 import { Bullet } from "./Bullet.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
@@ -22,10 +29,7 @@ export class Player extends Sprite {
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
-    this.shoot();
-    //skills
-    projectile();
-    magicField(this);
+    this.hpRegen();
   }
 
   moving() {
@@ -101,12 +105,12 @@ export class Player extends Sprite {
             new Bullet(
               this.x,
               this.y,
-              5,
-              2,
+              stats.skills.baseAttack.radius,
+              stats.skills.baseAttack.speed,
               direction,
               stats.player.baseDamage,
               `${countId}bullet`,
-              1
+              stats.skills.baseAttack.penetrationNumber
             )
           );
         }
@@ -115,6 +119,37 @@ export class Player extends Sprite {
           iid = null;
         }
       }, this.attackSpeed);
+    }
+  }
+  showHp(c: CanvasRenderingContext2D) {
+    drawText(
+      this.x,
+      this.y + 8,
+      stats.player.currentHP.toString(),
+      8,
+      game.font.main,
+      "#000"
+    );
+  }
+
+  hpRegen() {
+    let iid: number;
+    if (!iid) {
+      iid = setInterval(() => {
+        if (!game.isPause) {
+          if (stats.player.currentHP < stats.player.maxHP) {
+            if (stats.player.currentHP + stats.player.hpRegen <= stats.player.maxHP) {
+              stats.player.currentHP += stats.player.hpRegen;
+            } else {
+              stats.player.currentHP = stats.player.maxHP;
+            }
+          }
+        }
+        if (game.isGameOver) {
+          clearInterval(iid);
+          iid = null;
+        }
+      }, 1000);
     }
   }
 
@@ -136,7 +171,20 @@ export class Player extends Sprite {
   }
 
   getDamage(value: number, from: Sprite) {
-    this.hp -= value;
+    const { armor } = stats.player;
+
+    stats.player.currentHP -= value - armor;
+    instances.appearingText.push(
+      new AppearingText(
+        this.x + randomNumber(-this.radius, this.radius),
+        this.y,
+        500,
+        (value - armor).toString(),
+        16,
+        "#e42525"
+      )
+    );
+
     this.isImmune = true;
     setTimeout(() => {
       this.isImmune = false;
@@ -144,7 +192,7 @@ export class Player extends Sprite {
   }
 
   die() {
-    if (this.hp <= 0) {
+    if (stats.player.currentHP <= 0) {
       gameOver();
     }
   }

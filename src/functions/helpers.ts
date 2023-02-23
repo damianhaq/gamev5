@@ -1,7 +1,8 @@
-import { Enemy } from "../classes/Enemy";
-import { Player } from "../classes/Player";
-import { Sprite } from "../classes/Sprite";
+import { Enemy } from "../classes/Enemy.js";
+import { Player } from "../classes/Player.js";
+import { Sprite } from "../classes/Sprite.js";
 import { game, instances, stats } from "../variables.js";
+import { circlingBallLvlUp } from "./skills/circlingBall.js";
 
 export function calculateDirection(
   fromX: number,
@@ -78,6 +79,8 @@ export function addExp(value: number) {
 export function lvlup() {
   game.isPause = true;
   stats.player.upgradePoints += 1;
+
+  circlingBallLvlUp();
 }
 
 export function saveDataToLocalStorage(data: object): void {
