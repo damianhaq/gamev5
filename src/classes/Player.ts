@@ -1,4 +1,5 @@
 import { controls } from "../functions/controls.js";
+import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
 import { magicField } from "../functions/skills/magicField.js";
@@ -26,6 +27,7 @@ export class Player extends Sprite {
     //skills
     projectile();
     magicField(this);
+    this.hpRegen();
   }
 
   moving() {
@@ -117,6 +119,37 @@ export class Player extends Sprite {
       }, this.attackSpeed);
     }
   }
+  showHp(c: CanvasRenderingContext2D) {
+    drawText(
+      this.x,
+      this.y + 8,
+      stats.player.currentHP.toString(),
+      8,
+      game.font.main,
+      "#000"
+    );
+  }
+
+  hpRegen() {
+    let iid: number;
+    if (!iid) {
+      iid = setInterval(() => {
+        if (!game.isPause) {
+          if (stats.player.currentHP < stats.player.maxHP) {
+            if (stats.player.currentHP + stats.player.hpRegen <= stats.player.maxHP) {
+              stats.player.currentHP += stats.player.hpRegen;
+            } else {
+              stats.player.currentHP = stats.player.maxHP;
+            }
+          }
+        }
+        if (game.isGameOver) {
+          clearInterval(iid);
+          iid = null;
+        }
+      }, 1000);
+    }
+  }
 
   isCollideBorderMap(side: "left" | "right" | "up" | "bot"): boolean {
     switch (side) {
@@ -136,7 +169,7 @@ export class Player extends Sprite {
   }
 
   getDamage(value: number, from: Sprite) {
-    this.hp -= value;
+    stats.player.currentHP -= value;
     this.isImmune = true;
     setTimeout(() => {
       this.isImmune = false;
@@ -144,7 +177,7 @@ export class Player extends Sprite {
   }
 
   die() {
-    if (this.hp <= 0) {
+    if (stats.player.currentHP <= 0) {
       gameOver();
     }
   }

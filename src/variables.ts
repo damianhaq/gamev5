@@ -50,6 +50,7 @@ export const stats = {
   player: {
     maxHP: 100,
     currentHP: 100,
+    hpRegen: 0,
     lvl: 1,
     maxXP: 100,
     currentXP: 0,
