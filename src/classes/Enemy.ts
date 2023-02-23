@@ -83,9 +83,6 @@ export class Enemy extends Sprite {
   }
 
   getDamage(value: number, id: string = null) {
-    console.log("id  get damage enemy: " + this.immuneProjectilesId.includes(id));
-    // this.hp -= value;
-
     if (id && !this.immuneProjectilesId.includes(id)) {
       this.immuneProjectilesId.push(id);
       this.hp -= value;
@@ -100,7 +97,7 @@ export class Enemy extends Sprite {
         16
       )
     );
-    console.log(id);
-    console.log(this.immuneProjectilesId);
+    // console.log(id);
+    // console.log(this.immuneProjectilesId);
   }
 }

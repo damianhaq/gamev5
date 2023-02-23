@@ -1,7 +1,11 @@
 import { controls } from "../functions/controls.js";
 import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
-import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import {
+  calculateDirection,
+  findNearestEnemy,
+  randomNumber,
+} from "../functions/helpers.js";
 import { circlingBall } from "../functions/skills/circlingBall.js";
 import { magicField } from "../functions/skills/magicField.js";
 import { projectile } from "../functions/skills/projectile.js";
@@ -25,11 +29,6 @@ export class Player extends Sprite {
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
-    // this.shoot();
-    //skills
-    // projectile();
-    // magicField(this);
-    circlingBall(this);
     this.hpRegen();
   }
 
@@ -106,12 +105,12 @@ export class Player extends Sprite {
             new Bullet(
               this.x,
               this.y,
-              5,
-              2,
+              stats.skills.baseAttack.radius,
+              stats.skills.baseAttack.speed,
               direction,
               stats.player.baseDamage,
               `${countId}bullet`,
-              2
+              stats.skills.baseAttack.penetrationNumber
             )
           );
         }
@@ -176,7 +175,14 @@ export class Player extends Sprite {
 
     stats.player.currentHP -= value - armor;
     instances.appearingText.push(
-      new AppearingText(this.x, this.y, 500, (value - armor).toString(), 16, "#e42525")
+      new AppearingText(
+        this.x + randomNumber(-this.radius, this.radius),
+        this.y,
+        500,
+        (value - armor).toString(),
+        16,
+        "#e42525"
+      )
     );
 
     this.isImmune = true;

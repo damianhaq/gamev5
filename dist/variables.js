@@ -43,11 +43,17 @@ export const game = {
 };
 export const stats = {
     skills: {
+        baseAttack: {
+            speed: 2,
+            radius: 5,
+            penetrationNumber: 2,
+        },
         circlingBalls: {
+            lvl: 0,
             damage: 4,
-            speed: 3,
-            numberBalls: 4,
-            radius: 150,
+            speed: 1,
+            numberBalls: 1,
+            radius: 80,
             radiusElement: 10,
         },
     },

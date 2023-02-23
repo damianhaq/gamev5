@@ -11,7 +11,15 @@ export function gameOver() {
   instances.appearingText.length = 0;
 
   instances.skills.magicField = null;
-  instances.skills.circling = null;
+  instances.skills.circling.length = 0;
+  stats.skills.circlingBalls = {
+    lvl: 0,
+    damage: 4,
+    speed: 1,
+    numberBalls: 1,
+    radius: 80,
+    radiusElement: 10,
+  };
 
   game.isGameOver = true;
   game.gameState = "mainMenu";

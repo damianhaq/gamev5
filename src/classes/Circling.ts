@@ -10,7 +10,7 @@ export class Circling {
   x: number;
   y: number;
   dmg: number;
-  damageOnceFlag: boolean;
+
   constructor(
     public who: Sprite,
     public radius: number,
@@ -29,7 +29,6 @@ export class Circling {
     this.id = id;
 
     this.dmg = stats.skills.circlingBalls.damage;
-    this.damageOnceFlag = true;
 
     this.x = 0;
     this.y = 0;
@@ -58,12 +57,9 @@ export class Circling {
       // drawLine(this.x, this.y, enemy.x, enemy.y, "#000", c);
 
       if (distance <= 0) {
-        // this.damageOnceFlag = false;
-        // console.log("wykonuje sie raz");
-
         // if not include id
         if (!enemy.immuneProjectilesId.includes(this.id)) {
-          console.log("Circling test " + enemy.immuneProjectilesId.includes(this.id));
+          // console.log("Circling test " + enemy.immuneProjectilesId.includes(this.id));
 
           enemy.getDamage(this.dmg, this.id);
           stats.game.AllDamageDone += this.dmg;
@@ -74,10 +70,6 @@ export class Circling {
         // find and remove id while ball not touching enemy
         enemy.immuneProjectilesId.splice(enemy.immuneProjectilesId.indexOf(this.id), 1);
       }
-
-      // if (distance > 0 && this.damageOnceFlag === false) {
-      //   this.damageOnceFlag = true;
-      // }
     });
   }
 }
