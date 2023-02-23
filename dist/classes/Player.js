@@ -1,8 +1,7 @@
 import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
-import { magicField } from "../functions/skills/magicField.js";
-import { projectile } from "../functions/skills/projectile.js";
+import { circlingBall } from "../functions/skills/circlingBall.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { AppearingText } from "./AppearingText.js";
 import { Bullet } from "./Bullet.js";
@@ -18,10 +17,11 @@ export class Player extends Sprite {
         this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
         this.grabItemRange = 100;
-        this.shoot();
+        // this.shoot();
         //skills
-        projectile();
-        magicField(this);
+        // projectile();
+        // magicField(this);
+        circlingBall(this);
         this.hpRegen();
     }
     moving() {
@@ -81,7 +81,7 @@ export class Player extends Sprite {
                     // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                     const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
                     countId++;
-                    instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, stats.player.baseDamage, `${countId}bullet`, 1));
+                    instances.bullets.push(new Bullet(this.x, this.y, 5, 2, direction, stats.player.baseDamage, `${countId}bullet`, 2));
                 }
                 if (game.isGameOver) {
                     clearInterval(iid);

@@ -42,10 +42,19 @@ export const game = {
     },
 };
 export const stats = {
+    skills: {
+        circlingBalls: {
+            damage: 4,
+            speed: 3,
+            numberBalls: 4,
+            radius: 150,
+            radiusElement: 10,
+        },
+    },
     player: {
         maxHP: 100,
         currentHP: 100,
-        hpRegen: 0,
+        hpRegen: 1,
         armor: 1,
         lvl: 1,
         maxXP: 100,
@@ -67,5 +76,6 @@ export const instances = {
     appearingText: null,
     skills: {
         magicField: null,
+        circling: null,
     },
 };

@@ -2,6 +2,7 @@ import { controls } from "../functions/controls.js";
 import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
 import { calculateDirection, findNearestEnemy } from "../functions/helpers.js";
+import { circlingBall } from "../functions/skills/circlingBall.js";
 import { magicField } from "../functions/skills/magicField.js";
 import { projectile } from "../functions/skills/projectile.js";
 import { dimensions, game, instances, keys, stats } from "../variables.js";
@@ -24,10 +25,11 @@ export class Player extends Sprite {
     this.immuneTime = 100;
     this.grabItemRange = 100;
 
-    this.shoot();
+    // this.shoot();
     //skills
-    projectile();
-    magicField(this);
+    // projectile();
+    // magicField(this);
+    circlingBall(this);
     this.hpRegen();
   }
 
@@ -109,7 +111,7 @@ export class Player extends Sprite {
               direction,
               stats.player.baseDamage,
               `${countId}bullet`,
-              1
+              2
             )
           );
         }

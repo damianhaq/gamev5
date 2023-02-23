@@ -8,6 +8,7 @@ export function gameOver() {
     instances.player = null;
     instances.appearingText.length = 0;
     instances.skills.magicField = null;
+    instances.skills.circling = null;
     game.isGameOver = true;
     game.gameState = "mainMenu";
     game.initialPlayingFlag = true;

@@ -1,7 +1,10 @@
 import { c } from "../../app.js";
 import { AppearingText } from "../../classes/AppearingText.js";
+import { Bullet } from "../../classes/Bullet.js";
+import { Circling } from "../../classes/Circling.js";
 import { Enemy } from "../../classes/Enemy.js";
 import { ExpBall } from "../../classes/expBall.js";
+import { Grass } from "../../classes/Grass.js";
 import { game, instances } from "../../variables.js";
 import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
@@ -14,12 +17,16 @@ export function playing() {
 
   camera(instances.player);
 
-  instances.skills.magicField.update();
-  instances.grassArray.forEach((el) => el.update(c, drawGrass));
+  // instances.skills.magicField.update();
+  instances.skills.circling.forEach((el: Circling) => {
+    el.update(c, drawCircle);
+    el.collisionEnemy();
+  });
+  instances.grassArray.forEach((el: Grass) => el.update(c, drawGrass));
 
   drawMap(c);
 
-  instances.bullets.forEach((bullet, index) => {
+  instances.bullets.forEach((bullet: Bullet, index: number) => {
     bullet.update(c, drawCircle);
     bullet.deleteIfOverMap(index);
     bullet.collisionEnemy(index);

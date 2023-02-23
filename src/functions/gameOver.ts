@@ -9,7 +9,9 @@ export function gameOver() {
   instances.grassArray.length = 0;
   instances.player = null;
   instances.appearingText.length = 0;
+
   instances.skills.magicField = null;
+  instances.skills.circling = null;
 
   game.isGameOver = true;
   game.gameState = "mainMenu";

@@ -29,7 +29,11 @@ export class AppearingText {
       color: "#fff",
       lineWidth: 2,
     });
-    if (this.killMe) instances.appearingText.splice(index, 1);
+    if (this.killMe) {
+      setTimeout(() => {
+        instances.appearingText.splice(index, 1);
+      }, 0);
+    }
   }
 
   timeout() {

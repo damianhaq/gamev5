@@ -7,6 +7,7 @@ export function loadPlaying() {
     instances.grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
     //Bullet
     instances.bullets = [];
+    instances.skills.circling = [];
     //Enemy
     instances.enemies = [];
     addEnemies(1000, 100);

@@ -10,6 +10,8 @@ export function loadPlaying() {
   //Bullet
   instances.bullets = [];
 
+  instances.skills.circling = [];
+
   //Enemy
   instances.enemies = [];
   addEnemies(1000, 100);

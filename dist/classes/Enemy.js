@@ -51,11 +51,14 @@ export class Enemy extends Sprite {
         }
     }
     getDamage(value, id = null) {
-        this.hp -= value;
-        if (id)
+        console.log("id  get damage enemy: " + this.immuneProjectilesId.includes(id));
+        // this.hp -= value;
+        if (id && !this.immuneProjectilesId.includes(id)) {
             this.immuneProjectilesId.push(id);
+            this.hp -= value;
+        }
         instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, value.toString(), 16));
-        // console.log(id);
-        // console.log(this.immuneProjectiles);
+        console.log(id);
+        console.log(this.immuneProjectilesId);
     }
 }

@@ -40,7 +40,8 @@ function animate() {
         else if (!keys.escape && !game.pauseFlag) {
             game.pauseFlag = true;
         }
-        playing();
+        if (!game.isPause)
+            playing();
         if (game.isPause) {
             pauseGui(gui);
         }

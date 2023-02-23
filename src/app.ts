@@ -53,7 +53,7 @@ function animate() {
       game.pauseFlag = true;
     }
 
-    playing();
+    if (!game.isPause) playing();
 
     if (game.isPause) {
       pauseGui(gui);
