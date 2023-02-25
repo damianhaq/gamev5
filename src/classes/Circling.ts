@@ -37,10 +37,12 @@ export class Circling {
   public update(c: CanvasRenderingContext2D, drawMe: Function) {
     drawMe(this.x, this.y, this.radiusElement, this.type, this.color, c);
 
-    this.angle += this.speed;
-    const radians = (this.angle * Math.PI) / 180;
-    this.x = this.who.x + this.radius * Math.cos(radians);
-    this.y = this.who.y + this.radius * Math.sin(radians);
+    if (!game.isPause) {
+      this.angle += this.speed;
+      const radians = (this.angle * Math.PI) / 180;
+      this.x = this.who.x + this.radius * Math.cos(radians);
+      this.y = this.who.y + this.radius * Math.sin(radians);
+    }
   }
 
   collisionEnemy() {

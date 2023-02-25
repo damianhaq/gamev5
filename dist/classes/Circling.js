@@ -1,5 +1,5 @@
 import { calculateDistance } from "../functions/helpers.js";
-import { instances, stats } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 export class Circling {
     constructor(who, radius, radiusElement, speed, angle, id, type = "stroke", color = "#202124") {
         this.who = who;
@@ -22,10 +22,12 @@ export class Circling {
     }
     update(c, drawMe) {
         drawMe(this.x, this.y, this.radiusElement, this.type, this.color, c);
-        this.angle += this.speed;
-        const radians = (this.angle * Math.PI) / 180;
-        this.x = this.who.x + this.radius * Math.cos(radians);
-        this.y = this.who.y + this.radius * Math.sin(radians);
+        if (!game.isPause) {
+            this.angle += this.speed;
+            const radians = (this.angle * Math.PI) / 180;
+            this.x = this.who.x + this.radius * Math.cos(radians);
+            this.y = this.who.y + this.radius * Math.sin(radians);
+        }
     }
     collisionEnemy() {
         instances.enemies.forEach((enemy) => {

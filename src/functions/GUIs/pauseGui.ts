@@ -1,45 +1,57 @@
-import { GUI } from "../classes/GUI.js";
-import { dimensions, game, stats } from "../variables.js";
+import { GUI } from "../../classes/GUI.js";
+import { dimensions, game, stats } from "../../variables.js";
+import { upgradeGui } from "./upgradeGui.js";
 
 export function pauseGui(gui: GUI) {
+  // Main frame
   gui.frame(
     50,
-    100,
+    50,
     dimensions.canvas.w - 100,
-    dimensions.canvas.h - 150,
+    dimensions.canvas.h - 100,
     game.colors.blue,
     2,
     true,
     "#fff"
   );
+  if (stats.player.upgradePoints > 0) upgradeGui(gui);
 
+  // Title
   gui.text(
     dimensions.canvas.w / 2,
-    200,
+    150,
     "Upgrade points: " + stats.player.upgradePoints,
     20,
     game.font.main,
     game.font.main
   );
 
-  gui.button(
-    dimensions.canvas.w - 100,
-    120,
-    30,
-    30,
-    "X",
-    game.font.main,
-    game.colors.blue,
-    "#fff",
-    "#fff",
-    game.colors.blue,
-    2,
-    () => (game.isPause = false)
-  );
+  // Exit button
+  // gui.button(
+  //   dimensions.canvas.w - 100,
+  //   70,
+  //   30,
+  //   30,
+  //   "X",
+  //   game.font.main,
+  //   game.colors.blue,
+  //   "#fff",
+  //   "#fff",
+  //   game.colors.blue,
+  //   2,
+  //   exitButton
+  // );
+
+  // function exitButton() {
+  //   console.log("powinno sie wykonać raz exit button");
+
+  //   game.isPause = false;
+  //   stats.skills.upgrade.executeOnceFlag = true;
+  // }
 
   gui.text(
     dimensions.canvas.w / 2,
-    150,
+    100,
     "Statistics",
     20,
     game.font.main,
@@ -48,7 +60,7 @@ export function pauseGui(gui: GUI) {
 
   const d = {
     x: 60,
-    y: 200,
+    y: 150,
     w: 300,
     h: dimensions.canvas.h - 260,
     fs: 14,

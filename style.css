@@ -1,0 +1,40 @@
+.container {
+  height: 800px;
+  /* width: 1920px; */
+  border: 1px solid black;
+  display: flex;
+}
+
+.interface {
+  background-color: cornflowerblue;
+  width: 400px;
+}
+/* @keyframes expand {
+  0% {
+    flex-grow: 0;
+  }
+  100% {
+    flex-grow: 1;
+  }
+} */
+#canvas {
+  transition: width 0.3s ease;
+}
+
+h1 {
+  /* width: 600px; */
+  margin: 0;
+}
+
+.lvlUp {
+  background-color: darkgrey;
+  flex-grow: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+.gameOver {
+  background-color: darkgrey;
+  flex-grow: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}

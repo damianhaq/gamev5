@@ -10,7 +10,7 @@ import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
 import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
-import { guiPlaying } from "../guiPlaying.js";
+import { guiPlaying } from "../GUIs/guiPlaying.js";
 
 export function playing() {
   if (game.isGameOver) return;

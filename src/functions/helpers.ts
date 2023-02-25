@@ -1,3 +1,4 @@
+import { canvas, lvlUpDivElement } from "../app.js";
 import { Enemy } from "../classes/Enemy.js";
 import { Player } from "../classes/Player.js";
 import { Sprite } from "../classes/Sprite.js";
@@ -79,6 +80,9 @@ export function addExp(value: number) {
 export function lvlup() {
   game.isPause = true;
   stats.player.upgradePoints += 1;
+  canvas.style.width = canvas.style.width === "0px" ? "1200px" : "0px";
+  lvlUpDivElement.style.flexGrow = "1";
+  game.gameState = "lvlup";
 
   circlingBallLvlUp();
 }
@@ -111,4 +115,15 @@ export function findNearestEnemy(player: Player): Enemy | null {
     }
   }
   return nearestEnemy;
+}
+
+export function addHtmlElement(
+  element: string,
+  parent: HTMLElement,
+  innerText: string
+): HTMLElement {
+  const el: HTMLElement = document.createElement(element);
+  el.innerText = innerText;
+  parent.appendChild(el);
+  return el;
 }

@@ -30,7 +30,7 @@ export const dimensions = {
 };
 
 export const game = {
-  gameState: "mainMenu",
+  gameState: "mainMenu" as "mainMenu" | "playing" | "lvlup" | "gameOver",
   initialPlayingFlag: true,
   pauseFlag: true,
   isPause: false,
@@ -49,19 +49,29 @@ export const game = {
 export const stats = {
   skills: {
     baseAttack: {
+      id: "baseAttack",
       speed: 2,
       radius: 5,
       penetrationNumber: 2,
     },
     circlingBalls: {
+      id: "circlingBalls",
       lvl: 0,
-      damage: 4,
+      damage: 8,
       speed: 1,
       numberBalls: 1,
       radius: 80,
       radiusElement: 10,
     },
+    upgrade: {
+      skillList: ["circlingBalls", "baseAttack"] as const,
+      skillsRandomPicked: [],
+      executeOnceFlag: true,
+      pickSkillId: "",
+      amount: 3,
+    },
   },
+
   player: {
     maxHP: 100,
     currentHP: 100,
@@ -70,8 +80,8 @@ export const stats = {
     lvl: 1,
     maxXP: 100,
     currentXP: 0,
-    maxXpGrowPrecentage: 20, // how much precent grow next lvl maxXp
-    upgradePoints: 0,
+    maxXpGrowPrecentage: 50, // how much precent grow next lvl maxXp
+    upgradePoints: 1,
     baseDamage: 10,
   },
   game: {
@@ -80,14 +90,14 @@ export const stats = {
 };
 
 export const instances = {
-  grassArray: null,
-  bullets: null,
-  enemies: null,
-  expBalls: null,
+  grassArray: [],
+  bullets: [],
+  enemies: [],
+  expBalls: [],
   player: null,
-  appearingText: null,
+  appearingText: [],
   skills: {
     magicField: null,
-    circling: null,
+    circling: [],
   },
 };

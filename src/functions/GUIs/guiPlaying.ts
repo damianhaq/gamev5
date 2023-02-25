@@ -1,6 +1,6 @@
-import { gui } from "../app.js";
-import { dimensions, game, stats } from "../variables.js";
-import { drawText } from "./draw/drawText.js";
+import { gui } from "../../app.js";
+import { dimensions, game, stats } from "../../variables.js";
+import { drawText } from "../draw/drawText.js";
 
 export function guiPlaying() {
   // expbar
