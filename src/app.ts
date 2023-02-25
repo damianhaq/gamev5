@@ -67,6 +67,7 @@ function animate() {
       }
     } else if (!keys.escape && !game.pauseFlag) {
       game.pauseFlag = true;
+      console.log("test");
     }
 
     playing();
