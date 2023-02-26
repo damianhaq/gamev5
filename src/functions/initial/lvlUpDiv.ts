@@ -1,14 +1,15 @@
-import { lvlUpDivElement } from "../../app.js";
-import { addHtmlElement } from "../helpers.js";
+// import { addHtmlElement } from "../helpers.js";
+import { gui, lvlupDiv } from "../../app.js";
+import { NewGui } from "../../classes/NewGui.js";
 import { returnToGameAfterLvlup } from "../returnToGameAfterLvlup.js";
 
 export function lvlUpDiv() {
-  // lvlUpDivElement.style.flexGrow = "0";
-  lvlUpDivElement.style.flexBasis = "0px";
-
-  addHtmlElement("h2", lvlUpDivElement, "Level Up!");
-  const click = addHtmlElement("button", lvlUpDivElement, "Click");
-  click.addEventListener("click", () => {
+  // addHtmlElement("h2", lvlUpDivElement, "Level Up!");
+  new NewGui("h3", "Level up!", "", lvlupDiv);
+  const lvlupButton = new NewGui("button", "ok", "", lvlupDiv);
+  // const click = addHtmlElement("button", lvlUpDivElement, "Click");
+  lvlupButton.newElement.addEventListener("click", () => {
     returnToGameAfterLvlup();
   });
+  // addHtmlElement("p", lvlUpDivElement, "Lvl up system work in progress");
 }

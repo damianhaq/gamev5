@@ -49,7 +49,10 @@ export const stats = {
             radius: 5,
             penetrationNumber: 2,
         },
+        // remember to change also in lvlup reset
         circlingBalls: {
+            // Mistyczne sfery po polsku
+            name: "Mystical Spheres",
             id: "circlingBalls",
             lvl: 0,
             damage: 8,

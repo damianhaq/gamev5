@@ -1,4 +1,4 @@
-import { canvas, lvlUpDivElement } from "../app.js";
+import { lvlupDiv } from "../app.js";
 import { game, instances, stats } from "../variables.js";
 import { circlingBallLvlUp } from "./skills/circlingBall.js";
 export function calculateDirection(fromX, fromY, toX, toY) {
@@ -48,12 +48,16 @@ export function addExp(value) {
         stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
     }
 }
+// execute once lvlup
 export function lvlup() {
     game.isPause = true;
-    stats.player.upgradePoints += 1;
-    canvas.style.width = canvas.style.width === "0px" ? "1200px" : "0px";
-    lvlUpDivElement.style.flexGrow = "1";
     game.gameState = "lvlup";
+    // styles
+    lvlupDiv.style.display = "inline-block";
+    //stats
+    stats.player.upgradePoints += 1;
+    stats.player.baseDamage += 1;
+    console.log(stats.player);
     circlingBallLvlUp();
 }
 export function saveDataToLocalStorage(data) {
@@ -81,9 +85,14 @@ export function findNearestEnemy(player) {
     }
     return nearestEnemy;
 }
-export function addHtmlElement(element, parent, innerText) {
-    const el = document.createElement(element);
-    el.innerText = innerText;
-    parent.appendChild(el);
-    return el;
-}
+// export function addHtmlElement(
+//   element: string,
+//   parent: HTMLElement,
+//   innerText: string,
+//   value: string | number = ""
+// ) {
+//   const el: HTMLElement = document.createElement(element);
+//   el.innerText = innerText + value;
+//   parent.appendChild(el);
+//   return { el: el, string: innerText, value: value };
+// }

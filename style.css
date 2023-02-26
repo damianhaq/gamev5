@@ -2,13 +2,24 @@
   height: 800px;
   /* width: 1920px; */
   border: 1px solid black;
-  display: flex;
+  position: relative;
 }
 
-.interface {
+.gui {
+  position: absolute;
   background-color: cornflowerblue;
   width: 400px;
+  left: 0;
+  top: 0;
 }
+
+.lvlup,
+.gameover,
+.pause {
+  display: none;
+  background-color: aquamarine;
+}
+
 /* @keyframes expand {
   0% {
     flex-grow: 0;
@@ -18,23 +29,10 @@
   }
 } */
 #canvas {
-  transition: width 0.3s ease;
+  /* transition: width 0.3s ease; */
 }
 
 h1 {
   /* width: 600px; */
   margin: 0;
-}
-
-.lvlUp {
-  background-color: darkgrey;
-  flex-grow: 0;
-  transition: width 0.3s ease;
-  overflow: hidden;
-}
-.gameOver {
-  background-color: darkgrey;
-  flex-grow: 0;
-  transition: width 0.3s ease;
-  overflow: hidden;
 }

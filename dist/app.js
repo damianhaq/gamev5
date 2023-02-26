@@ -1,4 +1,4 @@
-import { dimensions, game, instances, keys } from "./variables.js";
+import { dimensions, game, instances, keys, stats } from "./variables.js";
 import { GUI } from "./classes/GUI.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
@@ -6,27 +6,31 @@ import { controls } from "./functions/controls.js";
 import { interfaceDiv } from "./functions/initial/interfaceDiv.js";
 import { lvlUpDiv } from "./functions/initial/lvlUpDiv.js";
 import { gameOverDiv } from "./functions/initial/gameOverDiv.js";
+import { interfaceDivUpdate } from "./functions/loops/interfaceDivUpdate.js";
+import { pauseDivInitial } from "./functions/initial/pauseDivInitial.js";
 export const canvas = document.querySelector("#canvas");
-// canvas.style.border = "1px dashed black";
 const p = document.querySelector("#log");
-const divInterface = document.querySelector("#divInterface");
-export const lvlUpDivElement = document.querySelector("#divLvlUp");
-export const gameOverDivElement = document.querySelector("#gameOver");
+export const guiDiv = document.querySelector("#gui");
+export const lvlupDiv = document.querySelector("#lvlup");
+export const gameoverDiv = document.querySelector("#gameover");
+export const pauseDiv = document.querySelector("#pause");
 export const newGameButton = document.querySelector("#newGame");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
 canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
 canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
-canvas.style.width = 0 + "px";
+canvas.style.width = dimensions.canvas.w + "px";
 canvas.style.height = dimensions.canvas.h + "px";
 c.scale(window.devicePixelRatio, window.devicePixelRatio);
 // GUI
 export const gui = new GUI(c);
 controls();
 lvlUpDiv();
-interfaceDiv(divInterface, canvas);
+// interfaceDiv();
+interfaceDiv();
 gameOverDiv();
+export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv] = pauseDivInitial();
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,16 +44,24 @@ function animate() {
         if (keys.escape && game.pauseFlag) {
             // execute once
             console.log(instances);
-            canvas.style.width = canvas.style.width === "0px" ? "1200px" : "0px";
+            // canvas.style.width = canvas.style.width === "0px" ? "1200px" : "0px";
             game.pauseFlag = false;
-            // Pause on = instant, pause off = delay
             if (!game.isPause) {
+                interfaceDivUpdate();
                 game.isPause = true;
+                pauseDiv.style.display = "inline-block";
+                if (stats.skills.circlingBalls.lvl === 0) {
+                    mysticalSpheresDiv.newElement.style.display = "none";
+                    console.log("mysticalSpheresDiv.style.display = none");
+                }
+                if (stats.skills.circlingBalls.lvl > 0) {
+                    mysticalSpheresDiv.newElement.style.display = "block";
+                    console.log("mysticalSpheresDiv.newElement.style.display = block");
+                }
             }
             else {
-                setTimeout(() => {
-                    game.isPause = false;
-                }, 300);
+                game.isPause = false;
+                pauseDiv.style.display = "none";
             }
         }
         else if (!keys.escape && !game.pauseFlag) {
@@ -60,7 +72,7 @@ function animate() {
     }
     if (game.isPause) {
         // Gray screen
-        gui.pauseRect();
+        // gui.pauseRect();
         // pauseGui(gui);
     }
     if (game.gameState === "lvlup") {
