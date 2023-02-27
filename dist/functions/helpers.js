@@ -1,6 +1,7 @@
 import { lvlupDiv } from "../app.js";
 import { game, instances, stats } from "../variables.js";
 import { circlingBallLvlUp } from "./skills/circlingBall.js";
+import { projectileLvlUp } from "./skills/projectile.js";
 export function calculateDirection(fromX, fromY, toX, toY) {
     const dx = toX - fromX;
     const dy = toY - fromY;
@@ -59,6 +60,7 @@ export function lvlup() {
     stats.player.baseDamage += 1;
     console.log(stats.player);
     circlingBallLvlUp();
+    projectileLvlUp();
 }
 export function saveDataToLocalStorage(data) {
     localStorage.setItem(game.localStorageKey, JSON.stringify(data));

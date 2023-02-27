@@ -17,6 +17,18 @@ export function newGame() {
     stats.skills.circlingBalls.numberBalls = 1;
     stats.skills.circlingBalls.radius = 80;
     stats.skills.circlingBalls.radiusElement = 10;
+    //fireball reset
+    stats.skills.fireBall.lvl = 0;
+    stats.skills.fireBall.damage = 35;
+    stats.skills.fireBall.attackSpeed = 2100;
+    stats.skills.fireBall.movementSpeed = 0.7;
+    stats.skills.fireBall.penetrationNumber = 5;
+    stats.skills.fireBall.radius = 15;
+    stats.skills.fireBall.burn = {
+        damage: 5,
+        speed: 300,
+        times: 5,
+    };
     stats.player.lvl = 1;
     stats.game.AllDamageDone = 0;
     stats.player.upgradePoints = 0;

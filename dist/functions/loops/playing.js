@@ -28,7 +28,7 @@ export function playing() {
         enemy.moveTowardsPlayer(instances.player);
         enemy.die(index);
         enemy.collideEnemies(instances.enemies, index);
-        enemy.customText(enemy.immuneProjectilesId.length.toString());
+        // enemy.customText(enemy.immuneProjectilesId.length.toString());
     });
     instances.expBalls.forEach((exp, index) => {
         exp.update(c, drawCircle);

@@ -1,21 +1,21 @@
 import { Bullet } from "../../classes/Bullet.js";
 import { Enemy } from "../../classes/Enemy.js";
-import { game, instances } from "../../variables.js";
+import { game, instances, stats } from "../../variables.js";
 import { calculateDirection, findNearestEnemy } from "../helpers.js";
 
+let projectileiid: number;
 export function projectile() {
-  let iid: number;
   let countId: number = 0;
   const data = {
-    attackSpeed: 2100,
-    movementSpeed: 2,
-    damage: 25,
-    radius: 15,
-    penetrationNumber: 5,
+    attackSpeed: stats.skills.fireBall.attackSpeed,
+    movementSpeed: stats.skills.fireBall.movementSpeed,
+    damage: stats.skills.fireBall.damage,
+    radius: stats.skills.fireBall.radius,
+    penetrationNumber: stats.skills.fireBall.penetrationNumber,
   };
 
-  if (!iid) {
-    iid = setInterval(() => {
+  if (!projectileiid) {
+    projectileiid = setInterval(() => {
       if (instances.enemies.length > 0 && !game.isPause && instances.player) {
         const nearestEnemy: Enemy = findNearestEnemy(instances.player);
 
@@ -39,15 +39,32 @@ export function projectile() {
             direction,
             data.damage,
             `${countId}projectile`,
-            data.penetrationNumber
+            data.penetrationNumber,
+            true
           )
         );
       }
 
       if (game.isGameOver) {
-        clearInterval(iid);
-        iid = null;
+        clearInterval(projectileiid);
+        projectileiid = null;
       }
     }, data.attackSpeed);
+  }
+}
+
+export function projectileLvlUp() {
+  if (stats.skills.fireBall.lvl === 0) {
+    stats.skills.fireBall.lvl = 1;
+    projectile();
+  } else {
+    // stats.skills.fireBall.numberBalls += 1;
+    clearInterval(projectileiid);
+    projectileiid = null;
+
+    stats.skills.fireBall.lvl += 1;
+    stats.skills.fireBall.damage += 3;
+
+    projectile();
   }
 }

@@ -15,6 +15,12 @@ import { Sprite } from "./Sprite.js";
 export class Enemy extends Sprite {
   dmg: number;
   immuneProjectilesId: string[];
+
+  buffCount: number;
+  buffTimeout: number;
+  buffFlag: boolean;
+
+  burnDamage: number;
   constructor(
     public x: number,
     public y: number,
@@ -29,6 +35,12 @@ export class Enemy extends Sprite {
     this.dmg = 5;
     this.expDropValue = expDropValue;
     this.immuneProjectilesId = [];
+
+    this.buffCount = 0;
+    this.buffTimeout = 0;
+    this.buffFlag = true;
+
+    this.burnDamage = 0;
   }
 
   moveTowardsPlayer(player: Player) {
@@ -87,6 +99,9 @@ export class Enemy extends Sprite {
       this.immuneProjectilesId.push(id);
       this.hp -= value;
     }
+    if (id === null) {
+      this.hp -= value;
+    }
 
     instances.appearingText.push(
       new AppearingText(
@@ -99,5 +114,23 @@ export class Enemy extends Sprite {
     );
     // console.log(id);
     // console.log(this.immuneProjectilesId);
+  }
+
+  burnMe() {
+    if (this.buffCount > 0 && this.buffFlag) {
+      this.buffFlag = false;
+      this.buffCount--;
+      setTimeout(() => {
+        this.buffFlag = true;
+        this.getDamage(this.burnDamage);
+      }, this.buffTimeout);
+    }
+  }
+
+  // moving is only for update
+  moving(): void {
+    if (!game.isPause) {
+      this.burnMe();
+    }
   }
 }

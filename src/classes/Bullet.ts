@@ -13,7 +13,8 @@ export class Bullet extends Sprite {
     public direction: { x: number; y: number },
     public dmg: number,
     public id: string,
-    public penetrationNumber: number = 1
+    public penetrationNumber: number = 1,
+    public isApplyBurn: boolean = false
   ) {
     super(x, y, radius);
     this.speed = speed;
@@ -21,6 +22,7 @@ export class Bullet extends Sprite {
     this.dmg = dmg;
     this.penetrationNumber = penetrationNumber;
     this.id = id;
+    this.isApplyBurn = isApplyBurn;
   }
 
   moving(): void {
@@ -55,6 +57,12 @@ export class Bullet extends Sprite {
       if (distance <= 0) {
         if (!enemy.immuneProjectilesId.includes(this.id)) {
           enemy.getDamage(this.dmg, this.id);
+          if (this.isApplyBurn) {
+            enemy.buffTimeout = stats.skills.fireBall.burn.speed;
+            enemy.burnDamage = stats.skills.fireBall.burn.damage;
+            enemy.buffCount = stats.skills.fireBall.burn.times;
+          }
+
           this.penetrationNumber--;
           stats.game.AllDamageDone += this.dmg;
           if (this.penetrationNumber <= 0) {

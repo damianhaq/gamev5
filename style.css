@@ -1,6 +1,6 @@
 .container {
   height: 800px;
-  /* width: 1920px; */
+  width: 1200px;
   border: 1px solid black;
   position: relative;
 }
@@ -8,9 +8,10 @@
 .gui {
   position: absolute;
   background-color: cornflowerblue;
-  width: 400px;
-  left: 0;
-  top: 0;
+  /* width: 400px; */
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
 }
 
 .lvlup,

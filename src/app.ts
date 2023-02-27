@@ -43,8 +43,28 @@ lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
 gameOverDiv();
-export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv] =
-  pauseDivInitial();
+export const [
+  add,
+  lvl,
+  up,
+  hr,
+  bd,
+  as,
+  pn,
+  cbd,
+  cbs,
+  cbr,
+  cbns,
+  mysticalSpheresDiv,
+  cbl,
+  fireBallDiv,
+  fbl,
+  fbd,
+  fbms,
+  fbas,
+  fbpn,
+  fbbd,
+] = pauseDivInitial();
 
 //Animate
 function animate() {
@@ -69,14 +89,6 @@ function animate() {
         interfaceDivUpdate();
         game.isPause = true;
         pauseDiv.style.display = "inline-block";
-        if (stats.skills.circlingBalls.lvl === 0) {
-          mysticalSpheresDiv.newElement.style.display = "none";
-          console.log("mysticalSpheresDiv.style.display = none");
-        }
-        if (stats.skills.circlingBalls.lvl > 0) {
-          mysticalSpheresDiv.newElement.style.display = "block";
-          console.log("mysticalSpheresDiv.newElement.style.display = block");
-        }
       } else {
         game.isPause = false;
         pauseDiv.style.display = "none";

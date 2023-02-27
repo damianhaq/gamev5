@@ -4,7 +4,7 @@ import { addEnemies } from "../addEnemies.js";
 import { addGrass } from "../addGrass.js";
 import { circlingBall } from "../skills/circlingBall.js";
 import { magicField } from "../skills/magicField.js";
-import { projectile } from "../skills/projectile.js";
+import { projectile, projectileLvlUp } from "../skills/projectile.js";
 
 export function loadPlaying() {
   // Add grass
@@ -30,6 +30,6 @@ export function loadPlaying() {
   // base attack
   instances.player.shoot();
   // skills
-  projectile();
+  // projectileLvlUp();
   // magicField(instances.player);
 }

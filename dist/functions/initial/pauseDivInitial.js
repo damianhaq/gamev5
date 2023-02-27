@@ -21,12 +21,39 @@ export function pauseDivInitial() {
     let cbr;
     let cbns;
     // if (stats.skills.circlingBalls.lvl !== 0) {
-    new NewGui("h3", "", stats.skills.circlingBalls.name, mysticalSpheresDiv.newElement);
+    const cbl = new NewGui("h3", stats.skills.circlingBalls.name, stats.skills.circlingBalls.lvl, mysticalSpheresDiv.newElement);
     cbd = new NewGui("p", "Damage: ", stats.skills.circlingBalls.damage, mysticalSpheresDiv.newElement);
     cbs = new NewGui("p", "Speed: ", stats.skills.circlingBalls.speed, mysticalSpheresDiv.newElement);
     cbr = new NewGui("p", "Range: ", stats.skills.circlingBalls.radius, mysticalSpheresDiv.newElement);
     cbns = new NewGui("p", "Number spheres: ", stats.skills.circlingBalls.numberBalls, mysticalSpheresDiv.newElement);
-    // }
-    // new NewGui("p", "Damage: ", stats.player.baseDamage, guiDiv);
-    return [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv];
+    // Fire ball
+    const fireBallDiv = new NewGui("div", "", "", pauseDiv);
+    const fbl = new NewGui("h3", stats.skills.fireBall.name, stats.skills.fireBall.lvl, fireBallDiv.newElement);
+    const fbd = new NewGui("p", "Damage: ", stats.skills.fireBall.damage, fireBallDiv.newElement);
+    const fbms = new NewGui("p", "Movement speed: ", stats.skills.fireBall.movementSpeed, fireBallDiv.newElement);
+    const fbas = new NewGui("p", "Attack speed: ", stats.skills.fireBall.attackSpeed, fireBallDiv.newElement);
+    const fbpn = new NewGui("p", "Penetration number: ", stats.skills.fireBall.penetrationNumber, fireBallDiv.newElement);
+    const fbbd = new NewGui("p", "Burn damage: ", stats.skills.fireBall.burn.damage, fireBallDiv.newElement);
+    return [
+        add,
+        lvl,
+        up,
+        hr,
+        bd,
+        as,
+        pn,
+        cbd,
+        cbs,
+        cbr,
+        cbns,
+        mysticalSpheresDiv,
+        cbl,
+        fireBallDiv,
+        fbl,
+        fbd,
+        fbms,
+        fbas,
+        fbpn,
+        fbbd,
+    ];
 }

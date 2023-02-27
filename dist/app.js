@@ -1,4 +1,4 @@
-import { dimensions, game, instances, keys, stats } from "./variables.js";
+import { dimensions, game, instances, keys } from "./variables.js";
 import { GUI } from "./classes/GUI.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
@@ -30,7 +30,7 @@ lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
 gameOverDiv();
-export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv] = pauseDivInitial();
+export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd,] = pauseDivInitial();
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -50,14 +50,6 @@ function animate() {
                 interfaceDivUpdate();
                 game.isPause = true;
                 pauseDiv.style.display = "inline-block";
-                if (stats.skills.circlingBalls.lvl === 0) {
-                    mysticalSpheresDiv.newElement.style.display = "none";
-                    console.log("mysticalSpheresDiv.style.display = none");
-                }
-                if (stats.skills.circlingBalls.lvl > 0) {
-                    mysticalSpheresDiv.newElement.style.display = "block";
-                    console.log("mysticalSpheresDiv.newElement.style.display = block");
-                }
             }
             else {
                 game.isPause = false;

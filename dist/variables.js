@@ -61,6 +61,21 @@ export const stats = {
             radius: 80,
             radiusElement: 10,
         },
+        fireBall: {
+            name: "Fire Ball",
+            id: "fireBall",
+            lvl: 1,
+            damage: 35,
+            attackSpeed: 2100,
+            movementSpeed: 0.7,
+            penetrationNumber: 5,
+            radius: 15,
+            burn: {
+                damage: 5,
+                speed: 300,
+                times: 5,
+            },
+        },
         upgrade: {
             skillList: ["circlingBalls", "baseAttack"],
             skillsRandomPicked: [],
