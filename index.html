@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script defer type="module" src="dist/app.js"></script>
+    <link rel="stylesheet" href="style.css" />
     <style>
       @font-face {
         font-family: "Minecraftia";
@@ -18,7 +19,14 @@
     </style>
   </head>
   <body>
-    <canvas id="canvas"></canvas>
-    <p id="log">wsad - controlls, esc - pause</p>
+    <div class="container">
+      <canvas id="canvas"></canvas>
+      <div id="gui" class="gui">
+        <button id="newGame">New Game</button>
+        <div id="lvlup" class="lvlup"></div>
+        <div id="gameover" class="gameover"></div>
+        <div id="pause" class="pause"></div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 import { calculatePercentage } from "../functions/helpers.js";
-import { keys } from "../variables.js";
+import { dimensions, game, keys } from "../variables.js";
 
 export class GUI {
   constructor(public c: CanvasRenderingContext2D) {
@@ -17,6 +17,7 @@ export class GUI {
     colorFill: string
   ) {
     this.c.save();
+    this.c.beginPath();
     if (isFill) {
       this.c.fillStyle = colorFill;
       this.c.fillRect(x, y, w, h);
@@ -131,5 +132,46 @@ export class GUI {
       keys.mouse.executeOnceFlag = true;
     }
     this.text(x + w / 2, y + h - h / 6, text, h / 3, font, colorText);
+  }
+
+  clickFrame(
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    func: Function,
+    // content: Function,
+    colorLine: string = game.colors.blue
+  ) {
+    let { click, x: mx, y: my, executeOnceFlag } = keys.mouse;
+
+    //mouse Over
+    if (mx >= x && mx <= x + w && my >= y && my <= y + h) {
+      // hover
+      this.frame(x - 2, y - 2, w + 4, h + 4, colorLine, 2, true, "#fff");
+
+      if (executeOnceFlag && click) {
+        // execute when click
+        keys.mouse.executeOnceFlag = false;
+      }
+    } else {
+      //mouse away
+      this.frame(x, y, w, h, colorLine, 2, true, "#fff");
+    }
+    // content(x, y, this);
+
+    if (!click && !executeOnceFlag) {
+      // execute when release click
+      func();
+
+      keys.mouse.executeOnceFlag = true;
+    }
+  }
+
+  pauseRect() {
+    this.c.save();
+    this.c.fillStyle = "rgba(0, 0, 0, 0.5)";
+    this.c.fillRect(0, 0, dimensions.canvas.w, dimensions.canvas.h);
+    this.c.restore();
   }
 }

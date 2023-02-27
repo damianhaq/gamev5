@@ -18,6 +18,10 @@ export class Enemy extends Sprite {
         this.dmg = 5;
         this.expDropValue = expDropValue;
         this.immuneProjectilesId = [];
+        this.buffCount = 0;
+        this.buffTimeout = 0;
+        this.buffFlag = true;
+        this.burnDamage = 0;
     }
     moveTowardsPlayer(player) {
         const direction = calculateDirection(this.x, this.y, player.x, player.y);
@@ -55,8 +59,27 @@ export class Enemy extends Sprite {
             this.immuneProjectilesId.push(id);
             this.hp -= value;
         }
+        if (id === null) {
+            this.hp -= value;
+        }
         instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, value.toString(), 16));
         // console.log(id);
         // console.log(this.immuneProjectilesId);
+    }
+    burnMe() {
+        if (this.buffCount > 0 && this.buffFlag) {
+            this.buffFlag = false;
+            this.buffCount--;
+            setTimeout(() => {
+                this.buffFlag = true;
+                this.getDamage(this.burnDamage);
+            }, this.buffTimeout);
+        }
+    }
+    // moving is only for update
+    moving() {
+        if (!game.isPause) {
+            this.burnMe();
+        }
     }
 }

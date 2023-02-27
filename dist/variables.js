@@ -44,17 +44,44 @@ export const game = {
 export const stats = {
     skills: {
         baseAttack: {
+            id: "baseAttack",
             speed: 2,
             radius: 5,
             penetrationNumber: 2,
         },
+        // remember to change also in lvlup reset
         circlingBalls: {
+            // Mistyczne sfery po polsku
+            name: "Mystical Spheres",
+            id: "circlingBalls",
             lvl: 0,
-            damage: 4,
+            damage: 8,
             speed: 1,
             numberBalls: 1,
             radius: 80,
             radiusElement: 10,
+        },
+        fireBall: {
+            name: "Fire Ball",
+            id: "fireBall",
+            lvl: 1,
+            damage: 35,
+            attackSpeed: 2100,
+            movementSpeed: 0.7,
+            penetrationNumber: 5,
+            radius: 15,
+            burn: {
+                damage: 5,
+                speed: 300,
+                times: 5,
+            },
+        },
+        upgrade: {
+            skillList: ["circlingBalls", "baseAttack"],
+            skillsRandomPicked: [],
+            executeOnceFlag: true,
+            pickSkillId: "",
+            amount: 3,
         },
     },
     player: {
@@ -65,8 +92,8 @@ export const stats = {
         lvl: 1,
         maxXP: 100,
         currentXP: 0,
-        maxXpGrowPrecentage: 20,
-        upgradePoints: 0,
+        maxXpGrowPrecentage: 50,
+        upgradePoints: 1,
         baseDamage: 10,
     },
     game: {
@@ -74,14 +101,14 @@ export const stats = {
     },
 };
 export const instances = {
-    grassArray: null,
-    bullets: null,
-    enemies: null,
-    expBalls: null,
+    grassArray: [],
+    bullets: [],
+    enemies: [],
+    expBalls: [],
     player: null,
-    appearingText: null,
+    appearingText: [],
     skills: {
         magicField: null,
-        circling: null,
+        circling: [],
     },
 };

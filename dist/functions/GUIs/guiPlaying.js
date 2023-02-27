@@ -1,5 +1,5 @@
-import { gui } from "../app.js";
-import { dimensions, game, stats } from "../variables.js";
+import { gui } from "../../app.js";
+import { dimensions, game, stats } from "../../variables.js";
 export function guiPlaying() {
     // expbar
     gui.progressBar(stats.player.maxXP, stats.player.currentXP, game.font.main, 10, 10, dimensions.canvas.w - 20, 20, game.colors.blue, 2, true, "#fff", game.colors.blue2, game.colors.blue);

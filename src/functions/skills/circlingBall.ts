@@ -24,11 +24,14 @@ export function circlingBall(who: Sprite) {
 
 export function circlingBallLvlUp() {
   if (stats.skills.circlingBalls.lvl === 0) {
-    circlingBall(instances.player);
     stats.skills.circlingBalls.lvl = 1;
+    circlingBall(instances.player);
   } else {
-    stats.skills.circlingBalls.numberBalls += 1;
     instances.skills.circling.length = 0;
+
+    stats.skills.circlingBalls.numberBalls += 1;
+    stats.skills.circlingBalls.lvl += 1;
+
     circlingBall(instances.player);
   }
 }

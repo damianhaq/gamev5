@@ -3,7 +3,7 @@ import { calculateDistance } from "../functions/helpers.js";
 import { dimensions, game, instances, stats } from "../variables.js";
 import { Sprite } from "./Sprite.js";
 export class Bullet extends Sprite {
-    constructor(x, y, radius, speed, direction, dmg, id, penetrationNumber = 1) {
+    constructor(x, y, radius, speed, direction, dmg, id, penetrationNumber = 1, isApplyBurn = false) {
         super(x, y, radius);
         this.x = x;
         this.y = y;
@@ -13,11 +13,13 @@ export class Bullet extends Sprite {
         this.dmg = dmg;
         this.id = id;
         this.penetrationNumber = penetrationNumber;
+        this.isApplyBurn = isApplyBurn;
         this.speed = speed;
         this.direction = direction;
         this.dmg = dmg;
         this.penetrationNumber = penetrationNumber;
         this.id = id;
+        this.isApplyBurn = isApplyBurn;
     }
     moving() {
         if (!game.isPause) {
@@ -39,6 +41,11 @@ export class Bullet extends Sprite {
             if (distance <= 0) {
                 if (!enemy.immuneProjectilesId.includes(this.id)) {
                     enemy.getDamage(this.dmg, this.id);
+                    if (this.isApplyBurn) {
+                        enemy.buffTimeout = stats.skills.fireBall.burn.speed;
+                        enemy.burnDamage = stats.skills.fireBall.burn.damage;
+                        enemy.buffCount = stats.skills.fireBall.burn.times;
+                    }
                     this.penetrationNumber--;
                     stats.game.AllDamageDone += this.dmg;
                     if (this.penetrationNumber <= 0) {

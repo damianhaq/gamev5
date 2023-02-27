@@ -1,5 +1,7 @@
+import { lvlupDiv } from "../app.js";
 import { game, instances, stats } from "../variables.js";
 import { circlingBallLvlUp } from "./skills/circlingBall.js";
+import { projectileLvlUp } from "./skills/projectile.js";
 export function calculateDirection(fromX, fromY, toX, toY) {
     const dx = toX - fromX;
     const dy = toY - fromY;
@@ -47,10 +49,18 @@ export function addExp(value) {
         stats.player.maxXP += Math.round(maxXP * (maxXpGrowPrecentage / 100));
     }
 }
+// execute once lvlup
 export function lvlup() {
     game.isPause = true;
+    game.gameState = "lvlup";
+    // styles
+    lvlupDiv.style.display = "inline-block";
+    //stats
     stats.player.upgradePoints += 1;
+    stats.player.baseDamage += 1;
+    console.log(stats.player);
     circlingBallLvlUp();
+    projectileLvlUp();
 }
 export function saveDataToLocalStorage(data) {
     localStorage.setItem(game.localStorageKey, JSON.stringify(data));
@@ -77,3 +87,14 @@ export function findNearestEnemy(player) {
     }
     return nearestEnemy;
 }
+// export function addHtmlElement(
+//   element: string,
+//   parent: HTMLElement,
+//   innerText: string,
+//   value: string | number = ""
+// ) {
+//   const el: HTMLElement = document.createElement(element);
+//   el.innerText = innerText + value;
+//   parent.appendChild(el);
+//   return { el: el, string: innerText, value: value };
+// }

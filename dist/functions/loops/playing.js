@@ -4,7 +4,7 @@ import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
 import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
-import { guiPlaying } from "../guiPlaying.js";
+import { guiPlaying } from "../GUIs/guiPlaying.js";
 export function playing() {
     if (game.isGameOver)
         return;
@@ -28,7 +28,7 @@ export function playing() {
         enemy.moveTowardsPlayer(instances.player);
         enemy.die(index);
         enemy.collideEnemies(instances.enemies, index);
-        enemy.customText(enemy.immuneProjectilesId.length.toString());
+        // enemy.customText(enemy.immuneProjectilesId.length.toString());
     });
     instances.expBalls.forEach((exp, index) => {
         exp.update(c, drawCircle);

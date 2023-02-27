@@ -1,0 +1,39 @@
+.container {
+  height: 800px;
+  width: 1200px;
+  border: 1px solid black;
+  position: relative;
+}
+
+.gui {
+  position: absolute;
+  background-color: cornflowerblue;
+  /* width: 400px; */
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+}
+
+.lvlup,
+.gameover,
+.pause {
+  display: none;
+  background-color: aquamarine;
+}
+
+/* @keyframes expand {
+  0% {
+    flex-grow: 0;
+  }
+  100% {
+    flex-grow: 1;
+  }
+} */
+#canvas {
+  /* transition: width 0.3s ease; */
+}
+
+h1 {
+  /* width: 600px; */
+  margin: 0;
+}
