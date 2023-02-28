@@ -67,7 +67,7 @@ export const stats = {
         fireBall: {
             name: "Fire Ball",
             id: "fireBall",
-            lvl: 1,
+            lvl: 0,
             damage: 35,
             attackSpeed: 2100,
             movementSpeed: 0.7,
@@ -88,7 +88,7 @@ export const stats = {
             radius: 100,
         },
         upgrade: {
-            skillList: ["circlingBalls", "baseAttack"],
+            skillList: ["circlingBalls", "baseAttack", "fireBall", "magicField"],
             skillsRandomPicked: [],
             executeOnceFlag: true,
             pickSkillId: "",

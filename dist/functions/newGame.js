@@ -12,7 +12,7 @@ export function newGame() {
     instances.skills.circling.length = 0;
     // circling ball reset
     stats.skills.circlingBalls.lvl = 0;
-    stats.skills.circlingBalls.damage = 8;
+    stats.skills.circlingBalls.damage = 30;
     stats.skills.circlingBalls.speed = 1;
     stats.skills.circlingBalls.numberBalls = 1;
     stats.skills.circlingBalls.radius = 80;

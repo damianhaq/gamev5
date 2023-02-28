@@ -103,7 +103,7 @@ export class Enemy extends Sprite {
       this.immuneProjectilesId.push(id.id);
       this.hp -= value;
     }
-    if (id === null) {
+    if (id.id === null) {
       this.hp -= value;
     }
 
