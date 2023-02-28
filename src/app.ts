@@ -70,6 +70,8 @@ function animate(currentTime) {
   deltaTime = currentTime - lastTime;
   lastTime = currentTime;
   const fps = Math.round(1000 / deltaTime);
+  // console.log("fps: ", fps);
+
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   if (game.gameState === "playing") {
@@ -83,6 +85,7 @@ function animate(currentTime) {
     if (keys.escape && game.pauseFlag) {
       // execute once
       console.log(instances);
+      // console.log("enemies", instances.enemies.length);
 
       // canvas.style.width = canvas.style.width === "0px" ? "1200px" : "0px";
       game.pauseFlag = false;
@@ -97,7 +100,7 @@ function animate(currentTime) {
       }
     } else if (!keys.escape && !game.pauseFlag) {
       game.pauseFlag = true;
-      console.log("test");
+      // console.log("test");
     }
 
     playing();

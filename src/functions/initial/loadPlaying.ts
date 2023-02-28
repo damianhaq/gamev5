@@ -17,7 +17,7 @@ export function loadPlaying() {
 
   //Enemy
   instances.enemies = [];
-  addEnemies(1000, 100);
+  addEnemies(1000, 200);
 
   // ExpBalls
   instances.expBalls = [];

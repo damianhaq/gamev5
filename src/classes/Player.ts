@@ -86,7 +86,7 @@ export class Player extends Sprite {
         if (this.enemies.length > 0 && !game.isPause) {
           const nearestEnemy: Enemy = findNearestEnemy(this);
 
-          console.log("shoot", stats.skills.baseAttack.speed);
+          // console.log("shoot", stats.skills.baseAttack.speed);
 
           // draw line to nearest enemy
           // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);

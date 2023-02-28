@@ -45,7 +45,9 @@ export function addEnemies(interval, maxEnemies) {
                             y = randomNumber(dimensions.map.y * -1 + dimensions.canvas.h, dimensions.map.y * -1 + dimensions.canvas.h + 50);
                             break;
                     }
-                    instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
+                    if (instances.enemies.length < maxEnemies) {
+                        instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
+                    }
                 }
                 counter++;
             }
