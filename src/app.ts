@@ -64,7 +64,12 @@ export const [
 ] = pauseDivInitial();
 
 //Animate
-function animate() {
+let lastTime = 0;
+let deltaTime = 0;
+function animate(currentTime) {
+  deltaTime = currentTime - lastTime;
+  lastTime = currentTime;
+  const fps = Math.round(1000 / deltaTime);
   c.clearRect(0, 0, canvas.width, canvas.height);
 
   if (game.gameState === "playing") {
@@ -115,4 +120,4 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-animate();
+requestAnimationFrame(animate);
