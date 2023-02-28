@@ -68,7 +68,9 @@ export function addEnemies(interval: number, maxEnemies: number) {
               break;
           }
 
-          instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
+          if (instances.enemies.length < maxEnemies) {
+            instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
+          }
         }
         counter++;
       }

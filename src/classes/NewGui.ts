@@ -17,7 +17,7 @@ export class NewGui {
   update(value: number | string) {
     if (this.newElement.innerText !== this.text + value) {
       this.newElement.innerText = this.text + value;
-      console.log(this.newElement.innerText, this.text + value);
+      // console.log(this.newElement.innerText, this.text + value);
     }
   }
 
