@@ -130,7 +130,7 @@ export function pauseDivInitial() {
   const fbbd = new NewGui(
     "p",
     "Burn damage: ",
-    stats.skills.fireBall.burn.damage,
+    `${stats.skills.fireBall.burn.damage} (x5)`,
     fireBallDiv.newElement
   );
 

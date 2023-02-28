@@ -55,7 +55,7 @@ export function interfaceDivUpdate() {
   fbms.update(stats.skills.fireBall.movementSpeed);
   fbas.update(stats.skills.fireBall.attackSpeed);
   fbpn.update(stats.skills.fireBall.penetrationNumber);
-  fbbd.update(stats.skills.fireBall.burn.damage);
+  fbbd.update(`${stats.skills.fireBall.burn.damage} (x5)`);
 
   if (stats.skills.fireBall.lvl === 0) {
     fireBallDiv.newElement.style.display = "none";

@@ -39,7 +39,7 @@ export function pauseDivInitial() {
     const fbms = new NewGui("p", "Movement speed: ", stats.skills.fireBall.movementSpeed, fireBallDiv.newElement);
     const fbas = new NewGui("p", "Attack speed: ", stats.skills.fireBall.attackSpeed, fireBallDiv.newElement);
     const fbpn = new NewGui("p", "Penetration number: ", stats.skills.fireBall.penetrationNumber, fireBallDiv.newElement);
-    const fbbd = new NewGui("p", "Burn damage: ", stats.skills.fireBall.burn.damage, fireBallDiv.newElement);
+    const fbbd = new NewGui("p", "Burn damage: ", `${stats.skills.fireBall.burn.damage} (x5)`, fireBallDiv.newElement);
     //  Magic Field
     const magicFieldDiv = new NewGui("div", "", "", pauseDiv);
     magicFieldDiv.newElement.style.border = "1px solid black";

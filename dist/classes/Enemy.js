@@ -60,7 +60,7 @@ export class Enemy extends Sprite {
             this.immuneProjectilesId.push(id.id);
             this.hp -= value;
         }
-        if (id === null) {
+        if (id.id === null) {
             this.hp -= value;
         }
         instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, value.toString(), 16, id.color));

@@ -93,9 +93,9 @@ export function lvlup() {
 
   console.log(stats.player);
 
-  circlingBallLvlUp();
-  projectileLvlUp();
-  magicFieldLvlUp();
+  // circlingBallLvlUp();
+  // projectileLvlUp();
+  // magicFieldLvlUp();
 }
 
 export function saveDataToLocalStorage(data: object): void {
