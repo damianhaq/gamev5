@@ -1,7 +1,8 @@
-import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, fbbd, mysticalSpheresDiv, fireBallDiv, } from "../../app.js";
+import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, fbbd, mysticalSpheresDiv, fireBallDiv, mfas, mfd, mfl, mfr, magicFieldDiv, ek, } from "../../app.js";
 import { stats } from "../../variables.js";
 export function interfaceDivUpdate() {
     add.update(stats.game.AllDamageDone);
+    ek.update(stats.game.enemiesKilled);
     lvl.update(stats.player.lvl);
     up.update(stats.player.upgradePoints);
     hr.update(stats.player.hpRegen);
@@ -31,5 +32,14 @@ export function interfaceDivUpdate() {
     else if (stats.skills.fireBall.lvl > 0) {
         fireBallDiv.newElement.style.display = "block";
     }
+    if (stats.skills.magicField.lvl === 0) {
+        magicFieldDiv.newElement.style.display = "none";
+    }
+    else if (stats.skills.magicField.lvl > 0) {
+        magicFieldDiv.newElement.style.display = "block";
+    }
+    mfl.update(stats.skills.magicField.lvl);
+    mfd.update(stats.skills.magicField.damage);
+    mfas.update(stats.skills.magicField.attackSpeed);
+    mfr.update(stats.skills.magicField.radius);
 }
-// TODO: jak to zrobić ?

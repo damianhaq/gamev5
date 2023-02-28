@@ -7,14 +7,33 @@ import { returnToGameAfterLvlup } from "../returnToGameAfterLvlup.js";
 export function pauseDivInitial() {
   new NewGui("h1", "Pause", "", pauseDiv);
 
-  const lvl = new NewGui("p", "Lvl: ", stats.player.lvl, pauseDiv);
-  const up = new NewGui("p", "Upgrade points:", stats.player.upgradePoints, pauseDiv);
-  const hr = new NewGui("p", "Hp regen: ", stats.player.hpRegen, pauseDiv);
+  const statsDiv = new NewGui("div", "", "", pauseDiv);
+  statsDiv.newElement.style.border = "1px solid black";
+  const lvl = new NewGui("p", "Lvl: ", stats.player.lvl, statsDiv.newElement);
+  const up = new NewGui(
+    "p",
+    "Upgrade points:",
+    stats.player.upgradePoints,
+    statsDiv.newElement
+  );
+  const hr = new NewGui("p", "Hp regen: ", stats.player.hpRegen, statsDiv.newElement);
 
-  const add = new NewGui("p", "All damage done: ", stats.game.AllDamageDone, pauseDiv);
+  const add = new NewGui(
+    "p",
+    "All damage done: ",
+    stats.game.AllDamageDone,
+    statsDiv.newElement
+  );
+  const ek = new NewGui(
+    "p",
+    "Enemies killed: ",
+    stats.game.enemiesKilled,
+    statsDiv.newElement
+  );
 
   // Base attack
   const baseAttackDiv = new NewGui("div", "", "", pauseDiv);
+  baseAttackDiv.newElement.style.border = "1px solid black";
   new NewGui("h3", "Base attack", "", baseAttackDiv.newElement);
   const bd = new NewGui(
     "p",
@@ -37,6 +56,7 @@ export function pauseDivInitial() {
 
   // Mystical Spheres
   const mysticalSpheresDiv = new NewGui("div", "", "", pauseDiv);
+  mysticalSpheresDiv.newElement.style.border = "1px solid black";
   let cbd;
   let cbs;
   let cbr;
@@ -75,6 +95,7 @@ export function pauseDivInitial() {
 
   // Fire ball
   const fireBallDiv = new NewGui("div", "", "", pauseDiv);
+  fireBallDiv.newElement.style.border = "1px solid black";
 
   const fbl = new NewGui(
     "h3",
@@ -113,6 +134,37 @@ export function pauseDivInitial() {
     fireBallDiv.newElement
   );
 
+  //  Magic Field
+  const magicFieldDiv = new NewGui("div", "", "", pauseDiv);
+  magicFieldDiv.newElement.style.border = "1px solid black";
+
+  const mfl = new NewGui(
+    "h3",
+    stats.skills.magicField.name,
+    stats.skills.magicField.lvl,
+    magicFieldDiv.newElement
+  );
+  const mfd = new NewGui(
+    "p",
+    "Damage: ",
+    stats.skills.magicField.damage,
+    magicFieldDiv.newElement
+  );
+
+  const mfas = new NewGui(
+    "p",
+    "Attack speed: ",
+    stats.skills.magicField.attackSpeed,
+    magicFieldDiv.newElement
+  );
+
+  const mfr = new NewGui(
+    "p",
+    "Range: ",
+    stats.skills.magicField.radius,
+    magicFieldDiv.newElement
+  );
+
   return [
     add,
     lvl,
@@ -134,5 +186,11 @@ export function pauseDivInitial() {
     fbas,
     fbpn,
     fbbd,
+    magicFieldDiv,
+    mfl,
+    mfd,
+    mfas,
+    mfr,
+    ek,
   ];
 }

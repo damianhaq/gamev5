@@ -15,7 +15,6 @@ export function addEnemies(interval: number, maxEnemies: number) {
       let x: number = 0;
       let y: number = 0;
       timesSpawn = 1 + Math.floor(counter / 10);
-      console.log(timesSpawn);
 
       // pick which site of screen spawn enemies
       site = getSite();
@@ -69,7 +68,7 @@ export function addEnemies(interval: number, maxEnemies: number) {
               break;
           }
 
-          instances.enemies.push(new Enemy(x, y, 12, 0.5, 100 + counter, 48));
+          instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
         }
         counter++;
       }

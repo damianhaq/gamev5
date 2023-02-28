@@ -33,7 +33,7 @@ controls();
 lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
-gameOverDiv();
+export const [golvl, goadd, goek] = gameOverDiv();
 export const [
   add,
   lvl,
@@ -55,6 +55,12 @@ export const [
   fbas,
   fbpn,
   fbbd,
+  magicFieldDiv,
+  mfl,
+  mfd,
+  mfas,
+  mfr,
+  ek,
 ] = pauseDivInitial();
 
 //Animate
@@ -79,7 +85,7 @@ function animate() {
       if (!game.isPause) {
         interfaceDivUpdate();
         game.isPause = true;
-        pauseDiv.style.display = "inline-block";
+        pauseDiv.style.display = "flex";
       } else {
         game.isPause = false;
         pauseDiv.style.display = "none";
@@ -101,6 +107,9 @@ function animate() {
     playing();
   }
   if (game.gameState === "gameOver") {
+    golvl.update(stats.player.lvl);
+    goadd.update(stats.game.AllDamageDone);
+    goek.update(stats.game.enemiesKilled);
   }
 
   requestAnimationFrame(animate);

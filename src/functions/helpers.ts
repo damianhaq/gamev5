@@ -4,6 +4,7 @@ import { Player } from "../classes/Player.js";
 import { Sprite } from "../classes/Sprite.js";
 import { game, instances, stats } from "../variables.js";
 import { circlingBallLvlUp } from "./skills/circlingBall.js";
+import { magicFieldLvlUp } from "./skills/magicField.js";
 import { projectileLvlUp } from "./skills/projectile.js";
 
 export function calculateDirection(
@@ -94,6 +95,7 @@ export function lvlup() {
 
   circlingBallLvlUp();
   projectileLvlUp();
+  magicFieldLvlUp();
 }
 
 export function saveDataToLocalStorage(data: object): void {

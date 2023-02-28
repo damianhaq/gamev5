@@ -5,7 +5,7 @@ import {
   collideCircleResolve,
   randomNumber,
 } from "../functions/helpers.js";
-import { game, instances } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 import { AppearingText } from "./AppearingText.js";
 // import { enemies, expBalls } from "../functions/initial/playing.js";
 import { ExpBall } from "./expBall.js";
@@ -91,12 +91,16 @@ export class Enemy extends Sprite {
     if (this.hp <= 0) {
       instances.expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
       instances.enemies.splice(index, 1);
+      stats.game.enemiesKilled += 1;
     }
   }
 
-  getDamage(value: number, id: string = null) {
-    if (id && !this.immuneProjectilesId.includes(id)) {
-      this.immuneProjectilesId.push(id);
+  getDamage(
+    value: number,
+    id: { id?: string | null; color?: string } = { id: null, color: game.colors.blue }
+  ) {
+    if (id && !this.immuneProjectilesId.includes(id.id)) {
+      this.immuneProjectilesId.push(id.id);
       this.hp -= value;
     }
     if (id === null) {
@@ -109,7 +113,8 @@ export class Enemy extends Sprite {
         this.y,
         500,
         value.toString(),
-        16
+        16,
+        id.color
       )
     );
     // console.log(id);
@@ -122,7 +127,7 @@ export class Enemy extends Sprite {
       this.buffCount--;
       setTimeout(() => {
         this.buffFlag = true;
-        this.getDamage(this.burnDamage);
+        this.getDamage(this.burnDamage, { color: "#e42525" });
       }, this.buffTimeout);
     }
   }

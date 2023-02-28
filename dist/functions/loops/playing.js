@@ -6,10 +6,11 @@ import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
 import { guiPlaying } from "../GUIs/guiPlaying.js";
 export function playing() {
+    var _a;
     if (game.isGameOver)
         return;
     camera(instances.player);
-    instances.skills.magicField.update();
+    (_a = instances.skills.magicField) === null || _a === void 0 ? void 0 : _a.update();
     instances.skills.circling.forEach((el) => {
         el.update(c, drawCircle);
         el.collisionEnemy();

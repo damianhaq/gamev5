@@ -16,14 +16,11 @@ import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Player extends Sprite {
-  speed: number;
-  attackSpeed: number;
   grabItemRange: number;
   constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
-    this.speed = 2;
+
     this.enemies = enemies;
-    this.attackSpeed = 500;
     this.hp = stats.player.currentHP;
     this.maxHP = stats.player.maxHP;
     this.immuneTime = 100;
@@ -34,7 +31,7 @@ export class Player extends Sprite {
 
   moving() {
     if (!game.isPause) {
-      const diagonalSpeed = this.speed / Math.sqrt(2); // prędkość na ukos
+      const diagonalSpeed = stats.player.movementSpeed / Math.sqrt(2); // prędkość na ukos
 
       if (
         keys.a &&
@@ -69,15 +66,14 @@ export class Player extends Sprite {
         this.x += diagonalSpeed;
         this.y += diagonalSpeed;
       } else if (keys.a && !this.isCollideBorderMap("left")) {
-        this.x -= this.speed;
+        this.x -= stats.player.movementSpeed;
       } else if (keys.d && !this.isCollideBorderMap("right")) {
-        this.x += this.speed;
+        this.x += stats.player.movementSpeed;
       } else if (keys.w && !this.isCollideBorderMap("up")) {
-        this.y -= this.speed;
+        this.y -= stats.player.movementSpeed;
       } else if (keys.s && !this.isCollideBorderMap("bot")) {
-        this.y += this.speed;
+        this.y += stats.player.movementSpeed;
       }
-
       this.die();
     }
   }
@@ -89,6 +85,8 @@ export class Player extends Sprite {
       iid = setInterval(() => {
         if (this.enemies.length > 0 && !game.isPause) {
           const nearestEnemy: Enemy = findNearestEnemy(this);
+
+          console.log("shoot", stats.skills.baseAttack.speed);
 
           // draw line to nearest enemy
           // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
@@ -106,7 +104,7 @@ export class Player extends Sprite {
               this.x,
               this.y,
               stats.skills.baseAttack.radius,
-              stats.skills.baseAttack.speed,
+              stats.skills.baseAttack.movementSpeed,
               direction,
               stats.player.baseDamage,
               `${countId}bullet`,
@@ -118,7 +116,7 @@ export class Player extends Sprite {
           clearInterval(iid);
           iid = null;
         }
-      }, this.attackSpeed);
+      }, stats.skills.baseAttack.speed);
     }
   }
   showHp(c: CanvasRenderingContext2D) {

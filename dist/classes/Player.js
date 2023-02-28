@@ -9,9 +9,7 @@ export class Player extends Sprite {
     constructor(x, y, radius, enemies) {
         super(x, y, radius);
         this.enemies = enemies;
-        this.speed = 2;
         this.enemies = enemies;
-        this.attackSpeed = 500;
         this.hp = stats.player.currentHP;
         this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
@@ -20,7 +18,7 @@ export class Player extends Sprite {
     }
     moving() {
         if (!game.isPause) {
-            const diagonalSpeed = this.speed / Math.sqrt(2); // prędkość na ukos
+            const diagonalSpeed = stats.player.movementSpeed / Math.sqrt(2); // prędkość na ukos
             if (keys.a &&
                 keys.w &&
                 !this.isCollideBorderMap("left") &&
@@ -50,16 +48,16 @@ export class Player extends Sprite {
                 this.y += diagonalSpeed;
             }
             else if (keys.a && !this.isCollideBorderMap("left")) {
-                this.x -= this.speed;
+                this.x -= stats.player.movementSpeed;
             }
             else if (keys.d && !this.isCollideBorderMap("right")) {
-                this.x += this.speed;
+                this.x += stats.player.movementSpeed;
             }
             else if (keys.w && !this.isCollideBorderMap("up")) {
-                this.y -= this.speed;
+                this.y -= stats.player.movementSpeed;
             }
             else if (keys.s && !this.isCollideBorderMap("bot")) {
-                this.y += this.speed;
+                this.y += stats.player.movementSpeed;
             }
             this.die();
         }
@@ -71,17 +69,18 @@ export class Player extends Sprite {
             iid = setInterval(() => {
                 if (this.enemies.length > 0 && !game.isPause) {
                     const nearestEnemy = findNearestEnemy(this);
+                    console.log("shoot", stats.skills.baseAttack.speed);
                     // draw line to nearest enemy
                     // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                     const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
                     countId++;
-                    instances.bullets.push(new Bullet(this.x, this.y, stats.skills.baseAttack.radius, stats.skills.baseAttack.speed, direction, stats.player.baseDamage, `${countId}bullet`, stats.skills.baseAttack.penetrationNumber));
+                    instances.bullets.push(new Bullet(this.x, this.y, stats.skills.baseAttack.radius, stats.skills.baseAttack.movementSpeed, direction, stats.player.baseDamage, `${countId}bullet`, stats.skills.baseAttack.penetrationNumber));
                 }
                 if (game.isGameOver) {
                     clearInterval(iid);
                     iid = null;
                 }
-            }, this.attackSpeed);
+            }, stats.skills.baseAttack.speed);
         }
     }
     showHp(c) {

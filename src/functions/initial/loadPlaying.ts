@@ -31,5 +31,5 @@ export function loadPlaying() {
   instances.player.shoot();
   // skills
   // projectileLvlUp();
-  magicField(instances.player);
+  // magicField(instances.player);
 }

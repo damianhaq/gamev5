@@ -20,6 +20,8 @@ export class Bullet extends Sprite {
         this.penetrationNumber = penetrationNumber;
         this.id = id;
         this.isApplyBurn = isApplyBurn;
+        if (isApplyBurn)
+            this.color = "#e42525";
     }
     moving() {
         if (!game.isPause) {
@@ -40,7 +42,7 @@ export class Bullet extends Sprite {
             const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.x, this.y, this.radius);
             if (distance <= 0) {
                 if (!enemy.immuneProjectilesId.includes(this.id)) {
-                    enemy.getDamage(this.dmg, this.id);
+                    enemy.getDamage(this.dmg, { id: this.id });
                     if (this.isApplyBurn) {
                         enemy.buffTimeout = stats.skills.fireBall.burn.speed;
                         enemy.burnDamage = stats.skills.fireBall.burn.damage;

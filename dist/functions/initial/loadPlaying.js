@@ -2,7 +2,6 @@ import { Player } from "../../classes/Player.js";
 import { dimensions, instances } from "../../variables.js";
 import { addEnemies } from "../addEnemies.js";
 import { addGrass } from "../addGrass.js";
-import { magicField } from "../skills/magicField.js";
 export function loadPlaying() {
     // Add grass
     instances.grassArray = addGrass(dimensions.map.w, dimensions.map.h, 100);
@@ -21,5 +20,5 @@ export function loadPlaying() {
     instances.player.shoot();
     // skills
     // projectileLvlUp();
-    magicField(instances.player);
+    // magicField(instances.player);
 }
