@@ -13,7 +13,6 @@ export function addEnemies(interval, maxEnemies) {
             let x = 0;
             let y = 0;
             timesSpawn = 1 + Math.floor(counter / 10);
-            console.log(timesSpawn);
             // pick which site of screen spawn enemies
             site = getSite();
             // site = "down";
@@ -46,7 +45,7 @@ export function addEnemies(interval, maxEnemies) {
                             y = randomNumber(dimensions.map.y * -1 + dimensions.canvas.h, dimensions.map.y * -1 + dimensions.canvas.h + 50);
                             break;
                     }
-                    instances.enemies.push(new Enemy(x, y, 12, 0.5, 100 + counter, 48));
+                    instances.enemies.push(new Enemy(x, y, 12, 0.5, 80 + counter, 48));
                 }
                 counter++;
             }

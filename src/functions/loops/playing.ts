@@ -17,7 +17,7 @@ export function playing() {
 
   camera(instances.player);
 
-  // instances.skills.magicField.update();
+  instances.skills.magicField?.update();
   instances.skills.circling.forEach((el: Circling) => {
     el.update(c, drawCircle);
     el.collisionEnemy();

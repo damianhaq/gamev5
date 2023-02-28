@@ -1,18 +1,12 @@
 import { dimensions, game, instances, keys, stats } from "./variables.js";
-
 import { GUI } from "./classes/GUI.js";
-
-import { mainMenu } from "./functions/loops/mainMenu.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
 import { controls } from "./functions/controls.js";
-import { pauseGui } from "./functions/GUIs/pauseGui.js";
 import { interfaceDiv } from "./functions/initial/interfaceDiv.js";
 import { lvlUpDiv } from "./functions/initial/lvlUpDiv.js";
 import { gameOverDiv } from "./functions/initial/gameOverDiv.js";
 import { interfaceDivUpdate } from "./functions/loops/interfaceDivUpdate.js";
-// import { addHtmlElement } from "./functions/helpers.js";
-import { NewGui } from "./classes/NewGui.js";
 import { pauseDivInitial } from "./functions/initial/pauseDivInitial.js";
 
 export const canvas: HTMLCanvasElement = document.querySelector("#canvas");
@@ -28,11 +22,8 @@ canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c: CanvasRenderingContext2D = canvas.getContext("2d");
 
-canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
-canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
-
-canvas.style.width = dimensions.canvas.w + "px";
-canvas.style.height = dimensions.canvas.h + "px";
+canvas.style.width = dimensions.canvas.sw;
+canvas.style.height = dimensions.canvas.sh;
 
 c.scale(window.devicePixelRatio, window.devicePixelRatio);
 
@@ -42,7 +33,7 @@ controls();
 lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
-gameOverDiv();
+export const [golvl, goadd, goek] = gameOverDiv();
 export const [
   add,
   lvl,
@@ -64,6 +55,12 @@ export const [
   fbas,
   fbpn,
   fbbd,
+  magicFieldDiv,
+  mfl,
+  mfd,
+  mfas,
+  mfr,
+  ek,
 ] = pauseDivInitial();
 
 //Animate
@@ -88,7 +85,7 @@ function animate() {
       if (!game.isPause) {
         interfaceDivUpdate();
         game.isPause = true;
-        pauseDiv.style.display = "inline-block";
+        pauseDiv.style.display = "flex";
       } else {
         game.isPause = false;
         pauseDiv.style.display = "none";
@@ -110,6 +107,9 @@ function animate() {
     playing();
   }
   if (game.gameState === "gameOver") {
+    golvl.update(stats.player.lvl);
+    goadd.update(stats.game.AllDamageDone);
+    goek.update(stats.game.enemiesKilled);
   }
 
   requestAnimationFrame(animate);

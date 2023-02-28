@@ -1,7 +1,14 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .container {
-  height: 800px;
+  /* height: 800px;
   width: 1200px;
-  border: 1px solid black;
+  border: 1px solid black; */
   position: relative;
 }
 

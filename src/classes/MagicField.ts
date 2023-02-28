@@ -1,26 +1,25 @@
 import { c } from "../app.js";
 import { drawCircle } from "../functions/draw/drawCircle.js";
 import { calculateDistance } from "../functions/helpers.js";
-import { game, instances } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class MagicField {
-  constructor(
-    public who: Sprite,
-    public radius: number,
-    public dmg: number,
-    public attackSpeed: number
-  ) {
+  constructor(public who: Sprite) {
     this.who = who;
-    this.radius = radius;
-    this.dmg = dmg;
-    this.attackSpeed = attackSpeed;
     this.attack();
   }
 
   update() {
-    drawCircle(this.who.x, this.who.y, this.radius, "fill", "#e8eaee", c);
+    drawCircle(
+      this.who.x,
+      this.who.y,
+      stats.skills.magicField.radius,
+      "fill",
+      "#e8eaee",
+      c
+    );
   }
 
   attack() {
@@ -33,12 +32,10 @@ export class MagicField {
             enemy.radius,
             this.who.x,
             this.who.y,
-            this.radius
+            stats.skills.magicField.radius
           );
           if (distance <= 0) {
-            enemy.getDamage(this.dmg);
-
-            // enemy.hp -= this.dmg;
+            enemy.getDamage(stats.skills.magicField.damage);
           }
 
           if (game.isGameOver) {
@@ -46,6 +43,6 @@ export class MagicField {
           }
         });
       }
-    }, this.attackSpeed);
+    }, stats.skills.magicField.attackSpeed);
   }
 }

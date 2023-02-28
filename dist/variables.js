@@ -14,8 +14,10 @@ export const keys = {
 };
 export const dimensions = {
     canvas: {
-        w: 1200,
-        h: 800,
+        w: window.innerWidth,
+        h: window.innerHeight,
+        sw: "100vw",
+        sh: "100vh",
     },
     map: {
         x: 0,
@@ -45,7 +47,8 @@ export const stats = {
     skills: {
         baseAttack: {
             id: "baseAttack",
-            speed: 2,
+            speed: 100,
+            movementSpeed: 3,
             radius: 5,
             penetrationNumber: 2,
         },
@@ -76,6 +79,14 @@ export const stats = {
                 times: 5,
             },
         },
+        magicField: {
+            name: "Magic Field",
+            id: "magicField",
+            lvl: 0,
+            attackSpeed: 500,
+            damage: 3,
+            radius: 100,
+        },
         upgrade: {
             skillList: ["circlingBalls", "baseAttack"],
             skillsRandomPicked: [],
@@ -85,6 +96,7 @@ export const stats = {
         },
     },
     player: {
+        movementSpeed: 2,
         maxHP: 100,
         currentHP: 100,
         hpRegen: 1,
@@ -98,6 +110,7 @@ export const stats = {
     },
     game: {
         AllDamageDone: 0,
+        enemiesKilled: 0,
     },
 };
 export const instances = {

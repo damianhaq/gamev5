@@ -1,18 +1,22 @@
 import { MagicField } from "../../classes/MagicField.js";
 import { Sprite } from "../../classes/Sprite.js";
-import { instances } from "../../variables.js";
+import { instances, stats } from "../../variables.js";
 
 export function magicField(who: Sprite) {
-  const data = {
-    attackSpeed: 100,
-    damage: 3,
-    radius: 100,
-  };
+  instances.skills.magicField = new MagicField(who);
+}
 
-  instances.skills.magicField = new MagicField(
-    who,
-    data.radius,
-    data.damage,
-    data.attackSpeed
-  );
+export function magicFieldLvlUp() {
+  if (stats.skills.magicField.lvl === 0) {
+    stats.skills.magicField.lvl = 1;
+    magicField(instances.player);
+  } else {
+    // instances.skills.magicField = null;
+
+    stats.skills.magicField.damage += 1;
+    stats.skills.magicField.radius += 10;
+    stats.skills.magicField.lvl += 1;
+
+    // magicField(instances.player);
+  }
 }

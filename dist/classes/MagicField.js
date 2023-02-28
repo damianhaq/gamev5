@@ -1,36 +1,29 @@
 import { c } from "../app.js";
 import { drawCircle } from "../functions/draw/drawCircle.js";
 import { calculateDistance } from "../functions/helpers.js";
-import { game, instances } from "../variables.js";
+import { game, instances, stats } from "../variables.js";
 export class MagicField {
-    constructor(who, radius, dmg, attackSpeed) {
+    constructor(who) {
         this.who = who;
-        this.radius = radius;
-        this.dmg = dmg;
-        this.attackSpeed = attackSpeed;
         this.who = who;
-        this.radius = radius;
-        this.dmg = dmg;
-        this.attackSpeed = attackSpeed;
         this.attack();
     }
     update() {
-        drawCircle(this.who.x, this.who.y, this.radius, "fill", "#e8eaee", c);
+        drawCircle(this.who.x, this.who.y, stats.skills.magicField.radius, "fill", "#e8eaee", c);
     }
     attack() {
         const iid = setInterval(() => {
             if (!game.isPause) {
                 instances.enemies.forEach((enemy) => {
-                    const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.who.x, this.who.y, this.radius);
+                    const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.who.x, this.who.y, stats.skills.magicField.radius);
                     if (distance <= 0) {
-                        enemy.getDamage(this.dmg);
-                        // enemy.hp -= this.dmg;
+                        enemy.getDamage(stats.skills.magicField.damage);
                     }
                     if (game.isGameOver) {
                         clearInterval(iid);
                     }
                 });
             }
-        }, this.attackSpeed);
+        }, stats.skills.magicField.attackSpeed);
     }
 }

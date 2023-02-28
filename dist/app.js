@@ -1,4 +1,4 @@
-import { dimensions, game, instances, keys } from "./variables.js";
+import { dimensions, game, instances, keys, stats } from "./variables.js";
 import { GUI } from "./classes/GUI.js";
 import { playing } from "./functions/loops/playing.js";
 import { loadPlaying } from "./functions/initial/loadPlaying.js";
@@ -18,10 +18,8 @@ export const newGameButton = document.querySelector("#newGame");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
-canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
-canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
-canvas.style.width = dimensions.canvas.w + "px";
-canvas.style.height = dimensions.canvas.h + "px";
+canvas.style.width = dimensions.canvas.sw;
+canvas.style.height = dimensions.canvas.sh;
 c.scale(window.devicePixelRatio, window.devicePixelRatio);
 // GUI
 export const gui = new GUI(c);
@@ -29,8 +27,8 @@ controls();
 lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
-gameOverDiv();
-export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd,] = pauseDivInitial();
+export const [golvl, goadd, goek] = gameOverDiv();
+export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd, magicFieldDiv, mfl, mfd, mfas, mfr, ek,] = pauseDivInitial();
 //Animate
 function animate() {
     c.clearRect(0, 0, canvas.width, canvas.height);
@@ -49,7 +47,7 @@ function animate() {
             if (!game.isPause) {
                 interfaceDivUpdate();
                 game.isPause = true;
-                pauseDiv.style.display = "inline-block";
+                pauseDiv.style.display = "flex";
             }
             else {
                 game.isPause = false;
@@ -71,6 +69,9 @@ function animate() {
         playing();
     }
     if (game.gameState === "gameOver") {
+        golvl.update(stats.player.lvl);
+        goadd.update(stats.game.AllDamageDone);
+        goek.update(stats.game.enemiesKilled);
     }
     requestAnimationFrame(animate);
 }

@@ -63,7 +63,7 @@ export class Circling {
         if (!enemy.immuneProjectilesId.includes(this.id)) {
           // console.log("Circling test " + enemy.immuneProjectilesId.includes(this.id));
 
-          enemy.getDamage(this.dmg, this.id);
+          enemy.getDamage(this.dmg, { id: this.id });
           stats.game.AllDamageDone += this.dmg;
         }
       }

@@ -34,8 +34,17 @@ export function newGame() {
     times: 5,
   };
 
+  // magic field reset
+  stats.skills.magicField = {
+    name: "Magic Field",
+    id: "magicField",
+    lvl: 0,
+    attackSpeed: 500,
+    damage: 3,
+    radius: 100,
+  };
+
   stats.player.lvl = 1;
-  stats.game.AllDamageDone = 0;
   stats.player.upgradePoints = 0;
   stats.player.maxXP = 100;
   stats.player.currentXP = 0;
@@ -43,8 +52,21 @@ export function newGame() {
   stats.player.currentHP = 100;
   stats.player.baseDamage = 10;
 
+  stats.skills.baseAttack = {
+    id: "baseAttack",
+    speed: 700,
+    movementSpeed: 3,
+    radius: 5,
+    penetrationNumber: 2,
+  };
+
+  stats.game = {
+    AllDamageDone: 0,
+    enemiesKilled: 0,
+  };
+
   game.gameState = "playing";
   game.isGameOver = false;
-  // canvas.style.width = "1200px";
+
   gameoverDiv.style.display = "none";
 }
