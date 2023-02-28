@@ -18,10 +18,8 @@ export const newGameButton = document.querySelector("#newGame");
 canvas.height = dimensions.canvas.h;
 canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
-canvas.width = Math.floor(dimensions.canvas.w * window.devicePixelRatio);
-canvas.height = Math.floor(dimensions.canvas.h * window.devicePixelRatio);
-canvas.style.width = dimensions.canvas.w + "px";
-canvas.style.height = dimensions.canvas.h + "px";
+canvas.style.width = dimensions.canvas.sw;
+canvas.style.height = dimensions.canvas.sh;
 c.scale(window.devicePixelRatio, window.devicePixelRatio);
 // GUI
 export const gui = new GUI(c);

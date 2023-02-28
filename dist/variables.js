@@ -14,8 +14,10 @@ export const keys = {
 };
 export const dimensions = {
     canvas: {
-        w: 1200,
-        h: 800,
+        w: window.innerWidth,
+        h: window.innerHeight,
+        sw: "100vw",
+        sh: "100vh",
     },
     map: {
         x: 0,

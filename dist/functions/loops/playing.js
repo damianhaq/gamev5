@@ -9,7 +9,7 @@ export function playing() {
     if (game.isGameOver)
         return;
     camera(instances.player);
-    // instances.skills.magicField.update();
+    instances.skills.magicField.update();
     instances.skills.circling.forEach((el) => {
         el.update(c, drawCircle);
         el.collisionEnemy();
