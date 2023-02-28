@@ -30,7 +30,12 @@ interfaceDiv();
 export const [golvl, goadd, goek] = gameOverDiv();
 export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd, magicFieldDiv, mfl, mfd, mfas, mfr, ek,] = pauseDivInitial();
 //Animate
-function animate() {
+let lastTime = 0;
+let deltaTime = 0;
+function animate(currentTime) {
+    deltaTime = currentTime - lastTime;
+    lastTime = currentTime;
+    const fps = Math.round(1000 / deltaTime);
     c.clearRect(0, 0, canvas.width, canvas.height);
     if (game.gameState === "playing") {
         if (game.initialPlayingFlag) {
@@ -75,4 +80,4 @@ function animate() {
     }
     requestAnimationFrame(animate);
 }
-animate();
+requestAnimationFrame(animate);
