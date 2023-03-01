@@ -44,20 +44,27 @@ export function newGame() {
     radius: 100,
   };
 
-  stats.player.lvl = 1;
-  stats.player.upgradePoints = 0;
-  stats.player.maxXP = 100;
-  stats.player.currentXP = 0;
-  stats.player.maxHP = 100;
-  stats.player.currentHP = 100;
-  stats.player.baseDamage = 10;
+  stats.player = {
+    movementSpeed: 2,
+    maxHP: 100,
+    currentHP: 100,
+    hpRegen: 0,
+    armor: 1,
+    lvl: 1,
+    maxXP: 100,
+    currentXP: 0,
+    maxXpGrowPrecentage: 30, // how much precent grow next lvl maxXp
+    upgradePoints: 0,
+    baseDamage: 10,
+    pickupRange: 100,
+  };
 
   stats.skills.baseAttack = {
     id: "baseAttack",
     speed: 700,
     movementSpeed: 3,
     radius: 5,
-    penetrationNumber: 2,
+    penetrationNumber: 1,
   };
 
   stats.game = {

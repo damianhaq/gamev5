@@ -13,7 +13,6 @@ export class Player extends Sprite {
         this.hp = stats.player.currentHP;
         this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
-        this.grabItemRange = 100;
         this.hpRegen();
     }
     moving() {
@@ -65,6 +64,7 @@ export class Player extends Sprite {
     shoot() {
         let iid;
         let countId = 0;
+        const intervalSpeed = stats.skills.baseAttack.speed;
         if (!iid) {
             iid = setInterval(() => {
                 if (this.enemies.length > 0 && !game.isPause) {
@@ -80,7 +80,12 @@ export class Player extends Sprite {
                     clearInterval(iid);
                     iid = null;
                 }
-            }, stats.skills.baseAttack.speed);
+                if (stats.skills.baseAttack.speed !== intervalSpeed) {
+                    clearInterval(iid);
+                    iid = null;
+                    this.shoot();
+                }
+            }, intervalSpeed);
         }
     }
     showHp(c) {
@@ -129,8 +134,10 @@ export class Player extends Sprite {
     }
     getDamage(value, from) {
         const { armor } = stats.player;
-        stats.player.currentHP -= value - armor;
-        instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, (value - armor).toString(), 16, "#e42525"));
+        const valueAfterArmor = value - armor < 1 ? 1 : value - armor;
+        // min 1 dmg
+        stats.player.currentHP -= valueAfterArmor;
+        instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, valueAfterArmor.toString(), 16, "#e42525"));
         this.isImmune = true;
         setTimeout(() => {
             this.isImmune = false;

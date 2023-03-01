@@ -52,15 +52,15 @@ export const stats = {
   skills: {
     baseAttack: {
       id: "baseAttack",
-      speed: 100,
+      speed: 700,
       movementSpeed: 3,
       radius: 5,
-      penetrationNumber: 2,
+      penetrationNumber: 1,
     },
     // remember to change also in lvlup reset
     circlingBalls: {
       // Mistyczne sfery po polsku
-      name: "Mystical Spheres",
+      name: "Kule",
       id: "circlingBalls",
       lvl: 0,
       damage: 8,
@@ -85,7 +85,7 @@ export const stats = {
       },
     },
     magicField: {
-      name: "Magic Field",
+      name: "Pole",
       id: "magicField",
       lvl: 0,
       attackSpeed: 500,
@@ -105,14 +105,15 @@ export const stats = {
     movementSpeed: 2,
     maxHP: 100,
     currentHP: 100,
-    hpRegen: 1,
+    hpRegen: 0,
     armor: 1,
     lvl: 1,
     maxXP: 100,
     currentXP: 0,
-    maxXpGrowPrecentage: 50, // how much precent grow next lvl maxXp
-    upgradePoints: 1,
+    maxXpGrowPrecentage: 30, // how much precent grow next lvl maxXp
+    upgradePoints: 0,
     baseDamage: 10,
+    pickupRange: 100,
   },
   game: {
     AllDamageDone: 0,
