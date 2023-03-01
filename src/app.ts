@@ -61,6 +61,10 @@ export const [
   mfas,
   mfr,
   ek,
+  ms,
+  mh,
+  a,
+  mxgp,
 ] = pauseDivInitial();
 
 //Animate

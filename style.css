@@ -26,6 +26,7 @@ body {
 .pause {
   display: none;
   background-color: aquamarine;
+  text-align: center;
 }
 
 /* @keyframes expand {

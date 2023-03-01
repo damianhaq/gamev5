@@ -89,7 +89,7 @@ export function lvlup() {
 
   //stats
   stats.player.upgradePoints += 1;
-  stats.player.baseDamage += 1;
+  // stats.player.baseDamage += 1;
 
   console.log(stats.player);
 

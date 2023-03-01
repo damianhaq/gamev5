@@ -9,8 +9,12 @@ export function pauseDivInitial() {
     const lvl = new NewGui("p", "Lvl: ", stats.player.lvl, statsDiv.newElement);
     const up = new NewGui("p", "Upgrade points:", stats.player.upgradePoints, statsDiv.newElement);
     const hr = new NewGui("p", "Hp regen: ", stats.player.hpRegen, statsDiv.newElement);
+    const mh = new NewGui("p", "Max Hp: ", stats.player.maxHP, statsDiv.newElement);
+    const a = new NewGui("p", "Armor: ", stats.player.armor, statsDiv.newElement);
     const add = new NewGui("p", "All damage done: ", stats.game.AllDamageDone, statsDiv.newElement);
     const ek = new NewGui("p", "Enemies killed: ", stats.game.enemiesKilled, statsDiv.newElement);
+    const ms = new NewGui("p", "Szybkość poruszania się: ", stats.player.movementSpeed, statsDiv.newElement);
+    const mxgp = new NewGui("p", "% przyrost wymaganego XP na lvl: ", stats.player.maxXpGrowPrecentage, statsDiv.newElement);
     // Base attack
     const baseAttackDiv = new NewGui("div", "", "", pauseDiv);
     baseAttackDiv.newElement.style.border = "1px solid black";
@@ -74,5 +78,9 @@ export function pauseDivInitial() {
         mfas,
         mfr,
         ek,
+        ms,
+        mh,
+        a,
+        mxgp,
     ];
 }

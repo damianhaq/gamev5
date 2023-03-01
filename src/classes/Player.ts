@@ -1,4 +1,3 @@
-import { controls } from "../functions/controls.js";
 import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
 import {
@@ -6,9 +5,7 @@ import {
   findNearestEnemy,
   randomNumber,
 } from "../functions/helpers.js";
-import { circlingBall } from "../functions/skills/circlingBall.js";
-import { magicField } from "../functions/skills/magicField.js";
-import { projectile } from "../functions/skills/projectile.js";
+
 import { dimensions, game, instances, keys, stats } from "../variables.js";
 import { AppearingText } from "./AppearingText.js";
 import { Bullet } from "./Bullet.js";
@@ -81,6 +78,7 @@ export class Player extends Sprite {
   shoot() {
     let iid: number;
     let countId: number = 0;
+    const intervalSpeed = stats.skills.baseAttack.speed;
     if (!iid) {
       iid = setInterval(() => {
         if (this.enemies.length > 0 && !game.isPause) {
@@ -116,7 +114,13 @@ export class Player extends Sprite {
           clearInterval(iid);
           iid = null;
         }
-      }, stats.skills.baseAttack.speed);
+
+        if (stats.skills.baseAttack.speed !== intervalSpeed) {
+          clearInterval(iid);
+          iid = null;
+          this.shoot();
+        }
+      }, intervalSpeed);
     }
   }
   showHp(c: CanvasRenderingContext2D) {
@@ -170,14 +174,16 @@ export class Player extends Sprite {
 
   getDamage(value: number, from: Sprite) {
     const { armor } = stats.player;
+    const valueAfterArmor = value - armor < 1 ? 1 : value - armor;
 
-    stats.player.currentHP -= value - armor;
+    // min 1 dmg
+    stats.player.currentHP -= valueAfterArmor;
     instances.appearingText.push(
       new AppearingText(
         this.x + randomNumber(-this.radius, this.radius),
         this.y,
         500,
-        (value - armor).toString(),
+        valueAfterArmor.toString(),
         16,
         "#e42525"
       )

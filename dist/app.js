@@ -28,7 +28,7 @@ lvlUpDiv();
 // interfaceDiv();
 interfaceDiv();
 export const [golvl, goadd, goek] = gameOverDiv();
-export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd, magicFieldDiv, mfl, mfd, mfas, mfr, ek,] = pauseDivInitial();
+export const [add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, mysticalSpheresDiv, cbl, fireBallDiv, fbl, fbd, fbms, fbas, fbpn, fbbd, magicFieldDiv, mfl, mfd, mfas, mfr, ek, ms, mh, a, mxgp,] = pauseDivInitial();
 //Animate
 let lastTime = 0;
 let deltaTime = 0;

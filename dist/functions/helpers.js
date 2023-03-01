@@ -55,7 +55,7 @@ export function lvlup() {
     lvlupDiv.style.display = "inline-block";
     //stats
     stats.player.upgradePoints += 1;
-    stats.player.baseDamage += 1;
+    // stats.player.baseDamage += 1;
     console.log(stats.player);
     // circlingBallLvlUp();
     // projectileLvlUp();
