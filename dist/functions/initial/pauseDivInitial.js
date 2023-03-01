@@ -15,6 +15,7 @@ export function pauseDivInitial() {
     const ek = new NewGui("p", "Enemies killed: ", stats.game.enemiesKilled, statsDiv.newElement);
     const ms = new NewGui("p", "Szybkość poruszania się: ", stats.player.movementSpeed, statsDiv.newElement);
     const mxgp = new NewGui("p", "% przyrost wymaganego XP na lvl: ", stats.player.maxXpGrowPrecentage, statsDiv.newElement);
+    const pr = new NewGui("p", "Zasięg podnoszenia: ", stats.player.pickupRange, statsDiv.newElement);
     // Base attack
     const baseAttackDiv = new NewGui("div", "", "", pauseDiv);
     baseAttackDiv.newElement.style.border = "1px solid black";
@@ -82,5 +83,6 @@ export function pauseDivInitial() {
         mh,
         a,
         mxgp,
+        pr,
     ];
 }

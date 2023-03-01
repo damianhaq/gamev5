@@ -13,7 +13,6 @@ import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Player extends Sprite {
-  grabItemRange: number;
   constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
 
@@ -21,7 +20,6 @@ export class Player extends Sprite {
     this.hp = stats.player.currentHP;
     this.maxHP = stats.player.maxHP;
     this.immuneTime = 100;
-    this.grabItemRange = 100;
 
     this.hpRegen();
   }

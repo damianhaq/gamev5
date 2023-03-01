@@ -50,6 +50,7 @@ export function newGame() {
         maxXpGrowPrecentage: 30,
         upgradePoints: 0,
         baseDamage: 10,
+        pickupRange: 100,
     };
     stats.skills.baseAttack = {
         id: "baseAttack",

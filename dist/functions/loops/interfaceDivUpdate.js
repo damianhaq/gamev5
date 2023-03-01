@@ -1,4 +1,4 @@
-import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, fbbd, mysticalSpheresDiv, fireBallDiv, mfas, mfd, mfl, mfr, magicFieldDiv, ek, ms, mh, a, mxgp, } from "../../app.js";
+import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, fbbd, mysticalSpheresDiv, fireBallDiv, mfas, mfd, mfl, mfr, magicFieldDiv, ek, ms, mh, a, mxgp, pr, } from "../../app.js";
 import { stats } from "../../variables.js";
 export function interfaceDivUpdate() {
     add.update(stats.game.AllDamageDone);
@@ -13,6 +13,7 @@ export function interfaceDivUpdate() {
     ms.update(stats.player.movementSpeed);
     a.update(stats.player.armor);
     mxgp.update(stats.player.maxXpGrowPrecentage);
+    pr.update(stats.player.pickupRange);
     cbd.update(stats.skills.circlingBalls.damage);
     cbs.update(stats.skills.circlingBalls.speed);
     cbr.update(stats.skills.circlingBalls.radius);

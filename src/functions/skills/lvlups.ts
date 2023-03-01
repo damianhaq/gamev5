@@ -25,3 +25,6 @@ export function growMaxXpLvlUp() {
 export function dmgLvlUp() {
   stats.player.baseDamage += 1;
 }
+export function pickupRangeLvlUp() {
+  stats.player.pickupRange += 20;
+}

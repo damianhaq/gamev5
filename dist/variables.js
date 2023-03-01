@@ -107,6 +107,7 @@ export const stats = {
         maxXpGrowPrecentage: 30,
         upgradePoints: 0,
         baseDamage: 10,
+        pickupRange: 100,
     },
     game: {
         AllDamageDone: 0,

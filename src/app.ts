@@ -65,6 +65,7 @@ export const [
   mh,
   a,
   mxgp,
+  pr,
 ] = pauseDivInitial();
 
 //Animate

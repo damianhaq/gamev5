@@ -46,6 +46,12 @@ export function pauseDivInitial() {
     stats.player.maxXpGrowPrecentage,
     statsDiv.newElement
   );
+  const pr = new NewGui(
+    "p",
+    "Zasięg podnoszenia: ",
+    stats.player.pickupRange,
+    statsDiv.newElement
+  );
 
   // Base attack
   const baseAttackDiv = new NewGui("div", "", "", pauseDiv);
@@ -212,5 +218,6 @@ export function pauseDivInitial() {
     mh,
     a,
     mxgp,
+    pr,
   ];
 }

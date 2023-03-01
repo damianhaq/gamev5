@@ -27,7 +27,7 @@ export class ExpBall extends Sprite {
       instances.player.radius
     );
 
-    if (distance < instances.player.grabItemRange) {
+    if (distance < stats.player.pickupRange) {
       const direction = calculateDirection(
         this.x,
         this.y,

@@ -13,6 +13,7 @@ import {
   maxHpLvlUp,
   moveSpeedLvlUp,
   penNumLvlUp,
+  pickupRangeLvlUp,
 } from "../skills/lvlups.js";
 import { magicFieldLvlUp } from "../skills/magicField.js";
 import { projectileLvlUp } from "../skills/projectile.js";
@@ -170,7 +171,7 @@ export function lvlUpDiv() {
   const statsUpgrade7div = new NewGui("div", "", "", statsWrapper.newElement);
   statsUpgrade7div.newElement.style.display = "flex";
   statsUpgrade7div.newElement.style.border = "1px solid black";
-  new NewGui("p", "przyrost xp -2%", "", statsUpgrade7div.newElement);
+  new NewGui("p", "przyrost wymaganego xp -2%", "", statsUpgrade7div.newElement);
 
   const xpButton = new NewGui("button", "ulepsz", "", statsUpgrade7div.newElement);
   xpButton.newElement.addEventListener("click", (ev) => {
@@ -190,6 +191,21 @@ export function lvlUpDiv() {
   const dmgButton = new NewGui("button", "ulepsz", "", statsUpgrade8div.newElement);
   dmgButton.newElement.addEventListener("click", (ev) => {
     dmgLvlUp();
+
+    returnToGameAfterLvlup();
+    upgradeSkillsContainer.newElement.style.display = "block";
+    upgradeStatsContainer.newElement.style.display = "none";
+  });
+
+  // ----------------------
+  const statsUpgrade9div = new NewGui("div", "", "", statsWrapper.newElement);
+  statsUpgrade9div.newElement.style.display = "flex";
+  statsUpgrade9div.newElement.style.border = "1px solid black";
+  new NewGui("p", "zasięg podnoszenia + 20", "", statsUpgrade9div.newElement);
+
+  const pickupRButton = new NewGui("button", "ulepsz", "", statsUpgrade9div.newElement);
+  pickupRButton.newElement.addEventListener("click", (ev) => {
+    pickupRangeLvlUp();
 
     returnToGameAfterLvlup();
     upgradeSkillsContainer.newElement.style.display = "block";

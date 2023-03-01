@@ -29,6 +29,7 @@ import {
   mh,
   a,
   mxgp,
+  pr,
 } from "../../app.js";
 import { stats } from "../../variables.js";
 
@@ -45,6 +46,7 @@ export function interfaceDivUpdate() {
   ms.update(stats.player.movementSpeed);
   a.update(stats.player.armor);
   mxgp.update(stats.player.maxXpGrowPrecentage);
+  pr.update(stats.player.pickupRange);
 
   cbd.update(stats.skills.circlingBalls.damage);
   cbs.update(stats.skills.circlingBalls.speed);

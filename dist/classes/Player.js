@@ -13,7 +13,6 @@ export class Player extends Sprite {
         this.hp = stats.player.currentHP;
         this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
-        this.grabItemRange = 100;
         this.hpRegen();
     }
     moving() {

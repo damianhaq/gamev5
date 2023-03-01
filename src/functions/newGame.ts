@@ -56,6 +56,7 @@ export function newGame() {
     maxXpGrowPrecentage: 30, // how much precent grow next lvl maxXp
     upgradePoints: 0,
     baseDamage: 10,
+    pickupRange: 100,
   };
 
   stats.skills.baseAttack = {
