@@ -10,7 +10,7 @@ export class Sprite {
     public maxHP: number = 0,
     public immuneTime: number = 0,
     public isImmune: boolean = false,
-    public type: "stroke" | "fill" = "stroke",
+    public drawType: "stroke" | "fill" = "stroke",
     public color: string = "#202124"
   ) {
     this.x = x;
@@ -21,7 +21,7 @@ export class Sprite {
   }
 
   update(c: CanvasRenderingContext2D, drawMe: Function) {
-    drawMe(this.x, this.y, this.radius, this.type, this.color, c);
+    drawMe(this.x, this.y, this.radius, this.drawType, this.color, c);
 
     if (this.hp > 0) this.showHp(c);
     this.moving();

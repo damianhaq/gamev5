@@ -13,6 +13,7 @@ import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class Player extends Sprite {
+  id: string;
   constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
 
@@ -20,6 +21,8 @@ export class Player extends Sprite {
     this.hp = stats.player.currentHP;
     this.maxHP = stats.player.maxHP;
     this.immuneTime = 100;
+
+    this.id = "player";
 
     this.hpRegen();
   }
@@ -104,6 +107,7 @@ export class Player extends Sprite {
               direction,
               stats.player.baseDamage,
               `${countId}bullet`,
+              ["enemyRange"],
               stats.skills.baseAttack.penetrationNumber
             )
           );
@@ -191,6 +195,27 @@ export class Player extends Sprite {
     setTimeout(() => {
       this.isImmune = false;
     }, this.immuneTime);
+  }
+
+  heal(value: number) {
+    let ableHeal = 0;
+    if (stats.player.currentHP + value <= stats.player.maxHP) {
+      ableHeal = value;
+    } else {
+      ableHeal = stats.player.maxHP - stats.player.currentHP;
+    }
+    stats.player.currentHP += ableHeal;
+
+    instances.appearingText.push(
+      new AppearingText(
+        this.x + randomNumber(-this.radius, this.radius),
+        this.y,
+        500,
+        ableHeal.toString(),
+        16,
+        game.colors.greenHeal
+      )
+    );
   }
 
   die() {

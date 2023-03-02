@@ -5,6 +5,7 @@ import { Circling } from "../../classes/Circling.js";
 import { Enemy } from "../../classes/Enemy.js";
 import { ExpBall } from "../../classes/expBall.js";
 import { Grass } from "../../classes/Grass.js";
+import { Heart } from "../../classes/Heart.js";
 import { game, instances } from "../../variables.js";
 import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
@@ -22,6 +23,7 @@ export function playing() {
     el.update(c, drawCircle);
     el.collisionEnemy();
   });
+
   instances.grassArray.forEach((el: Grass) => el.update(c, drawGrass));
 
   drawMap(c);
@@ -34,6 +36,10 @@ export function playing() {
   });
 
   instances.player.update(c, drawCircle);
+
+  instances.hearts.forEach((heart: Heart, index) => {
+    heart.update(index);
+  });
 
   instances.enemies.forEach((enemy: Enemy, index: number) => {
     enemy.update(c, drawCircle);

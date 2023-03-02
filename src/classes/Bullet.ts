@@ -1,4 +1,4 @@
-import { calculateDistance } from "../functions/helpers.js";
+import { calculateDistance, collideCircleResolve } from "../functions/helpers.js";
 // import { bullets, enemies } from "../functions/initial/playing.js";
 import { dimensions, game, instances, stats } from "../variables.js";
 import { Enemy } from "./Enemy.js";
@@ -13,6 +13,7 @@ export class Bullet extends Sprite {
     public direction: { x: number; y: number },
     public dmg: number,
     public id: string,
+    public target: string[],
     public penetrationNumber: number = 1,
     public isApplyBurn: boolean = false
   ) {
@@ -22,6 +23,7 @@ export class Bullet extends Sprite {
     this.dmg = dmg;
     this.penetrationNumber = penetrationNumber;
     this.id = id;
+    this.target = target;
     this.isApplyBurn = isApplyBurn;
 
     if (isApplyBurn) this.color = "#e42525";
@@ -46,34 +48,76 @@ export class Bullet extends Sprite {
   }
 
   collisionEnemy(index: number) {
-    instances.enemies.forEach((enemy: Enemy) => {
+    if (this.target.includes("enemyRange")) {
+      instances.enemies.forEach((enemy: Enemy) => {
+        const distance: number = calculateDistance(
+          enemy.x,
+          enemy.y,
+          enemy.radius,
+          this.x,
+          this.y,
+          this.radius
+        );
+
+        if (distance <= 0) {
+          if (!enemy.immuneProjectilesId.includes(this.id)) {
+            enemy.getDamage(this.dmg, { id: this.id });
+
+            if (this.isApplyBurn) {
+              enemy.buffTimeout = stats.skills.fireBall.burn.speed;
+              enemy.burnDamage = stats.skills.fireBall.burn.damage;
+              enemy.buffCount = stats.skills.fireBall.burn.times;
+            }
+
+            this.penetrationNumber--;
+            stats.game.AllDamageDone += this.dmg;
+            if (this.penetrationNumber <= 0) {
+              instances.bullets.splice(index, 1);
+            }
+
+            // knockback
+            enemy.setKnockback(this.x, this.y, 15, this.speed);
+          }
+          // const { x, y } = collideCircleResolve(enemy, this);
+          // this.x = x;
+          // this.y = y;
+
+          // enemy.hp -= this.dmg;
+        }
+      });
+    }
+
+    if (this.target.includes("player")) {
       const distance: number = calculateDistance(
-        enemy.x,
-        enemy.y,
-        enemy.radius,
+        instances.player.x,
+        instances.player.y,
+        instances.player.radius,
         this.x,
         this.y,
         this.radius
       );
 
       if (distance <= 0) {
-        if (!enemy.immuneProjectilesId.includes(this.id)) {
-          enemy.getDamage(this.dmg, { id: this.id });
-          if (this.isApplyBurn) {
-            enemy.buffTimeout = stats.skills.fireBall.burn.speed;
-            enemy.burnDamage = stats.skills.fireBall.burn.damage;
-            enemy.buffCount = stats.skills.fireBall.burn.times;
-          }
+        console.log("player get damage");
 
-          this.penetrationNumber--;
-          stats.game.AllDamageDone += this.dmg;
-          if (this.penetrationNumber <= 0) {
-            instances.bullets.splice(index, 1);
-          }
+        // enemy.getDamage(this.dmg, { id: this.id });
+        instances.player.getDamage(this.dmg);
+
+        // if (this.isApplyBurn) {
+        //   enemy.buffTimeout = stats.skills.fireBall.burn.speed;
+        //   enemy.burnDamage = stats.skills.fireBall.burn.damage;
+        //   enemy.buffCount = stats.skills.fireBall.burn.times;
+        // }
+
+        this.penetrationNumber--;
+        // stats.game.AllDamageDone += this.dmg;
+        if (this.penetrationNumber <= 0) {
+          instances.bullets.splice(index, 1);
         }
 
-        // enemy.hp -= this.dmg;
+        // knockback
+        // enemy.setKnockback(this.x, this.y, 15, this.speed);
       }
-    });
+    }
   }
 }

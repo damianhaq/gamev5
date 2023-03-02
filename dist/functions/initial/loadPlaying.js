@@ -16,6 +16,8 @@ export function loadPlaying() {
     // Player
     instances.player = new Player(300, 300, 20, instances.enemies);
     instances.appearingText = [];
+    instances.hearts = [];
+    // instances.hearts.push(new Heart(20, 500));
     // base attack
     instances.player.shoot();
     // skills
