@@ -24,6 +24,9 @@ export function playing() {
         // bullet.customText(bullet.penetrationNumber);
     });
     instances.player.update(c, drawCircle);
+    instances.hearts.forEach((heart, index) => {
+        heart.update(index);
+    });
     instances.enemies.forEach((enemy, index) => {
         enemy.update(c, drawCircle);
         enemy.moveTowardsPlayer(instances.player);

@@ -8,6 +8,7 @@ import { lvlUpDiv } from "./functions/initial/lvlUpDiv.js";
 import { gameOverDiv } from "./functions/initial/gameOverDiv.js";
 import { interfaceDivUpdate } from "./functions/loops/interfaceDivUpdate.js";
 import { pauseDivInitial } from "./functions/initial/pauseDivInitial.js";
+import { Heart } from "./classes/Heart.js";
 
 export const canvas: HTMLCanvasElement = document.querySelector("#canvas");
 const p: HTMLParagraphElement = document.querySelector("#log");
@@ -67,6 +68,8 @@ export const [
   mxgp,
   pr,
 ] = pauseDivInitial();
+
+// instances.hearts.push(new Heart(20, 500));
 
 //Animate
 let lastTime = 0;

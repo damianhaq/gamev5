@@ -9,6 +9,7 @@ import { game, instances, stats } from "../variables.js";
 import { AppearingText } from "./AppearingText.js";
 // import { enemies, expBalls } from "../functions/initial/playing.js";
 import { ExpBall } from "./expBall.js";
+import { Heart } from "./Heart.js";
 import { Player } from "./Player.js";
 import { Sprite } from "./Sprite.js";
 
@@ -89,6 +90,11 @@ export class Enemy extends Sprite {
 
   die(index: number) {
     if (this.hp <= 0) {
+      if (randomNumber(0, 100) <= stats.game.heartDropChance) {
+        console.log("Serce");
+
+        instances.hearts.push(new Heart(this.x, this.y));
+      }
       instances.expBalls.push(new ExpBall(this.x, this.y, 3, this.expDropValue));
       instances.enemies.splice(index, 1);
       stats.game.enemiesKilled += 1;

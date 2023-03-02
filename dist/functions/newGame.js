@@ -8,6 +8,7 @@ export function newGame() {
     instances.grassArray.length = 0;
     instances.player = null;
     instances.appearingText.length = 0;
+    instances.hearts.length = 0;
     instances.skills.magicField = null;
     instances.skills.circling.length = 0;
     // circling ball reset
@@ -62,6 +63,8 @@ export function newGame() {
     stats.game = {
         AllDamageDone: 0,
         enemiesKilled: 0,
+        heartDropChance: 5,
+        healHeartValue: 10,
     };
     game.gameState = "playing";
     game.isGameOver = false;

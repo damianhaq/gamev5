@@ -193,6 +193,27 @@ export class Player extends Sprite {
     }, this.immuneTime);
   }
 
+  heal(value: number) {
+    let ableHeal = 0;
+    if (stats.player.currentHP + value <= stats.player.maxHP) {
+      ableHeal = value;
+    } else {
+      ableHeal = stats.player.maxHP - stats.player.currentHP;
+    }
+    stats.player.currentHP += ableHeal;
+
+    instances.appearingText.push(
+      new AppearingText(
+        this.x + randomNumber(-this.radius, this.radius),
+        this.y,
+        500,
+        ableHeal.toString(),
+        16,
+        game.colors.greenHeal
+      )
+    );
+  }
+
   die() {
     if (stats.player.currentHP <= 0) {
       gameOver();

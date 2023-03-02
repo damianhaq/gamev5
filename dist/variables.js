@@ -41,6 +41,7 @@ export const game = {
     colors: {
         blue: "#1a73e8",
         blue2: "#0098ff",
+        greenHeal: "#24c927",
     },
 };
 export const stats = {
@@ -112,10 +113,13 @@ export const stats = {
     game: {
         AllDamageDone: 0,
         enemiesKilled: 0,
+        heartDropChance: 5,
+        healHeartValue: 10,
     },
 };
 export const instances = {
     grassArray: [],
+    hearts: [],
     bullets: [],
     enemies: [],
     expBalls: [],
