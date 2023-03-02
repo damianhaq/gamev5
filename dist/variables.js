@@ -42,6 +42,8 @@ export const game = {
         blue: "#1a73e8",
         blue2: "#0098ff",
         greenHeal: "#24c927",
+        red: "#bd173c",
+        grey: "#202124",
     },
 };
 export const stats = {

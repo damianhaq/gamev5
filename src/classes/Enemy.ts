@@ -108,9 +108,11 @@ export class Enemy extends Sprite {
     if (id && !this.immuneProjectilesId.includes(id.id)) {
       this.immuneProjectilesId.push(id.id);
       this.hp -= value;
+      this.blink();
     }
     if (id.id === null) {
       this.hp -= value;
+      this.blink();
     }
 
     instances.appearingText.push(
@@ -125,6 +127,13 @@ export class Enemy extends Sprite {
     );
     // console.log(id);
     // console.log(this.immuneProjectilesId);
+  }
+
+  blink() {
+    this.color = game.colors.red;
+    setTimeout(() => {
+      this.color = game.colors.grey;
+    }, 100);
   }
 
   burnMe() {

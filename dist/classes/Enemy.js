@@ -64,13 +64,21 @@ export class Enemy extends Sprite {
         if (id && !this.immuneProjectilesId.includes(id.id)) {
             this.immuneProjectilesId.push(id.id);
             this.hp -= value;
+            this.blink();
         }
         if (id.id === null) {
             this.hp -= value;
+            this.blink();
         }
         instances.appearingText.push(new AppearingText(this.x + randomNumber(-this.radius, this.radius), this.y, 500, value.toString(), 16, id.color));
         // console.log(id);
         // console.log(this.immuneProjectilesId);
+    }
+    blink() {
+        this.color = game.colors.red;
+        setTimeout(() => {
+            this.color = game.colors.grey;
+        }, 100);
     }
     burnMe() {
         if (this.buffCount > 0 && this.buffFlag) {

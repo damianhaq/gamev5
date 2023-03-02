@@ -8,6 +8,8 @@ export function drawCircle(
   color: string,
   c: CanvasRenderingContext2D
 ) {
+  c.save();
+  c.lineWidth = 1;
   c.beginPath();
   c.arc(x + dimensions.map.x, y + dimensions.map.y, radius, 0, Math.PI * 2);
   if (type === "stroke") {
@@ -18,4 +20,6 @@ export function drawCircle(
     c.fillStyle = color;
     c.fill();
   }
+
+  c.restore();
 }
