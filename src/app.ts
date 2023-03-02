@@ -26,7 +26,7 @@ export const c: CanvasRenderingContext2D = canvas.getContext("2d");
 canvas.style.width = dimensions.canvas.sw;
 canvas.style.height = dimensions.canvas.sh;
 
-c.scale(window.devicePixelRatio, window.devicePixelRatio);
+// c.scale(window.devicePixelRatio, window.devicePixelRatio);
 
 // GUI
 export const gui: GUI = new GUI(c);
