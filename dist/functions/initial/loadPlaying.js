@@ -1,4 +1,3 @@
-import { Heart } from "../../classes/Heart.js";
 import { Player } from "../../classes/Player.js";
 import { dimensions, instances } from "../../variables.js";
 import { addEnemies } from "../addEnemies.js";
@@ -18,7 +17,7 @@ export function loadPlaying() {
     instances.player = new Player(300, 300, 20, instances.enemies);
     instances.appearingText = [];
     instances.hearts = [];
-    instances.hearts.push(new Heart(20, 500));
+    // instances.hearts.push(new Heart(20, 500));
     // base attack
     instances.player.shoot();
     // skills

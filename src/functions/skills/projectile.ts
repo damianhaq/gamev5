@@ -39,6 +39,7 @@ export function projectile() {
             direction,
             data.damage,
             `${countId}projectile`,
+            ["enemyRange"],
             data.penetrationNumber,
             true
           )

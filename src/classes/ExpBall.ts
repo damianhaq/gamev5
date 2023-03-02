@@ -12,7 +12,7 @@ export class ExpBall extends Sprite {
     this.y = y;
     this.radius = radius;
     this.color = "#ff8500";
-    this.type = "fill";
+    this.drawType = "fill";
     this.speed = 2.5;
     this.expValue = expValue;
   }

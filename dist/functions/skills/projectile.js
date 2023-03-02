@@ -19,7 +19,7 @@ export function projectile() {
                 // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                 const direction = calculateDirection(instances.player.x, instances.player.y, nearestEnemy.x, nearestEnemy.y);
                 countId++;
-                instances.bullets.push(new Bullet(instances.player.x, instances.player.y, data.radius, data.movementSpeed, direction, data.damage, `${countId}projectile`, data.penetrationNumber, true));
+                instances.bullets.push(new Bullet(instances.player.x, instances.player.y, data.radius, data.movementSpeed, direction, data.damage, `${countId}projectile`, ["enemyRange"], data.penetrationNumber, true));
             }
             if (game.isGameOver) {
                 clearInterval(projectileiid);

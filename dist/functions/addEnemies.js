@@ -46,7 +46,12 @@ export function addEnemies(interval, maxEnemies) {
                             break;
                     }
                     if (instances.enemies.length < maxEnemies) {
-                        instances.enemies.push(new Enemy(x, y, 12, 0.5, 40 + counter * 2, 48));
+                        if (randomNumber(1, 10) <= 1) {
+                            instances.enemies.push(new Enemy(x, y, 8, 0.5, 40 + counter, 48, 5, "range", "enemyRange", 300, 500));
+                        }
+                        else {
+                            instances.enemies.push(new Enemy(x, y, 12, 0.5, 40 + counter * 2, 48, 5, "mele", "enemyRange"));
+                        }
                     }
                 }
                 counter++;

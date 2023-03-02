@@ -13,6 +13,7 @@ export class Player extends Sprite {
         this.hp = stats.player.currentHP;
         this.maxHP = stats.player.maxHP;
         this.immuneTime = 100;
+        this.id = "player";
         this.hpRegen();
     }
     moving() {
@@ -74,7 +75,7 @@ export class Player extends Sprite {
                     // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                     const direction = calculateDirection(this.x, this.y, nearestEnemy.x, nearestEnemy.y);
                     countId++;
-                    instances.bullets.push(new Bullet(this.x, this.y, stats.skills.baseAttack.radius, stats.skills.baseAttack.movementSpeed, direction, stats.player.baseDamage, `${countId}bullet`, stats.skills.baseAttack.penetrationNumber));
+                    instances.bullets.push(new Bullet(this.x, this.y, stats.skills.baseAttack.radius, stats.skills.baseAttack.movementSpeed, direction, stats.player.baseDamage, `${countId}bullet`, ["enemyRange"], stats.skills.baseAttack.penetrationNumber));
                 }
                 if (game.isGameOver) {
                     clearInterval(iid);

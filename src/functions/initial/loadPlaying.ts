@@ -29,7 +29,7 @@ export function loadPlaying() {
   instances.appearingText = [];
 
   instances.hearts = [];
-  instances.hearts.push(new Heart(20, 500));
+  // instances.hearts.push(new Heart(20, 500));
 
   // base attack
   instances.player.shoot();
