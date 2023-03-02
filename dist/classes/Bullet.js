@@ -53,7 +53,12 @@ export class Bullet extends Sprite {
                     if (this.penetrationNumber <= 0) {
                         instances.bullets.splice(index, 1);
                     }
+                    // knockback
+                    enemy.setKnockback(this.x, this.y, 15, this.speed);
                 }
+                // const { x, y } = collideCircleResolve(enemy, this);
+                // this.x = x;
+                // this.y = y;
                 // enemy.hp -= this.dmg;
             }
         });

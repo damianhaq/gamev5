@@ -1,4 +1,4 @@
-import { calculateDistance } from "../functions/helpers.js";
+import { calculateDistance, collideCircleResolve } from "../functions/helpers.js";
 // import { bullets, enemies } from "../functions/initial/playing.js";
 import { dimensions, game, instances, stats } from "../variables.js";
 import { Enemy } from "./Enemy.js";
@@ -59,6 +59,7 @@ export class Bullet extends Sprite {
       if (distance <= 0) {
         if (!enemy.immuneProjectilesId.includes(this.id)) {
           enemy.getDamage(this.dmg, { id: this.id });
+
           if (this.isApplyBurn) {
             enemy.buffTimeout = stats.skills.fireBall.burn.speed;
             enemy.burnDamage = stats.skills.fireBall.burn.damage;
@@ -70,7 +71,13 @@ export class Bullet extends Sprite {
           if (this.penetrationNumber <= 0) {
             instances.bullets.splice(index, 1);
           }
+
+          // knockback
+          enemy.setKnockback(this.x, this.y, 15, this.speed);
         }
+        // const { x, y } = collideCircleResolve(enemy, this);
+        // this.x = x;
+        // this.y = y;
 
         // enemy.hp -= this.dmg;
       }

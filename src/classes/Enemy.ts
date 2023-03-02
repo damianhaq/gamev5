@@ -17,6 +17,15 @@ export class Enemy extends Sprite {
   dmg: number;
   immuneProjectilesId: string[];
 
+  knockback: {
+    direction: {
+      x: number;
+      y: number;
+    };
+    duration: number;
+    moveSpeed: number;
+  };
+
   buffCount: number;
   buffTimeout: number;
   buffFlag: boolean;
@@ -42,14 +51,31 @@ export class Enemy extends Sprite {
     this.buffFlag = true;
 
     this.burnDamage = 0;
+
+    this.knockback = { direction: { x: 0, y: 0 }, duration: 0, moveSpeed: 0 };
+  }
+
+  setKnockback(fromX: number, fromY: number, duration: number, speed: number) {
+    this.knockback.direction = calculateDirection(this.x, this.y, fromX, fromY);
+    this.knockback.duration = duration;
+    this.knockback.moveSpeed = speed;
   }
 
   moveTowardsPlayer(player: Player) {
     const direction = calculateDirection(this.x, this.y, player.x, player.y);
 
     if (!game.isPause) {
-      this.x += direction.x * this.speed;
-      this.y += direction.y * this.speed;
+      if (this.knockback.duration > 0) {
+        this.x -= this.knockback.direction.x * this.knockback.moveSpeed;
+        this.y -= this.knockback.direction.y * this.knockback.moveSpeed;
+        setTimeout(() => {
+          this.knockback.duration = 0;
+          this.knockback.direction = { x: 0, y: 0 };
+        }, this.knockback.duration);
+      } else {
+        this.x += direction.x * this.speed;
+        this.y += direction.y * this.speed;
+      }
     }
 
     const distance = calculateDistance(
