@@ -1,6 +1,9 @@
+import { Enemy } from "../../classes/Enemy.js";
 import { Heart } from "../../classes/Heart.js";
 import { Player } from "../../classes/Player.js";
-import { dimensions, game, instances } from "../../variables.js";
+import { Character } from "../../newClases/Character.js";
+import { EnemyCh } from "../../newClases/extend/EnemyCh.js";
+import { dimensions, game, instances, spriteSheetData } from "../../variables.js";
 import { addEnemies } from "../addEnemies.js";
 import { addGrass } from "../addGrass.js";
 import { circlingBall } from "../skills/circlingBall.js";
@@ -18,7 +21,10 @@ export function loadPlaying() {
 
   //Enemy
   instances.enemies = [];
-  addEnemies(1000, 200);
+
+  // NewClass Character
+  instances.characters.push(new EnemyCh(100, 100, spriteSheetData.tinyZombie));
+  // addEnemies(1000, 200);
 
   // ExpBalls
   instances.expBalls = [];

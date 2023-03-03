@@ -120,6 +120,7 @@ export const stats = {
     },
 };
 export const instances = {
+    characters: [],
     grassArray: [],
     hearts: [],
     bullets: [],
@@ -130,5 +131,24 @@ export const instances = {
     skills: {
         magicField: null,
         circling: [],
+    },
+};
+export const spriteSheetData = {
+    tinyZombie: {
+        idle: {
+            x: 368,
+            y: 16,
+            w: 16,
+            h: 16,
+            frames: 4,
+        },
+        run: {
+            x: 432,
+            y: 16,
+            w: 16,
+            h: 16,
+            frames: 4,
+        },
+        duration: 100,
     },
 };

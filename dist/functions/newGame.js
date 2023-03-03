@@ -2,6 +2,7 @@ import { gameoverDiv } from "../app.js";
 import { game, instances, stats } from "../variables.js";
 export function newGame() {
     //Reset
+    instances.characters.length = 0;
     instances.enemies.length = 0;
     instances.bullets.length = 0;
     instances.expBalls.length = 0;

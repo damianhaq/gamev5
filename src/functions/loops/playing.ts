@@ -6,6 +6,7 @@ import { Enemy } from "../../classes/Enemy.js";
 import { ExpBall } from "../../classes/expBall.js";
 import { Grass } from "../../classes/Grass.js";
 import { Heart } from "../../classes/Heart.js";
+import { Character } from "../../newClases/Character.js";
 import { game, instances } from "../../variables.js";
 import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
@@ -13,7 +14,7 @@ import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
 import { guiPlaying } from "../GUIs/guiPlaying.js";
 
-export function playing() {
+export function playing(deltaTime) {
   if (game.isGameOver) return;
 
   camera(instances.player);
@@ -47,6 +48,10 @@ export function playing() {
     enemy.die(index);
     enemy.collideEnemies(instances.enemies, index);
     // enemy.customText(enemy.immuneProjectilesId.length.toString());
+  });
+
+  instances.characters.forEach((el: Character, index: number) => {
+    el.update(deltaTime);
   });
 
   instances.expBalls.forEach((exp: ExpBall, index: number) => {

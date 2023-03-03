@@ -5,7 +5,7 @@ import { drawCircle } from "../draw/drawCircle.js";
 import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
 import { guiPlaying } from "../GUIs/guiPlaying.js";
-export function playing() {
+export function playing(deltaTime) {
     var _a;
     if (game.isGameOver)
         return;
@@ -33,6 +33,9 @@ export function playing() {
         enemy.die(index);
         enemy.collideEnemies(instances.enemies, index);
         // enemy.customText(enemy.immuneProjectilesId.length.toString());
+    });
+    instances.characters.forEach((el, index) => {
+        el.update(deltaTime);
     });
     instances.expBalls.forEach((exp, index) => {
         exp.update(c, drawCircle);

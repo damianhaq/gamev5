@@ -1,3 +1,4 @@
+import { c, spriteSheet } from "../app.js";
 import { drawText } from "../functions/draw/drawText.js";
 import { gameOver } from "../functions/gameOver.js";
 import {
@@ -14,6 +15,7 @@ import { Sprite } from "./Sprite.js";
 
 export class Player extends Sprite {
   id: string;
+  img: HTMLImageElement;
   constructor(x: number, y: number, radius: number, public enemies: Enemy[]) {
     super(x, y, radius);
 
@@ -28,6 +30,8 @@ export class Player extends Sprite {
   }
 
   moving() {
+    c.drawImage(spriteSheet, 322, 81, 12, 30, this.x, this.y, 12 * 2, 30 * 2);
+    // c.canvas.style.imageRendering = "crisp-edges";
     if (!game.isPause) {
       const diagonalSpeed = stats.player.movementSpeed / Math.sqrt(2); // prędkość na ukos
 
