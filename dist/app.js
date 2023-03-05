@@ -20,7 +20,7 @@ canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
 c.imageSmoothingEnabled = false;
 export const spriteSheet = new Image();
-spriteSheet.src = "../../assets/0x72_DungeonTilesetII_v1.4.png";
+spriteSheet.src = "../assets/0x72_DungeonTilesetII_v1.4.png";
 canvas.style.width = dimensions.canvas.sw;
 canvas.style.height = dimensions.canvas.sh;
 // c.scale(window.devicePixelRatio, window.devicePixelRatio);
