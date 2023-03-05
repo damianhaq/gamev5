@@ -1,11 +1,16 @@
-import { c } from "../app.js";
+import { c, spriteSheet } from "../app.js";
 import { calculateDirection, calculateDistance } from "../functions/helpers.js";
 import { dimensions, game, instances, stats } from "../variables.js";
 
 export class Heart {
   radius: number;
   speed: number;
-  constructor(public x: number, public y: number) {
+
+  constructor(
+    public x: number,
+    public y: number,
+    public spriteSheetData: { x: number; y: number; w: number; h: number }
+  ) {
     this.x = x;
     this.y = y;
     this.radius = 5;
@@ -18,65 +23,18 @@ export class Heart {
   }
 
   draw() {
-    c.save();
+    c.drawImage(
+      spriteSheet,
+      this.spriteSheetData.x,
+      this.spriteSheetData.y,
+      this.spriteSheetData.w,
+      this.spriteSheetData.h,
 
-    c.fillStyle = "red";
-    c.beginPath();
-
-    const shift = 5;
-
-    c.moveTo(
-      5 + this.x + dimensions.map.x - shift,
-      2 + this.y + dimensions.map.y - shift
+      this.x + dimensions.map.x - this.spriteSheetData.w,
+      this.y + dimensions.map.y - this.spriteSheetData.h,
+      this.spriteSheetData.w * 2,
+      this.spriteSheetData.h * 2
     );
-    c.lineTo(
-      7 + this.x + dimensions.map.x - shift,
-      0 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      10 + this.x + dimensions.map.x - shift,
-      0 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      10 + this.x + dimensions.map.x - shift,
-      5 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      5 + this.x + dimensions.map.x - shift,
-      10 + this.y + dimensions.map.y - shift
-    );
-
-    c.lineTo(
-      0 + this.x + dimensions.map.x - shift,
-      5 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      0 + this.x + dimensions.map.x - shift,
-      0 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      3 + this.x + dimensions.map.x - shift,
-      0 + this.y + dimensions.map.y - shift
-    );
-    c.lineTo(
-      5 + this.x + dimensions.map.x - shift,
-      2 + this.y + dimensions.map.y - shift
-    );
-    c.closePath();
-    c.fill();
-
-    // c.strokeStyle = color;
-
-    // c.beginPath();
-    // c.arc(
-    //   this.x + dimensions.map.x,
-    //   this.y + dimensions.map.y,
-    //   this.radius,
-    //   0,
-    //   Math.PI * 2
-    // );
-    // c.stroke();
-    c.restore();
   }
 
   moveToPlayer(index: number): void {
@@ -103,7 +61,14 @@ export class Heart {
       }
 
       if (distance <= 0) {
-        instances.player.heal(stats.game.healHeartValue);
+        let ableHeal = 0;
+        if (instances.player.hp + stats.game.healHeartValue <= stats.player.maxHP) {
+          ableHeal = stats.game.healHeartValue;
+        } else {
+          ableHeal = stats.player.maxHP - instances.player.hp;
+        }
+
+        instances.player.heal(ableHeal);
         instances.hearts.splice(index, 1);
       }
     }

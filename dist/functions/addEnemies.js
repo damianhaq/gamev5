@@ -1,6 +1,5 @@
-// import { enemies } from "../app.js";
-import { Enemy } from "../classes/Enemy.js";
-import { dimensions, game, instances } from "../variables.js";
+import { EnemyCh } from "../newClases/extend/EnemyCh.js";
+import { dimensions, game, instances, spriteSheetData } from "../variables.js";
 import { randomNumber } from "./helpers.js";
 // import { enemies } from "./initial/playing.js";
 export function addEnemies(interval, maxEnemies) {
@@ -45,12 +44,12 @@ export function addEnemies(interval, maxEnemies) {
                             y = randomNumber(dimensions.map.y * -1 + dimensions.canvas.h, dimensions.map.y * -1 + dimensions.canvas.h + 50);
                             break;
                     }
-                    if (instances.enemies.length < maxEnemies) {
+                    if (instances.enemiesCh.length < maxEnemies) {
                         if (randomNumber(1, 10) <= 1) {
-                            instances.enemies.push(new Enemy(x, y, 8, 0.5, 40 + counter, 48, 5, "range", "enemyRange", 300, 500));
+                            // range enemies
                         }
                         else {
-                            instances.enemies.push(new Enemy(x, y, 12, 0.5, 40 + counter * 2, 48, 5, "mele", "enemyRange"));
+                            instances.enemiesCh.push(new EnemyCh(x, y, 8, 0, 300, 0.5 + +(counter / 100).toFixed(3), 10, 40 + counter * 2, spriteSheetData.tinyZombie, "tinyZombie" + counter, 48));
                         }
                     }
                 }

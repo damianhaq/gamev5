@@ -1,8 +1,9 @@
 import { Circling } from "../../classes/Circling.js";
 import { Sprite } from "../../classes/Sprite.js";
-import { game, instances, stats } from "../../variables.js";
+import { Character } from "../../newClases/Character.js";
+import { game, instances, spriteSheetData, stats } from "../../variables.js";
 
-export function circlingBall(who: Sprite) {
+export function circlingBall(who: Character) {
   const { radius, radiusElement, speed, numberBalls } = stats.skills.circlingBalls;
 
   const angle = Math.round(360 / numberBalls);
@@ -15,8 +16,7 @@ export function circlingBall(who: Sprite) {
         speed,
         angle * i,
         i + "circleBall",
-        "fill",
-        game.colors.blue
+        spriteSheetData.weapons.skull
       )
     );
   }
@@ -29,7 +29,9 @@ export function circlingBallLvlUp() {
   } else {
     instances.skills.circling.length = 0;
 
-    stats.skills.circlingBalls.numberBalls += 1;
+    if (stats.skills.circlingBalls.numberBalls < 8) {
+      stats.skills.circlingBalls.numberBalls += 1;
+    }
     stats.skills.circlingBalls.lvl += 1;
 
     circlingBall(instances.player);

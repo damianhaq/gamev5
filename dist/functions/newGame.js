@@ -3,8 +3,10 @@ import { game, instances, stats } from "../variables.js";
 export function newGame() {
     //Reset
     instances.characters.length = 0;
+    instances.enemiesCh.length = 0;
     instances.enemies.length = 0;
-    instances.bullets.length = 0;
+    instances.projectiles.length = 0;
+    // instances.bullets.length = 0;
     instances.expBalls.length = 0;
     instances.grassArray.length = 0;
     instances.player = null;
@@ -19,18 +21,15 @@ export function newGame() {
     stats.skills.circlingBalls.numberBalls = 1;
     stats.skills.circlingBalls.radius = 80;
     stats.skills.circlingBalls.radiusElement = 10;
-    //fireball reset
-    stats.skills.fireBall.lvl = 0;
-    stats.skills.fireBall.damage = 35;
-    stats.skills.fireBall.attackSpeed = 2100;
-    stats.skills.fireBall.movementSpeed = 0.7;
-    stats.skills.fireBall.penetrationNumber = 5;
-    stats.skills.fireBall.radius = 15;
-    stats.skills.fireBall.burn = {
-        damage: 5,
-        speed: 300,
-        times: 5,
-    };
+    // golden sword
+    stats.skills.goldenSword.lvl = 0;
+    stats.skills.goldenSword.damage = 35;
+    stats.skills.goldenSword.attackSpeed = 2100;
+    stats.skills.goldenSword.attackSpeedCounter = 0;
+    stats.skills.goldenSword.counterId = 0;
+    stats.skills.goldenSword.movementSpeed = 0.7;
+    stats.skills.goldenSword.penetrationNumber = 5;
+    stats.skills.goldenSword.radius = 15;
     // magic field reset
     stats.skills.magicField = {
         name: "Magic Field",

@@ -121,38 +121,32 @@ export function pauseDivInitial() {
 
   const fbl = new NewGui(
     "h3",
-    stats.skills.fireBall.name,
-    stats.skills.fireBall.lvl,
+    stats.skills.goldenSword.name,
+    stats.skills.goldenSword.lvl,
     fireBallDiv.newElement
   );
   const fbd = new NewGui(
     "p",
     "Damage: ",
-    stats.skills.fireBall.damage,
+    stats.skills.goldenSword.damage,
     fireBallDiv.newElement
   );
   const fbms = new NewGui(
     "p",
     "Movement speed: ",
-    stats.skills.fireBall.movementSpeed,
+    stats.skills.goldenSword.movementSpeed,
     fireBallDiv.newElement
   );
   const fbas = new NewGui(
     "p",
     "Attack speed: ",
-    stats.skills.fireBall.attackSpeed,
+    stats.skills.goldenSword.attackSpeed,
     fireBallDiv.newElement
   );
   const fbpn = new NewGui(
     "p",
     "Penetration number: ",
-    stats.skills.fireBall.penetrationNumber,
-    fireBallDiv.newElement
-  );
-  const fbbd = new NewGui(
-    "p",
-    "Burn damage: ",
-    `${stats.skills.fireBall.burn.damage} (x5)`,
+    stats.skills.goldenSword.penetrationNumber,
     fireBallDiv.newElement
   );
 
@@ -207,7 +201,7 @@ export function pauseDivInitial() {
     fbms,
     fbas,
     fbpn,
-    fbbd,
+
     magicFieldDiv,
     mfl,
     mfd,

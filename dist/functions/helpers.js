@@ -74,7 +74,7 @@ export function loadDataFromLocalStorage() {
 export function findNearestEnemy(player) {
     let nearestEnemy = null;
     let nearestDistance = Number.MAX_VALUE;
-    for (const enemy of instances.enemies) {
+    for (const enemy of instances.enemiesCh) {
         let distance;
         if (player) {
             distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);

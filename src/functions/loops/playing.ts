@@ -7,12 +7,14 @@ import { ExpBall } from "../../classes/expBall.js";
 import { Grass } from "../../classes/Grass.js";
 import { Heart } from "../../classes/Heart.js";
 import { Character } from "../../newClases/Character.js";
+import { Projectile } from "../../newClases/Projectile.js";
 import { game, instances } from "../../variables.js";
 import { camera } from "../camera.js";
 import { drawCircle } from "../draw/drawCircle.js";
 import { drawGrass } from "../draw/drawGrass.js";
 import { drawMap } from "../drawMap.js";
 import { guiPlaying } from "../GUIs/guiPlaying.js";
+import { goldenSwordUpdate } from "../skills/goldenSword.js";
 
 export function playing(deltaTime) {
   if (game.isGameOver) return;
@@ -20,8 +22,9 @@ export function playing(deltaTime) {
   camera(instances.player);
 
   instances.skills.magicField?.update();
+
   instances.skills.circling.forEach((el: Circling) => {
-    el.update(c, drawCircle);
+    el.update(c);
     el.collisionEnemy();
   });
 
@@ -29,35 +32,24 @@ export function playing(deltaTime) {
 
   drawMap(c);
 
-  instances.bullets.forEach((bullet: Bullet, index: number) => {
-    bullet.update(c, drawCircle);
-    bullet.deleteIfOverMap(index);
-    bullet.collisionEnemy(index);
-    // bullet.customText(bullet.penetrationNumber);
+  instances.projectiles.forEach((projectile: Projectile, index: number) => {
+    projectile.update(deltaTime, index);
   });
 
-  instances.player.update(c, drawCircle);
+  instances.player.update(deltaTime);
 
+  instances.expBalls.forEach((exp: ExpBall, index: number) => {
+    exp.update(index, deltaTime);
+  });
   instances.hearts.forEach((heart: Heart, index) => {
     heart.update(index);
   });
 
-  instances.enemies.forEach((enemy: Enemy, index: number) => {
-    enemy.update(c, drawCircle);
-    enemy.moveTowardsPlayer(instances.player);
-    enemy.die(index);
-    enemy.collideEnemies(instances.enemies, index);
-    // enemy.customText(enemy.immuneProjectilesId.length.toString());
+  instances.enemiesCh.forEach((el: Character, index: number) => {
+    el.update(deltaTime, index);
   });
 
-  instances.characters.forEach((el: Character, index: number) => {
-    el.update(deltaTime);
-  });
-
-  instances.expBalls.forEach((exp: ExpBall, index: number) => {
-    exp.update(c, drawCircle);
-    exp.moveToPlayer(index, instances.expBalls);
-  });
+  goldenSwordUpdate(deltaTime);
 
   instances.appearingText.forEach((el: AppearingText, index: number) => {
     el.update(index);

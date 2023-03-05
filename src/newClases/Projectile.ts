@@ -1,11 +1,10 @@
-import { calculateDistance, collideCircleResolve } from "../functions/helpers.js";
-import { EnemyCh } from "../newClases/extend/EnemyCh.js";
-// import { bullets, enemies } from "../functions/initial/playing.js";
+import { c, spriteSheet } from "../app.js";
+import { calculateDistance } from "../functions/helpers.js";
 import { dimensions, game, instances, stats } from "../variables.js";
-import { Enemy } from "./Enemy.js";
-import { Sprite } from "./Sprite.js";
+import { EnemyCh } from "./extend/EnemyCh.js";
 
-export class Bullet extends Sprite {
+export class Projectile {
+  showHitBox: boolean;
   constructor(
     public x: number,
     public y: number,
@@ -14,20 +13,65 @@ export class Bullet extends Sprite {
     public direction: { x: number; y: number },
     public dmg: number,
     public id: string,
-    public target: string[],
+    public targets: string[],
     public penetrationNumber: number = 1,
-    public isApplyBurn: boolean = false
+    public spriteSheetData
   ) {
-    super(x, y, radius);
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
     this.speed = speed;
     this.direction = direction;
     this.dmg = dmg;
-    this.penetrationNumber = penetrationNumber;
     this.id = id;
-    this.target = target;
-    this.isApplyBurn = isApplyBurn;
+    this.targets = targets;
+    this.penetrationNumber = penetrationNumber;
+    this.spriteSheetData = spriteSheetData;
 
-    if (isApplyBurn) this.color = "#e42525";
+    this.showHitBox = false;
+    // this.isApplyBurn = isApplyBurn;
+
+    // if (isApplyBurn) this.color = "#e42525";
+  }
+
+  update(deltaTime, index) {
+    this.moving();
+    this.deleteIfOverMap(index);
+    this.draw();
+    this.collisionEnemy(index);
+  }
+
+  draw() {
+    const angle = (90 * Math.PI) / 180; // dodatkowy kąt w radianach
+    const angleRadians = Math.atan2(this.direction.y, this.direction.x) + angle; // + kąt kierunku
+
+    c.translate(this.x + dimensions.map.x, this.y + dimensions.map.y); // przesuń punkt obrotu do środka obrazka
+    c.rotate(angleRadians);
+    c.drawImage(
+      spriteSheet,
+      this.spriteSheetData.x,
+      this.spriteSheetData.y,
+      this.spriteSheetData.w,
+      this.spriteSheetData.h,
+      -this.spriteSheetData.w, // przesuń obrazek do lewej
+      -this.spriteSheetData.h, // przesuń obrazek do góry
+      this.spriteSheetData.w * 2,
+      this.spriteSheetData.h * 2
+    );
+    c.rotate(-angleRadians); // przywróć pierwotny kąt obrotu
+    c.translate(-this.x - dimensions.map.x, -this.y - dimensions.map.y); // przywróć pierwotne położenie punktu obrotu
+
+    if (this.showHitBox) {
+      c.beginPath();
+      c.arc(
+        this.x + dimensions.map.x,
+        this.y + dimensions.map.y,
+        this.radius,
+        0,
+        Math.PI * 2
+      );
+      c.stroke();
+    }
   }
 
   moving(): void {
@@ -44,12 +88,12 @@ export class Bullet extends Sprite {
       this.y - this.radius < 0 ||
       this.y + this.radius > dimensions.map.h
     ) {
-      instances.bullets.splice(index, 1);
+      instances.projectiles.splice(index, 1);
     }
   }
 
   collisionEnemy(index: number) {
-    if (this.target.includes("enemyCh")) {
+    if (this.targets.includes("enemyCh")) {
       instances.enemiesCh.forEach((enemy: EnemyCh) => {
         const distance: number = calculateDistance(
           enemy.x,
@@ -66,16 +110,16 @@ export class Bullet extends Sprite {
 
             enemy.getDamage(this.dmg, game.colors.blue, this.id);
 
-            if (this.isApplyBurn) {
-              // enemy.buffTimeout = stats.skills.fireBall.burn.speed;
-              // enemy.burnDamage = stats.skills.fireBall.burn.damage;
-              // enemy.buffCount = stats.skills.fireBall.burn.times;
-            }
+            // if (this.isApplyBurn) {
+            //   // enemy.buffTimeout = stats.skills.fireBall.burn.speed;
+            //   // enemy.burnDamage = stats.skills.fireBall.burn.damage;
+            //   // enemy.buffCount = stats.skills.fireBall.burn.times;
+            // }
 
-            this.penetrationNumber--;
             stats.game.AllDamageDone += this.dmg;
+            this.penetrationNumber--;
             if (this.penetrationNumber <= 0) {
-              instances.bullets.splice(index, 1);
+              instances.projectiles.splice(index, 1);
             }
 
             // knockback
@@ -90,7 +134,7 @@ export class Bullet extends Sprite {
       });
     }
 
-    if (this.target.includes("player")) {
+    if (this.targets.includes("player")) {
       const distance: number = calculateDistance(
         instances.player.x,
         instances.player.y,
@@ -101,7 +145,7 @@ export class Bullet extends Sprite {
       );
 
       if (distance <= 0) {
-        console.log("player get damage");
+        // console.log("player get damage");
 
         // enemy.getDamage(this.dmg, { id: this.id });
         instances.player.getDamage(this.dmg, game.colors.blue);
@@ -115,7 +159,7 @@ export class Bullet extends Sprite {
         this.penetrationNumber--;
         // stats.game.AllDamageDone += this.dmg;
         if (this.penetrationNumber <= 0) {
-          instances.bullets.splice(index, 1);
+          instances.projectiles.splice(index, 1);
         }
 
         // knockback

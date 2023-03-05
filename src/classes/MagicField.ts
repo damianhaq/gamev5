@@ -1,12 +1,14 @@
 import { c } from "../app.js";
 import { drawCircle } from "../functions/draw/drawCircle.js";
 import { calculateDistance } from "../functions/helpers.js";
+import { Character } from "../newClases/Character.js";
+import { EnemyCh } from "../newClases/extend/EnemyCh.js";
 import { game, instances, stats } from "../variables.js";
 import { Enemy } from "./Enemy.js";
 import { Sprite } from "./Sprite.js";
 
 export class MagicField {
-  constructor(public who: Sprite) {
+  constructor(public who: Character) {
     this.who = who;
     this.attack();
   }
@@ -25,7 +27,7 @@ export class MagicField {
   attack() {
     const iid = setInterval(() => {
       if (!game.isPause) {
-        instances.enemies.forEach((enemy: Enemy) => {
+        instances.enemiesCh.forEach((enemy: EnemyCh) => {
           const distance: number = calculateDistance(
             enemy.x,
             enemy.y,
@@ -35,7 +37,8 @@ export class MagicField {
             stats.skills.magicField.radius
           );
           if (distance <= 0) {
-            enemy.getDamage(stats.skills.magicField.damage);
+            // enemy.getDamage(stats.skills.magicField.damage);
+            enemy.getDamage(stats.skills.magicField.damage, game.colors.blue);
           }
 
           if (game.isGameOver) {

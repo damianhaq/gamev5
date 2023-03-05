@@ -14,10 +14,11 @@ export class MagicField {
     attack() {
         const iid = setInterval(() => {
             if (!game.isPause) {
-                instances.enemies.forEach((enemy) => {
+                instances.enemiesCh.forEach((enemy) => {
                     const distance = calculateDistance(enemy.x, enemy.y, enemy.radius, this.who.x, this.who.y, stats.skills.magicField.radius);
                     if (distance <= 0) {
-                        enemy.getDamage(stats.skills.magicField.damage);
+                        // enemy.getDamage(stats.skills.magicField.damage);
+                        enemy.getDamage(stats.skills.magicField.damage, game.colors.blue);
                     }
                     if (game.isGameOver) {
                         clearInterval(iid);

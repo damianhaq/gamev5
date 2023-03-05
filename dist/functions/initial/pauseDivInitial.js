@@ -39,12 +39,11 @@ export function pauseDivInitial() {
     // Fire ball
     const fireBallDiv = new NewGui("div", "", "", pauseDiv);
     fireBallDiv.newElement.style.border = "1px solid black";
-    const fbl = new NewGui("h3", stats.skills.fireBall.name, stats.skills.fireBall.lvl, fireBallDiv.newElement);
-    const fbd = new NewGui("p", "Damage: ", stats.skills.fireBall.damage, fireBallDiv.newElement);
-    const fbms = new NewGui("p", "Movement speed: ", stats.skills.fireBall.movementSpeed, fireBallDiv.newElement);
-    const fbas = new NewGui("p", "Attack speed: ", stats.skills.fireBall.attackSpeed, fireBallDiv.newElement);
-    const fbpn = new NewGui("p", "Penetration number: ", stats.skills.fireBall.penetrationNumber, fireBallDiv.newElement);
-    const fbbd = new NewGui("p", "Burn damage: ", `${stats.skills.fireBall.burn.damage} (x5)`, fireBallDiv.newElement);
+    const fbl = new NewGui("h3", stats.skills.goldenSword.name, stats.skills.goldenSword.lvl, fireBallDiv.newElement);
+    const fbd = new NewGui("p", "Damage: ", stats.skills.goldenSword.damage, fireBallDiv.newElement);
+    const fbms = new NewGui("p", "Movement speed: ", stats.skills.goldenSword.movementSpeed, fireBallDiv.newElement);
+    const fbas = new NewGui("p", "Attack speed: ", stats.skills.goldenSword.attackSpeed, fireBallDiv.newElement);
+    const fbpn = new NewGui("p", "Penetration number: ", stats.skills.goldenSword.penetrationNumber, fireBallDiv.newElement);
     //  Magic Field
     const magicFieldDiv = new NewGui("div", "", "", pauseDiv);
     magicFieldDiv.newElement.style.border = "1px solid black";
@@ -72,7 +71,6 @@ export function pauseDivInitial() {
         fbms,
         fbas,
         fbpn,
-        fbbd,
         magicFieldDiv,
         mfl,
         mfd,

@@ -1,11 +1,7 @@
 import { canvas, lvlupDiv } from "../app.js";
 import { Enemy } from "../classes/Enemy.js";
-import { Player } from "../classes/Player.js";
-import { Sprite } from "../classes/Sprite.js";
+import { Character } from "../newClases/Character.js";
 import { game, instances, stats } from "../variables.js";
-import { circlingBallLvlUp } from "./skills/circlingBall.js";
-import { magicFieldLvlUp } from "./skills/magicField.js";
-import { projectileLvlUp } from "./skills/projectile.js";
 
 export function calculateDirection(
   fromX: number,
@@ -40,7 +36,10 @@ export function calculateDistance(
   return distance;
 }
 
-export function collideCircleResolve(c1: Sprite, c2: Sprite): { x: number; y: number } {
+export function collideCircleResolve(
+  c1: Character,
+  c2: Character
+): { x: number; y: number } {
   let distance_x = c1.x - c2.x;
   let distance_y = c1.y - c2.y;
   let radii_sum = c1.radius + c2.radius;
@@ -110,11 +109,11 @@ export function loadDataFromLocalStorage(): object | null {
   return null;
 }
 
-export function findNearestEnemy(player: Player): Enemy | null {
+export function findNearestEnemy(player: Character): Enemy | null {
   let nearestEnemy: Enemy | null = null;
   let nearestDistance = Number.MAX_VALUE;
 
-  for (const enemy of instances.enemies) {
+  for (const enemy of instances.enemiesCh) {
     let distance: number;
     if (player) {
       distance = Math.sqrt((enemy.x - player.x) ** 2 + (enemy.y - player.y) ** 2);
