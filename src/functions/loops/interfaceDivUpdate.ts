@@ -16,7 +16,6 @@ import {
   fbms,
   fbas,
   fbpn,
-  fbbd,
   mysticalSpheresDiv,
   fireBallDiv,
   mfas,
@@ -60,16 +59,15 @@ export function interfaceDivUpdate() {
     mysticalSpheresDiv.newElement.style.display = "block";
   }
 
-  fbl.update(stats.skills.fireBall.lvl);
-  fbd.update(stats.skills.fireBall.damage);
-  fbms.update(stats.skills.fireBall.movementSpeed);
-  fbas.update(stats.skills.fireBall.attackSpeed);
-  fbpn.update(stats.skills.fireBall.penetrationNumber);
-  fbbd.update(`${stats.skills.fireBall.burn.damage} (x5)`);
+  fbl.update(stats.skills.goldenSword.lvl);
+  fbd.update(stats.skills.goldenSword.damage);
+  fbms.update(stats.skills.goldenSword.movementSpeed);
+  fbas.update(stats.skills.goldenSword.attackSpeed);
+  fbpn.update(stats.skills.goldenSword.penetrationNumber);
 
-  if (stats.skills.fireBall.lvl === 0) {
+  if (stats.skills.goldenSword.lvl === 0) {
     fireBallDiv.newElement.style.display = "none";
-  } else if (stats.skills.fireBall.lvl > 0) {
+  } else if (stats.skills.goldenSword.lvl > 0) {
     fireBallDiv.newElement.style.display = "block";
   }
 

@@ -84,39 +84,11 @@ export class Enemy extends Sprite {
                     this.knockback.direction = { x: 0, y: 0 };
                 }, this.knockback.duration);
             }
-            // if (distance > 0) {
-            //   // Moving
-            //   if (this.knockback.duration > 0) {
-            //     // if knockback
-            //     this.x -= this.knockback.direction.x * this.knockback.moveSpeed;
-            //     this.y -= this.knockback.direction.y * this.knockback.moveSpeed;
-            //     setTimeout(() => {
-            //       this.knockback.duration = 0;
-            //       this.knockback.direction = { x: 0, y: 0 };
-            //     }, this.knockback.duration);
-            //   } else {
-            //     // if not knockback
-            //     this.x += direction.x * this.speed;
-            //     this.y += direction.y * this.speed;
-            //   }
-            // } else {
-            //   if (!player.isImmune) player.getDamage(this.dmg, this);
-            //   const { x, y } = collideCircleResolve(this, player);
-            //   this.x = x;
-            //   this.y = y;
-            // }
         }
     }
     rangeAttack() {
-        // let iid: number;
         let countId = 0;
-        // const intervalSpeed = stats.skills.baseAttack.speed;
-        // if (!iid) {
-        // iid = setInterval(() => {
         if (!game.isPause) {
-            // console.log("shoot", stats.skills.baseAttack.speed);
-            // draw line to nearest enemy
-            // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
             if (this.canAttack) {
                 this.canAttack = false;
                 const direction = calculateDirection(this.x, this.y, instances.player.x, instances.player.y);
@@ -127,17 +99,6 @@ export class Enemy extends Sprite {
                 }, this.attackSpeed);
             }
         }
-        // if (game.isGameOver) {
-        //   // clearInterval(iid);
-        //   // iid = null;
-        // }
-        // if (stats.skills.baseAttack.speed !== intervalSpeed) {
-        //   clearInterval(iid);
-        //   iid = null;
-        //   this.shoot();
-        // }
-        // }, intervalSpeed);
-        // }
     }
     collideEnemies(enemies, index) {
         enemies.forEach((enemy) => {

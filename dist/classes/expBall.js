@@ -1,21 +1,49 @@
 // import { player } from "../app.js";
+import { c, spriteSheet } from "../app.js";
 import { addExp, calculateDirection, calculateDistance } from "../functions/helpers.js";
 // import { player } from "../functions/initial/playing.js";
-import { game, instances, stats } from "../variables.js";
-import { Sprite } from "./Sprite.js";
-export class ExpBall extends Sprite {
+import { dimensions, game, instances, spriteSheetData, stats } from "../variables.js";
+export class ExpBall {
     constructor(x, y, radius, expValue) {
-        super(x, y, radius);
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
         this.expValue = expValue;
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.color = "#ff8500";
-        this.drawType = "fill";
         this.speed = 2.5;
         this.expValue = expValue;
+        this.animData = {
+            frameInterval: 0,
+            currentFrame: 1,
+            addX: 0,
+            addY: 0,
+        };
+        this.spriteSheetData = spriteSheetData.rune;
+        this.showHitBox = false;
     }
-    moveToPlayer(index, expballs) {
+    update(index, deltaTime) {
+        this.moveToPlayer(index);
+        this.draw(deltaTime);
+    }
+    draw(deltaTime) {
+        this.animData.frameInterval += deltaTime;
+        if (!game.isPause && this.animData.frameInterval > this.spriteSheetData.duration) {
+            this.animData.currentFrame++;
+            if (this.animData.currentFrame >= this.spriteSheetData.frames) {
+                this.animData.currentFrame = 0;
+            }
+            this.animData.frameInterval = 0;
+        }
+        c.drawImage(spriteSheet, this.spriteSheetData.x + this.animData.currentFrame * this.spriteSheetData.w, this.spriteSheetData.y, this.spriteSheetData.w, this.spriteSheetData.h, this.x + dimensions.map.x - this.spriteSheetData.w - this.animData.addX, this.y + dimensions.map.y - this.spriteSheetData.h - this.animData.addY, this.spriteSheetData.w * 2, this.spriteSheetData.h * 2);
+        if (this.showHitBox) {
+            c.beginPath();
+            c.arc(this.x + dimensions.map.x, this.y + dimensions.map.y, this.radius, 0, Math.PI * 2);
+            c.stroke();
+        }
+    }
+    moveToPlayer(index) {
         const distance = calculateDistance(this.x, this.y, this.radius, instances.player.x, instances.player.y, instances.player.radius);
         if (distance < stats.player.pickupRange) {
             const direction = calculateDirection(this.x, this.y, instances.player.x, instances.player.y);
@@ -26,7 +54,7 @@ export class ExpBall extends Sprite {
             if (distance <= 0) {
                 // stats.player.currentXP += this.expValue;
                 addExp(this.expValue);
-                expballs.splice(index, 1);
+                instances.expBalls.splice(index, 1);
             }
         }
     }

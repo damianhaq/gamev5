@@ -1,4 +1,4 @@
-import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, fbbd, mysticalSpheresDiv, fireBallDiv, mfas, mfd, mfl, mfr, magicFieldDiv, ek, ms, mh, a, mxgp, pr, } from "../../app.js";
+import { add, lvl, up, hr, bd, as, pn, cbd, cbs, cbr, cbns, cbl, fbl, fbd, fbms, fbas, fbpn, mysticalSpheresDiv, fireBallDiv, mfas, mfd, mfl, mfr, magicFieldDiv, ek, ms, mh, a, mxgp, pr, } from "../../app.js";
 import { stats } from "../../variables.js";
 export function interfaceDivUpdate() {
     add.update(stats.game.AllDamageDone);
@@ -25,16 +25,15 @@ export function interfaceDivUpdate() {
     else if (stats.skills.circlingBalls.lvl > 0) {
         mysticalSpheresDiv.newElement.style.display = "block";
     }
-    fbl.update(stats.skills.fireBall.lvl);
-    fbd.update(stats.skills.fireBall.damage);
-    fbms.update(stats.skills.fireBall.movementSpeed);
-    fbas.update(stats.skills.fireBall.attackSpeed);
-    fbpn.update(stats.skills.fireBall.penetrationNumber);
-    fbbd.update(`${stats.skills.fireBall.burn.damage} (x5)`);
-    if (stats.skills.fireBall.lvl === 0) {
+    fbl.update(stats.skills.goldenSword.lvl);
+    fbd.update(stats.skills.goldenSword.damage);
+    fbms.update(stats.skills.goldenSword.movementSpeed);
+    fbas.update(stats.skills.goldenSword.attackSpeed);
+    fbpn.update(stats.skills.goldenSword.penetrationNumber);
+    if (stats.skills.goldenSword.lvl === 0) {
         fireBallDiv.newElement.style.display = "none";
     }
-    else if (stats.skills.fireBall.lvl > 0) {
+    else if (stats.skills.goldenSword.lvl > 0) {
         fireBallDiv.newElement.style.display = "block";
     }
     if (stats.skills.magicField.lvl === 0) {

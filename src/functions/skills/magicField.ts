@@ -1,8 +1,9 @@
 import { MagicField } from "../../classes/MagicField.js";
 import { Sprite } from "../../classes/Sprite.js";
+import { Character } from "../../newClases/Character.js";
 import { instances, stats } from "../../variables.js";
 
-export function magicField(who: Sprite) {
+export function magicField(who: Character) {
   instances.skills.magicField = new MagicField(who);
 }
 

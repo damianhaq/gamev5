@@ -16,7 +16,7 @@ import {
   pickupRangeLvlUp,
 } from "../skills/lvlups.js";
 import { magicFieldLvlUp } from "../skills/magicField.js";
-import { projectileLvlUp } from "../skills/projectile.js";
+import { goldenSwordLvlUp } from "../skills/goldenSword.js";
 
 export function lvlUpDiv() {
   new NewGui("h2", "Level up!", "", lvlupDiv);
@@ -29,11 +29,11 @@ export function lvlUpDiv() {
 
   const upgrade1div = new NewGui("div", "", "", skillsWrapper.newElement);
   upgrade1div.newElement.style.border = "1px solid black";
-  new NewGui("h4", stats.skills.fireBall.name, "", upgrade1div.newElement);
+  new NewGui("h4", stats.skills.goldenSword.name, "", upgrade1div.newElement);
   new NewGui("p", "damage +3", "", upgrade1div.newElement);
   const fireBallButton = new NewGui("button", "upgrade", "", upgrade1div.newElement);
   fireBallButton.newElement.addEventListener("click", (ev) => {
-    projectileLvlUp();
+    goldenSwordLvlUp();
     stage2();
     // returnToGameAfterLvlup();
   });

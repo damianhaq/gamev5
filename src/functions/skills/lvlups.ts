@@ -1,4 +1,4 @@
-import { stats } from "../../variables.js";
+import { instances, stats } from "../../variables.js";
 
 export function attackSpeedLvlUp() {
   stats.skills.baseAttack.speed -= 100;
@@ -11,7 +11,10 @@ export function penNumLvlUp() {
 }
 export function maxHpLvlUp() {
   stats.player.maxHP += 10;
-  stats.player.currentHP += 10;
+  // stats.player.currentHP += 10;
+
+  instances.player.hp += 10;
+  instances.player.maxHp += 10;
 }
 export function hpRegenLvlUp() {
   stats.player.hpRegen += 1;

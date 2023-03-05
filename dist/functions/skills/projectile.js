@@ -1,5 +1,5 @@
-import { Bullet } from "../../classes/Bullet.js";
-import { game, instances, stats } from "../../variables.js";
+import { Projectile } from "../../newClases/Projectile.js";
+import { game, instances, spriteSheetData, stats } from "../../variables.js";
 import { calculateDirection, findNearestEnemy } from "../helpers.js";
 let projectileiid;
 export function projectile() {
@@ -13,13 +13,26 @@ export function projectile() {
     };
     if (!projectileiid) {
         projectileiid = setInterval(() => {
-            if (instances.enemies.length > 0 && !game.isPause && instances.player) {
+            if (instances.enemiesCh.length > 0 && !game.isPause && instances.player) {
                 const nearestEnemy = findNearestEnemy(instances.player);
                 // draw line to nearest enemy
                 // drawLine(this.x, this.y, nearestEnemy.x, nearestEnemy.y, "#007acc", c);
                 const direction = calculateDirection(instances.player.x, instances.player.y, nearestEnemy.x, nearestEnemy.y);
                 countId++;
-                instances.bullets.push(new Bullet(instances.player.x, instances.player.y, data.radius, data.movementSpeed, direction, data.damage, `${countId}projectile`, ["enemyRange"], data.penetrationNumber, true));
+                instances.projectiles.push(new Projectile(instances.player.x, instances.player.y, data.radius, data.movementSpeed, direction, data.damage, `${countId}projectile`, ["enemyCh"], data.penetrationNumber, spriteSheetData.weapons.goldenSword)
+                // new Bullet(
+                //   instances.player.x,
+                //   instances.player.y,
+                //   data.radius,
+                //   data.movementSpeed,
+                //   direction,
+                //   data.damage,
+                //   `${countId}projectile`,
+                //   ["enemyRange"],
+                //   data.penetrationNumber,
+                //   true
+                // )
+                );
             }
             if (game.isGameOver) {
                 clearInterval(projectileiid);
