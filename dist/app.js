@@ -20,7 +20,7 @@ canvas.width = dimensions.canvas.w;
 export const c = canvas.getContext("2d");
 c.imageSmoothingEnabled = false;
 export const spriteSheet = new Image();
-spriteSheet.src = "dist/assets/tile.png";
+spriteSheet.src = "./dist/assets/tile.png";
 canvas.style.width = dimensions.canvas.sw;
 canvas.style.height = dimensions.canvas.sh;
 // c.scale(window.devicePixelRatio, window.devicePixelRatio);
