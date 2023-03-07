@@ -26,7 +26,7 @@ export const c: CanvasRenderingContext2D = canvas.getContext("2d");
 c.imageSmoothingEnabled = false;
 
 export const spriteSheet = new Image();
-spriteSheet.src = "../../gamev5/dist/assets/tile.png";
+spriteSheet.src = "/gamev5/dist/assets/tile.png";
 canvas.style.width = dimensions.canvas.sw;
 canvas.style.height = dimensions.canvas.sh;
 
